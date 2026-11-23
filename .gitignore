@@ -1,0 +1,7 @@
+results/
+key/
+config.local.js
+.DS_Store
+__pycache__/
+*.pyc
+node_modules/

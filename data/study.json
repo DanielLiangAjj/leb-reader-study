@@ -1,0 +1,3320 @@
+{
+ "version": "2026-11-23",
+ "frozen": "2026-11-18",
+ "readers": {
+  "1": [
+   {
+    "part": "practice",
+    "sheet": "practice",
+    "condition": "A",
+    "items": [
+     "P01",
+     "P03"
+    ]
+   },
+   {
+    "part": "practice",
+    "sheet": "practice",
+    "condition": "B",
+    "items": [
+     "P02",
+     "P04"
+    ]
+   },
+   {
+    "part": "block",
+    "no": 1,
+    "sheet": "scored",
+    "condition": "A",
+    "items": [
+     "T01",
+     "T02",
+     "T03",
+     "T04",
+     "T05",
+     "T06"
+    ]
+   },
+   {
+    "part": "block",
+    "no": 2,
+    "sheet": "scored",
+    "condition": "B",
+    "items": [
+     "T07",
+     "T08",
+     "T09",
+     "T10",
+     "T11",
+     "T12"
+    ]
+   },
+   {
+    "part": "block",
+    "no": 3,
+    "sheet": "scored",
+    "condition": "A",
+    "items": [
+     "T13",
+     "T14",
+     "T15",
+     "T16",
+     "T17",
+     "T18"
+    ]
+   },
+   {
+    "part": "block",
+    "no": 4,
+    "sheet": "scored",
+    "condition": "B",
+    "items": [
+     "T19",
+     "T20",
+     "T21",
+     "T22",
+     "T23",
+     "T24"
+    ]
+   }
+  ],
+  "2": [
+   {
+    "part": "practice",
+    "sheet": "practice",
+    "condition": "A",
+    "items": [
+     "P01",
+     "P03"
+    ]
+   },
+   {
+    "part": "practice",
+    "sheet": "practice",
+    "condition": "B",
+    "items": [
+     "P02",
+     "P04"
+    ]
+   },
+   {
+    "part": "block",
+    "no": 1,
+    "sheet": "scored",
+    "condition": "B",
+    "items": [
+     "T01",
+     "T02",
+     "T03",
+     "T04",
+     "T05",
+     "T06"
+    ]
+   },
+   {
+    "part": "block",
+    "no": 2,
+    "sheet": "scored",
+    "condition": "A",
+    "items": [
+     "T07",
+     "T08",
+     "T09",
+     "T10",
+     "T11",
+     "T12"
+    ]
+   },
+   {
+    "part": "block",
+    "no": 3,
+    "sheet": "scored",
+    "condition": "B",
+    "items": [
+     "T13",
+     "T14",
+     "T15",
+     "T16",
+     "T17",
+     "T18"
+    ]
+   },
+   {
+    "part": "block",
+    "no": 4,
+    "sheet": "scored",
+    "condition": "A",
+    "items": [
+     "T19",
+     "T20",
+     "T21",
+     "T22",
+     "T23",
+     "T24"
+    ]
+   }
+  ]
+ },
+ "trials": {
+  "T01": {
+   "id": "T01",
+   "name": "STEP 3",
+   "drug": "semaglutide",
+   "paper": {
+    "pmid": 33625476,
+    "pmc": "PMC7905697",
+    "title": "Effect of Subcutaneous Semaglutide vs Placebo as an Adjunct to Intensive Behavioral Therapy on Body Weight in Adults With Overweight or Obesity: The STEP 3 Randomized Clinical Trial.",
+    "journal": "JAMA",
+    "year": 2021
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "semaglutide 2.4 mg",
+      "n": 407
+     },
+     {
+      "name": "placebo",
+      "n": 204
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "semaglutide, 2.4 mg",
+      "second_arm": "placebo",
+      "outcome": "percentage change in body weight at week 68",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -16, second arm -5.7 (mean change); treatment difference -10.3 (interval -12 to -8.6); P <0.001",
+      "participants": 611,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "At week 68, the estimated mean body weight change from baseline was -16.0% for semaglutide vs -5.7% for placebo (difference, -10.3 percentage points [95% CI, -12.0 to -8.6]; P < .001).",
+      "pmid": 33625476,
+      "year": 2021,
+      "title": "Effect of Subcutaneous Semaglutide vs Placebo as an Adjunct to Intensive Behavioral Therapy on Body Weight in Adults With Overweight or Obesity: The STEP 3 Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "semaglutide, 2.4 mg",
+      "second_arm": "placebo",
+      "outcome": "loss of 5% or more of baseline weight by week 68",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 86.6, second arm 47.6 (percentage); P <.001",
+      "participants": 611,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "More participants treated with semaglutide vs placebo lost at least 5% of baseline body weight (86.6% vs 47.6%, respectively; P < .001).",
+      "pmid": 33625476,
+      "year": 2021,
+      "title": "Effect of Subcutaneous Semaglutide vs Placebo as an Adjunct to Intensive Behavioral Therapy on Body Weight in Adults With Overweight or Obesity: The STEP 3 Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "semaglutide, 2.4 mg",
+      "second_arm": "placebo group",
+      "outcome": "loss of at least 10% of baseline weight at week 68",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 75.3, second arm 27 (percentage); P <.001",
+      "participants": 611,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "A higher proportion of participants in the semaglutide vs placebo group achieved weight losses of at least 10% or 15% (75.3% vs 27.0% and 55.8% vs 13.2%, respectively; P < .001).",
+      "pmid": 33625476,
+      "year": 2021,
+      "title": "Effect of Subcutaneous Semaglutide vs Placebo as an Adjunct to Intensive Behavioral Therapy on Body Weight in Adults With Overweight or Obesity: The STEP 3 Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "semaglutide, 2.4 mg",
+      "second_arm": "placebo group",
+      "outcome": "loss of at least 15% of baseline weight at week 68",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 55.8, second arm 13.2 (percentage); P <.001",
+      "participants": 611,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "A higher proportion of participants in the semaglutide vs placebo group achieved weight losses of at least 10% or 15% (75.3% vs 27.0% and 55.8% vs 13.2%, respectively; P < .001).",
+      "pmid": 33625476,
+      "year": 2021,
+      "title": "Effect of Subcutaneous Semaglutide vs Placebo as an Adjunct to Intensive Behavioral Therapy on Body Weight in Adults With Overweight or Obesity: The STEP 3 Randomized Clinical Trial."
+     }
+    ]
+   }
+  },
+  "T02": {
+   "id": "T02",
+   "name": "SELECT",
+   "drug": "semaglutide",
+   "paper": {
+    "pmid": 37952131,
+    "pmc": null,
+    "title": "Semaglutide and Cardiovascular Outcomes in Obesity without Diabetes.",
+    "journal": "The New England journal of medicine",
+    "year": 2023
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "semaglutide 2.4 mg",
+      "n": 8803
+     },
+     {
+      "name": "placebo",
+      "n": 8801
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "semaglutide",
+      "second_arm": "placebo",
+      "outcome": "weight reduction at 208 weeks",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm -10.2, second arm -1.5 (mean); P <0.0001",
+      "participants": 17604,
+      "weeks": 208.0,
+      "subgroup": false,
+      "sentence": "At 208 weeks, semaglutide was associated with mean reduction in weight (-10.2%), waist circumference (-7.7 cm) and waist-to-height ratio (-6.9%) versus placebo (-1.5%, -1.3 cm and -1.0%, respectively; P < 0.0001 for all comparisons versus placebo).",
+      "pmid": 38740993,
+      "year": 2024,
+      "title": "Long-term weight loss effects of semaglutide in obesity without diabetes in the SELECT trial."
+     },
+     {
+      "first_arm": "subcutaneous semaglutide (2.4 mg weekly)",
+      "second_arm": "placebo",
+      "outcome": "body weight at 65 weeks",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": "percentage difference 8.9",
+      "participants": 17604,
+      "weeks": 65.0,
+      "subgroup": false,
+      "sentence": "Body weight plateaued at 65 weeks and was 8.9% lower with semaglutide.",
+      "pmid": 38907683,
+      "year": 2024,
+      "title": "Effect of Semaglutide on Regression and Progression of Glycemia in People With Overweight or Obesity but Without Diabetes in the SELECT Trial."
+     }
+    ]
+   }
+  },
+  "T03": {
+   "id": "T03",
+   "name": "Elkind-Hirsch 2022",
+   "drug": "liraglutide",
+   "paper": {
+    "pmid": 35710599,
+    "pmc": null,
+    "title": "Liraglutide 3 mg on weight, body composition, and hormonal and metabolic parameters in women with obesity and polycystic ovary syndrome: a randomized placebo-controlled-phase 3 study.",
+    "journal": "Fertility and sterility",
+    "year": 2022
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "LIRA 3 mg",
+      "n": 55
+     },
+     {
+      "name": "PL",
+      "n": 27
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "LIRA 3 mg",
+      "second_arm": "PL",
+      "outcome": "change in body weight from baseline to week 32",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": "first arm -5.7, second arm -1.4 (mean change)",
+      "participants": null,
+      "weeks": 32.0,
+      "subgroup": false,
+      "sentence": "Change in BW from baseline to week 32 was -5.7% (±0.75) with LIRA 3 mg vs. -1.4% (±1.09) with PL.",
+      "pmid": 35710599,
+      "year": 2022,
+      "title": "Liraglutide 3 mg on weight, body composition, and hormonal and metabolic parameters in women with obesity and polycystic ovary syndrome: a randomized placebo-controlled-phase 3 study."
+     },
+     {
+      "first_arm": "LIRA 3 mg",
+      "second_arm": "PL",
+      "outcome": "at least 5% weight reduction at week 32",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm 25, second arm 5 (count)",
+      "participants": null,
+      "weeks": 32.0,
+      "subgroup": false,
+      "sentence": "At week 32, more participants on LIRA 3 mg than on PL achieved at least 5% weight reductions (25 of 44 vs. 5 of 23).",
+      "pmid": 35710599,
+      "year": 2022,
+      "title": "Liraglutide 3 mg on weight, body composition, and hormonal and metabolic parameters in women with obesity and polycystic ovary syndrome: a randomized placebo-controlled-phase 3 study."
+     }
+    ]
+   }
+  },
+  "T04": {
+   "id": "T04",
+   "name": "SCALE Sleep Apnoea",
+   "drug": "liraglutide",
+   "paper": {
+    "pmid": 27005405,
+    "pmc": "PMC4973216",
+    "title": "Effect of liraglutide 3.0 mg in individuals with obesity and moderate or severe obstructive sleep apnea: the SCALE Sleep Apnea randomized clinical trial.",
+    "journal": "International journal of obesity (2005)",
+    "year": 2016
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "liraglutide 3.0 mg",
+      "n": 180
+     },
+     {
+      "name": "placebo",
+      "n": 179
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "percentage weight loss at 32 weeks",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm -5.7, second arm -1.6 (mean); treatment difference -4.2 (interval -5.2 to -3.1); P <0.0001",
+      "participants": null,
+      "weeks": 32.0,
+      "subgroup": false,
+      "sentence": "Liraglutide produced greater mean percentage weight loss compared with placebo (-5.7% vs -1.6%, estimated treatment difference: -4.2% (95% CI, -5.2 to -3.1%), P<0.0001).",
+      "pmid": 27005405,
+      "year": 2016,
+      "title": "Effect of liraglutide 3.0 mg in individuals with obesity and moderate or severe obstructive sleep apnea: the SCALE Sleep Apnea randomized clinical trial."
+     }
+    ]
+   }
+  },
+  "T05": {
+   "id": "T05",
+   "name": "SURMOUNT-1",
+   "drug": "tirzepatide",
+   "paper": {
+    "pmid": 35658024,
+    "pmc": null,
+    "title": "Tirzepatide Once Weekly for the Treatment of Obesity.",
+    "journal": "The New England journal of medicine",
+    "year": 2022
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "5 mg tirzepatide",
+      "n": null
+     },
+     {
+      "name": "10 mg tirzepatide",
+      "n": null
+     },
+     {
+      "name": "15 mg tirzepatide",
+      "n": null
+     },
+     {
+      "name": "placebo",
+      "n": null
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "5-mg weekly doses of tirzepatide",
+      "second_arm": "placebo",
+      "outcome": "percentage change in weight from baseline at week 72",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -15, second arm -3.1 (mean change); P <0.001",
+      "participants": 2539,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "The mean percentage change in weight at week 72 was -15.0% (95% confidence interval [CI], -15.9 to -14.2) with 5-mg weekly doses of tirzepatide, -19.5% (95% CI, -20.4 to -18.5) with 10-mg doses, and -20.9% (95% CI, -21.8 to -19.9) with 15-mg doses and -3.1% (95% CI, -4.3 to -1.9) with placebo (P<0.001 for all comparisons with placebo).",
+      "pmid": 35658024,
+      "year": 2022,
+      "title": "Tirzepatide Once Weekly for the Treatment of Obesity."
+     },
+     {
+      "first_arm": "5-mg weekly doses of tirzepatide",
+      "second_arm": "placebo",
+      "outcome": "weight reduction of 5% or more at week 72",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm 85, second arm 35 (percentage)",
+      "participants": 2539,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "The percentage of participants who had weight reduction of 5% or more was 85% (95% CI, 82 to 89), 89% (95% CI, 86 to 92), and 91% (95% CI, 88 to 94) with 5 mg, 10 mg, and 15 mg of tirzepatide, respectively, and 35% (95% CI, 30 to 39) with placebo; 50% (95% CI, 46 to 54) and 57% (95% CI, 53 to 61) of participants in the 10-mg and 15-mg groups had a reduction in body weight of 20% or more, as compared with 3% (95% CI, 1 to 5) in the placebo group (P<0.001 for all comparisons with placebo).",
+      "pmid": 35658024,
+      "year": 2022,
+      "title": "Tirzepatide Once Weekly for the Treatment of Obesity."
+     },
+     {
+      "first_arm": "10-mg doses",
+      "second_arm": "placebo",
+      "outcome": "percentage change in weight from baseline at week 72",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -19.5, second arm -3.1 (mean change); P <0.001",
+      "participants": 2539,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "The mean percentage change in weight at week 72 was -15.0% (95% confidence interval [CI], -15.9 to -14.2) with 5-mg weekly doses of tirzepatide, -19.5% (95% CI, -20.4 to -18.5) with 10-mg doses, and -20.9% (95% CI, -21.8 to -19.9) with 15-mg doses and -3.1% (95% CI, -4.3 to -1.9) with placebo (P<0.001 for all comparisons with placebo).",
+      "pmid": 35658024,
+      "year": 2022,
+      "title": "Tirzepatide Once Weekly for the Treatment of Obesity."
+     },
+     {
+      "first_arm": "10-mg doses",
+      "second_arm": "placebo",
+      "outcome": "weight reduction of 5% or more at week 72",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 89, second arm 35 (percentage); P <0.001",
+      "participants": 2539,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "The percentage of participants who had weight reduction of 5% or more was 85% (95% CI, 82 to 89), 89% (95% CI, 86 to 92), and 91% (95% CI, 88 to 94) with 5 mg, 10 mg, and 15 mg of tirzepatide, respectively, and 35% (95% CI, 30 to 39) with placebo; 50% (95% CI, 46 to 54) and 57% (95% CI, 53 to 61) of participants in the 10-mg and 15-mg groups had a reduction in body weight of 20% or more, as compared with 3% (95% CI, 1 to 5) in the placebo group (P<0.001 for all comparisons with placebo).",
+      "pmid": 35658024,
+      "year": 2022,
+      "title": "Tirzepatide Once Weekly for the Treatment of Obesity."
+     },
+     {
+      "first_arm": "10-mg doses",
+      "second_arm": "the placebo group",
+      "outcome": "weight reduction of 20% or more at week 72",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 50, second arm 3 (percentage); P <0.001",
+      "participants": 2539,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "The percentage of participants who had weight reduction of 5% or more was 85% (95% CI, 82 to 89), 89% (95% CI, 86 to 92), and 91% (95% CI, 88 to 94) with 5 mg, 10 mg, and 15 mg of tirzepatide, respectively, and 35% (95% CI, 30 to 39) with placebo; 50% (95% CI, 46 to 54) and 57% (95% CI, 53 to 61) of participants in the 10-mg and 15-mg groups had a reduction in body weight of 20% or more, as compared with 3% (95% CI, 1 to 5) in the placebo group (P<0.001 for all comparisons with placebo).",
+      "pmid": 35658024,
+      "year": 2022,
+      "title": "Tirzepatide Once Weekly for the Treatment of Obesity."
+     },
+     {
+      "first_arm": "15-mg doses",
+      "second_arm": "placebo",
+      "outcome": "percentage change in weight from baseline at week 72",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -20.9, second arm -3.1 (mean change); P <0.001",
+      "participants": 2539,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "The mean percentage change in weight at week 72 was -15.0% (95% confidence interval [CI], -15.9 to -14.2) with 5-mg weekly doses of tirzepatide, -19.5% (95% CI, -20.4 to -18.5) with 10-mg doses, and -20.9% (95% CI, -21.8 to -19.9) with 15-mg doses and -3.1% (95% CI, -4.3 to -1.9) with placebo (P<0.001 for all comparisons with placebo).",
+      "pmid": 35658024,
+      "year": 2022,
+      "title": "Tirzepatide Once Weekly for the Treatment of Obesity."
+     },
+     {
+      "first_arm": "15-mg doses",
+      "second_arm": "placebo",
+      "outcome": "weight reduction of 5% or more at week 72",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 91, second arm 35 (percentage); P <0.001",
+      "participants": 2539,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "The percentage of participants who had weight reduction of 5% or more was 85% (95% CI, 82 to 89), 89% (95% CI, 86 to 92), and 91% (95% CI, 88 to 94) with 5 mg, 10 mg, and 15 mg of tirzepatide, respectively, and 35% (95% CI, 30 to 39) with placebo; 50% (95% CI, 46 to 54) and 57% (95% CI, 53 to 61) of participants in the 10-mg and 15-mg groups had a reduction in body weight of 20% or more, as compared with 3% (95% CI, 1 to 5) in the placebo group (P<0.001 for all comparisons with placebo).",
+      "pmid": 35658024,
+      "year": 2022,
+      "title": "Tirzepatide Once Weekly for the Treatment of Obesity."
+     },
+     {
+      "first_arm": "15-mg doses",
+      "second_arm": "the placebo group",
+      "outcome": "weight reduction of 20% or more at week 72",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 57, second arm 3 (percentage); P <0.001",
+      "participants": 2539,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "The percentage of participants who had weight reduction of 5% or more was 85% (95% CI, 82 to 89), 89% (95% CI, 86 to 92), and 91% (95% CI, 88 to 94) with 5 mg, 10 mg, and 15 mg of tirzepatide, respectively, and 35% (95% CI, 30 to 39) with placebo; 50% (95% CI, 46 to 54) and 57% (95% CI, 53 to 61) of participants in the 10-mg and 15-mg groups had a reduction in body weight of 20% or more, as compared with 3% (95% CI, 1 to 5) in the placebo group (P<0.001 for all comparisons with placebo).",
+      "pmid": 35658024,
+      "year": 2022,
+      "title": "Tirzepatide Once Weekly for the Treatment of Obesity."
+     },
+     {
+      "first_arm": "tirzepatide (15 mg or maximum tolerated dose)",
+      "second_arm": "placebo",
+      "outcome": "body weight change at end of study treatment",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": null,
+      "participants": null,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "In this post hoc analysis, tirzepatide treatment was associated with significant body weight, waist circumference, and WHtR reductions versus placebo in women living with obesity or overweight and without type 2 diabetes, irrespective of reproductive stage.",
+      "pmid": 40074721,
+      "year": 2025,
+      "title": "Body weight reduction in women treated with tirzepatide by reproductive stage: a post hoc analysis from the SURMOUNT program."
+     },
+     {
+      "first_arm": "tirzepatide 5-",
+      "second_arm": "the placebo group",
+      "outcome": "mean percent change in body weight at week 72",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -12, second arm -0.3 (mean change); P <0.001",
+      "participants": 102,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "Participants in the tirzepatide 5-, 10-, and 15-mg groups had a statistically significantly greater (all p < 0.001) least squares mean (standard error) percent change in body weight compared with those in the placebo group: -12.0% (1.7%), -22.4% (1.7%), -22.1% (1.6%), and -0.3% (1.6%), respectively.",
+      "pmid": 41612966,
+      "year": 2026,
+      "title": "Efficacy and Safety of Tirzepatide in Japanese Participants With Obesity: A Subpopulation Analysis of the SURMOUNT-1 Trial."
+     },
+     {
+      "first_arm": "tirzepatide 5-",
+      "second_arm": "the placebo group",
+      "outcome": "proportion achieving ≥ 5% body weight reduction at week 72",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": null,
+      "participants": 102,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "Overall, 91.7%, 100%, and 96.6% of participants in the tirzepatide 5-, 10-, and 15-mg groups, respectively, had ≥ 5% weight reduction at week 72, compared with 15.4% in the placebo group.",
+      "pmid": 41612966,
+      "year": 2026,
+      "title": "Efficacy and Safety of Tirzepatide in Japanese Participants With Obesity: A Subpopulation Analysis of the SURMOUNT-1 Trial."
+     },
+     {
+      "first_arm": "10-",
+      "second_arm": "the placebo group",
+      "outcome": "mean percent change in body weight at week 72",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -22.4, second arm -0.3 (mean change); P <0.001",
+      "participants": 102,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "Participants in the tirzepatide 5-, 10-, and 15-mg groups had a statistically significantly greater (all p < 0.001) least squares mean (standard error) percent change in body weight compared with those in the placebo group: -12.0% (1.7%), -22.4% (1.7%), -22.1% (1.6%), and -0.3% (1.6%), respectively.",
+      "pmid": 41612966,
+      "year": 2026,
+      "title": "Efficacy and Safety of Tirzepatide in Japanese Participants With Obesity: A Subpopulation Analysis of the SURMOUNT-1 Trial."
+     },
+     {
+      "first_arm": "10-",
+      "second_arm": "the placebo group",
+      "outcome": "proportion achieving ≥ 5% body weight reduction at week 72",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm 100, second arm 15.4 (percentage)",
+      "participants": 102,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "Overall, 91.7%, 100%, and 96.6% of participants in the tirzepatide 5-, 10-, and 15-mg groups, respectively, had ≥ 5% weight reduction at week 72, compared with 15.4% in the placebo group.",
+      "pmid": 41612966,
+      "year": 2026,
+      "title": "Efficacy and Safety of Tirzepatide in Japanese Participants With Obesity: A Subpopulation Analysis of the SURMOUNT-1 Trial."
+     },
+     {
+      "first_arm": "15-mg groups",
+      "second_arm": "the placebo group",
+      "outcome": "mean percent change in body weight at week 72",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -22.1, second arm -0.3 (mean change); P <0.001",
+      "participants": 102,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "Participants in the tirzepatide 5-, 10-, and 15-mg groups had a statistically significantly greater (all p < 0.001) least squares mean (standard error) percent change in body weight compared with those in the placebo group: -12.0% (1.7%), -22.4% (1.7%), -22.1% (1.6%), and -0.3% (1.6%), respectively.",
+      "pmid": 41612966,
+      "year": 2026,
+      "title": "Efficacy and Safety of Tirzepatide in Japanese Participants With Obesity: A Subpopulation Analysis of the SURMOUNT-1 Trial."
+     },
+     {
+      "first_arm": "15-mg groups",
+      "second_arm": "the placebo group",
+      "outcome": "proportion achieving ≥ 5% body weight reduction at week 72",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm 96.6, second arm 15.4 (percentage)",
+      "participants": 102,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "Overall, 91.7%, 100%, and 96.6% of participants in the tirzepatide 5-, 10-, and 15-mg groups, respectively, had ≥ 5% weight reduction at week 72, compared with 15.4% in the placebo group.",
+      "pmid": 41612966,
+      "year": 2026,
+      "title": "Efficacy and Safety of Tirzepatide in Japanese Participants With Obesity: A Subpopulation Analysis of the SURMOUNT-1 Trial."
+     },
+     {
+      "first_arm": "tirzepatide at a once-weekly dose of 5 mg",
+      "second_arm": "those who received placebo",
+      "outcome": "percent change in body weight from baseline to week 176",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -12.3, second arm -1.3 (mean change); P <0.001",
+      "participants": 2539,
+      "weeks": 176.0,
+      "subgroup": true,
+      "sentence": "At 176 weeks, the mean percent change in body weight among the participants who received tirzepatide was -12.3% with the 5-mg dose, -18.7% with the 10-mg dose, and -19.7% with the 15-mg dose, as compared with -1.3% among those who received placebo (P<0.001 for all comparisons with placebo).",
+      "pmid": 39536238,
+      "year": 2024,
+      "title": "Tirzepatide for Obesity Treatment and Diabetes Prevention."
+     },
+     {
+      "first_arm": "10 mg",
+      "second_arm": "those who received placebo",
+      "outcome": "percent change in body weight from baseline to week 176",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -18.7, second arm -1.3 (mean change); P <0.001",
+      "participants": 2539,
+      "weeks": 176.0,
+      "subgroup": true,
+      "sentence": "At 176 weeks, the mean percent change in body weight among the participants who received tirzepatide was -12.3% with the 5-mg dose, -18.7% with the 10-mg dose, and -19.7% with the 15-mg dose, as compared with -1.3% among those who received placebo (P<0.001 for all comparisons with placebo).",
+      "pmid": 39536238,
+      "year": 2024,
+      "title": "Tirzepatide for Obesity Treatment and Diabetes Prevention."
+     },
+     {
+      "first_arm": "15 mg",
+      "second_arm": "those who received placebo",
+      "outcome": "percent change in body weight from baseline to week 176",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -19.7, second arm -1.3 (mean change); P <0.001",
+      "participants": 2539,
+      "weeks": 176.0,
+      "subgroup": true,
+      "sentence": "At 176 weeks, the mean percent change in body weight among the participants who received tirzepatide was -12.3% with the 5-mg dose, -18.7% with the 10-mg dose, and -19.7% with the 15-mg dose, as compared with -1.3% among those who received placebo (P<0.001 for all comparisons with placebo).",
+      "pmid": 39536238,
+      "year": 2024,
+      "title": "Tirzepatide for Obesity Treatment and Diabetes Prevention."
+     },
+     {
+      "first_arm": "tirzepatide (15 mg or maximum tolerated dose)",
+      "second_arm": "placebo",
+      "outcome": "body weight change at end of study treatment",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm 26, second arm 2 (percentage); P <0.001",
+      "participants": null,
+      "weeks": null,
+      "subgroup": true,
+      "sentence": "In SURMOUNT-1, significantly greater body weight reductions from baseline were observed with tirzepatide versus placebo in women in the premenopause (26% vs. 2%), perimenopause (23% vs. 3%), and postmenopause stages (23% vs. 3%; p < 0.001).",
+      "pmid": 40074721,
+      "year": 2025,
+      "title": "Body weight reduction in women treated with tirzepatide by reproductive stage: a post hoc analysis from the SURMOUNT program."
+     },
+     {
+      "first_arm": "tirzepatide (15 mg or maximum tolerated dose)",
+      "second_arm": "placebo",
+      "outcome": "body weight change at end of study treatment",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm 23, second arm 3 (percentage); P <0.001",
+      "participants": null,
+      "weeks": null,
+      "subgroup": true,
+      "sentence": "In SURMOUNT-1, significantly greater body weight reductions from baseline were observed with tirzepatide versus placebo in women in the premenopause (26% vs. 2%), perimenopause (23% vs. 3%), and postmenopause stages (23% vs. 3%; p < 0.001).",
+      "pmid": 40074721,
+      "year": 2025,
+      "title": "Body weight reduction in women treated with tirzepatide by reproductive stage: a post hoc analysis from the SURMOUNT program."
+     },
+     {
+      "first_arm": "tirzepatide (15 mg or maximum tolerated dose)",
+      "second_arm": "placebo",
+      "outcome": "body weight change at end of study treatment",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm 23, second arm 3 (percentage); P <0.001",
+      "participants": null,
+      "weeks": null,
+      "subgroup": true,
+      "sentence": "In SURMOUNT-1, significantly greater body weight reductions from baseline were observed with tirzepatide versus placebo in women in the premenopause (26% vs. 2%), perimenopause (23% vs. 3%), and postmenopause stages (23% vs. 3%; p < 0.001).",
+      "pmid": 40074721,
+      "year": 2025,
+      "title": "Body weight reduction in women treated with tirzepatide by reproductive stage: a post hoc analysis from the SURMOUNT program."
+     },
+     {
+      "first_arm": "5-mg weekly doses of tirzepatide",
+      "second_arm": "10-mg doses",
+      "outcome": "percentage change in weight from baseline at week 72",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm -15, second arm -19.5 (mean change)",
+      "participants": 2539,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "The mean percentage change in weight at week 72 was -15.0% (95% confidence interval [CI], -15.9 to -14.2) with 5-mg weekly doses of tirzepatide, -19.5% (95% CI, -20.4 to -18.5) with 10-mg doses, and -20.9% (95% CI, -21.8 to -19.9) with 15-mg doses and -3.1% (95% CI, -4.3 to -1.9) with placebo (P<0.001 for all comparisons with placebo).",
+      "pmid": 35658024,
+      "year": 2022,
+      "title": "Tirzepatide Once Weekly for the Treatment of Obesity."
+     },
+     {
+      "first_arm": "5-mg weekly doses of tirzepatide",
+      "second_arm": "10 mg",
+      "outcome": "weight reduction of 5% or more at week 72",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": "first arm 85, second arm 89 (percentage)",
+      "participants": 2539,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "The percentage of participants who had weight reduction of 5% or more was 85% (95% CI, 82 to 89), 89% (95% CI, 86 to 92), and 91% (95% CI, 88 to 94) with 5 mg, 10 mg, and 15 mg of tirzepatide, respectively, and 35% (95% CI, 30 to 39) with placebo; 50% (95% CI, 46 to 54) and 57% (95% CI, 53 to 61) of participants in the 10-mg and 15-mg groups had a reduction in body weight of 20% or more, as compared with 3% (95% CI, 1 to 5) in the placebo group (P<0.001 for all comparisons with placebo).",
+      "pmid": 35658024,
+      "year": 2022,
+      "title": "Tirzepatide Once Weekly for the Treatment of Obesity."
+     },
+     {
+      "first_arm": "5-mg weekly doses of tirzepatide",
+      "second_arm": "15 mg",
+      "outcome": "weight reduction of 5% or more at week 72",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": "first arm 85, second arm 91 (percentage)",
+      "participants": 2539,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "The percentage of participants who had weight reduction of 5% or more was 85% (95% CI, 82 to 89), 89% (95% CI, 86 to 92), and 91% (95% CI, 88 to 94) with 5 mg, 10 mg, and 15 mg of tirzepatide, respectively, and 35% (95% CI, 30 to 39) with placebo; 50% (95% CI, 46 to 54) and 57% (95% CI, 53 to 61) of participants in the 10-mg and 15-mg groups had a reduction in body weight of 20% or more, as compared with 3% (95% CI, 1 to 5) in the placebo group (P<0.001 for all comparisons with placebo).",
+      "pmid": 35658024,
+      "year": 2022,
+      "title": "Tirzepatide Once Weekly for the Treatment of Obesity."
+     },
+     {
+      "first_arm": "5 mg Tirzepatide",
+      "second_arm": "10 mg Tirzepatide",
+      "outcome": "proportions achieving various weight reduction thresholds at Week 24",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": null,
+      "participants": 1545,
+      "weeks": 24.0,
+      "subgroup": false,
+      "sentence": "Higher doses of tirzepatide were associated with higher proportions of participants achieving various weight reduction thresholds at Weeks 24 and 72.",
+      "pmid": 40677091,
+      "year": 2025,
+      "title": "Weight reduction over time in tirzepatide-treated participants by early weight loss response: Post hoc analysis in SURMOUNT-1."
+     },
+     {
+      "first_arm": "5 mg Tirzepatide",
+      "second_arm": "10 mg Tirzepatide",
+      "outcome": "proportions achieving various weight reduction thresholds at Week 72",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": null,
+      "participants": 1545,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "Higher doses of tirzepatide were associated with higher proportions of participants achieving various weight reduction thresholds at Weeks 24 and 72.",
+      "pmid": 40677091,
+      "year": 2025,
+      "title": "Weight reduction over time in tirzepatide-treated participants by early weight loss response: Post hoc analysis in SURMOUNT-1."
+     },
+     {
+      "first_arm": "5 mg Tirzepatide",
+      "second_arm": "15 mg Tirzepatide",
+      "outcome": "proportions achieving various weight reduction thresholds at Week 24",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": null,
+      "participants": 1545,
+      "weeks": 24.0,
+      "subgroup": false,
+      "sentence": "Higher doses of tirzepatide were associated with higher proportions of participants achieving various weight reduction thresholds at Weeks 24 and 72.",
+      "pmid": 40677091,
+      "year": 2025,
+      "title": "Weight reduction over time in tirzepatide-treated participants by early weight loss response: Post hoc analysis in SURMOUNT-1."
+     },
+     {
+      "first_arm": "5 mg Tirzepatide",
+      "second_arm": "15 mg Tirzepatide",
+      "outcome": "proportions achieving various weight reduction thresholds at Week 72",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": null,
+      "participants": 1545,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "Higher doses of tirzepatide were associated with higher proportions of participants achieving various weight reduction thresholds at Weeks 24 and 72.",
+      "pmid": 40677091,
+      "year": 2025,
+      "title": "Weight reduction over time in tirzepatide-treated participants by early weight loss response: Post hoc analysis in SURMOUNT-1."
+     },
+     {
+      "first_arm": "10 mg Tirzepatide",
+      "second_arm": "15 mg Tirzepatide",
+      "outcome": "proportions achieving various weight reduction thresholds at Week 72",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": null,
+      "participants": 1545,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "Higher doses of tirzepatide were associated with higher proportions of participants achieving various weight reduction thresholds at Weeks 24 and 72.",
+      "pmid": 40677091,
+      "year": 2025,
+      "title": "Weight reduction over time in tirzepatide-treated participants by early weight loss response: Post hoc analysis in SURMOUNT-1."
+     },
+     {
+      "first_arm": "tirzepatide 5-",
+      "second_arm": "10-",
+      "outcome": "mean percent change in body weight at week 72",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm -12, second arm -22.4 (mean change)",
+      "participants": 102,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "Participants in the tirzepatide 5-, 10-, and 15-mg groups had a statistically significantly greater (all p < 0.001) least squares mean (standard error) percent change in body weight compared with those in the placebo group: -12.0% (1.7%), -22.4% (1.7%), -22.1% (1.6%), and -0.3% (1.6%), respectively.",
+      "pmid": 41612966,
+      "year": 2026,
+      "title": "Efficacy and Safety of Tirzepatide in Japanese Participants With Obesity: A Subpopulation Analysis of the SURMOUNT-1 Trial."
+     },
+     {
+      "first_arm": "tirzepatide 5-",
+      "second_arm": "10-",
+      "outcome": "proportion achieving ≥ 5% body weight reduction at week 72",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": "first arm 91.7, second arm 100 (percentage)",
+      "participants": 102,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "Overall, 91.7%, 100%, and 96.6% of participants in the tirzepatide 5-, 10-, and 15-mg groups, respectively, had ≥ 5% weight reduction at week 72, compared with 15.4% in the placebo group.",
+      "pmid": 41612966,
+      "year": 2026,
+      "title": "Efficacy and Safety of Tirzepatide in Japanese Participants With Obesity: A Subpopulation Analysis of the SURMOUNT-1 Trial."
+     },
+     {
+      "first_arm": "tirzepatide 5-",
+      "second_arm": "15-mg groups",
+      "outcome": "proportion achieving ≥ 5% body weight reduction at week 72",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": "first arm 91.7, second arm 96.6 (percentage)",
+      "participants": 102,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "Overall, 91.7%, 100%, and 96.6% of participants in the tirzepatide 5-, 10-, and 15-mg groups, respectively, had ≥ 5% weight reduction at week 72, compared with 15.4% in the placebo group.",
+      "pmid": 41612966,
+      "year": 2026,
+      "title": "Efficacy and Safety of Tirzepatide in Japanese Participants With Obesity: A Subpopulation Analysis of the SURMOUNT-1 Trial."
+     },
+     {
+      "first_arm": "10-",
+      "second_arm": "15-mg groups",
+      "outcome": "proportion achieving ≥ 5% body weight reduction at week 72",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm 100, second arm 96.6 (percentage)",
+      "participants": 102,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "Overall, 91.7%, 100%, and 96.6% of participants in the tirzepatide 5-, 10-, and 15-mg groups, respectively, had ≥ 5% weight reduction at week 72, compared with 15.4% in the placebo group.",
+      "pmid": 41612966,
+      "year": 2026,
+      "title": "Efficacy and Safety of Tirzepatide in Japanese Participants With Obesity: A Subpopulation Analysis of the SURMOUNT-1 Trial."
+     },
+     {
+      "first_arm": "tirzepatide 5 mg",
+      "second_arm": "10 mg",
+      "outcome": "mean weight regain from nadir to Week 176",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": "first arm 3.8, second arm 4.4 (mean)",
+      "participants": 2539,
+      "weeks": 176.0,
+      "subgroup": false,
+      "sentence": "In this post hoc analysis, the mean weight regain from nadir weight to Week 176 was 3.8 kg, 4.4 kg, and 3.7 kg for those treated with tirzepatide 5 mg, 10 mg, and 15 mg, respectively.",
+      "pmid": 42831032,
+      "year": 2026,
+      "title": "Evaluation of clinical relevance of weight nadirs and weight regain during 3 years of treatment with tirzepatide in participants with obesity or overweight and prediabetes."
+     },
+     {
+      "first_arm": "10 mg",
+      "second_arm": "15 mg",
+      "outcome": "mean weight regain from nadir to Week 176",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm 4.4, second arm 3.7 (mean)",
+      "participants": 2539,
+      "weeks": 176.0,
+      "subgroup": false,
+      "sentence": "In this post hoc analysis, the mean weight regain from nadir weight to Week 176 was 3.8 kg, 4.4 kg, and 3.7 kg for those treated with tirzepatide 5 mg, 10 mg, and 15 mg, respectively.",
+      "pmid": 42831032,
+      "year": 2026,
+      "title": "Evaluation of clinical relevance of weight nadirs and weight regain during 3 years of treatment with tirzepatide in participants with obesity or overweight and prediabetes."
+     }
+    ]
+   }
+  },
+  "T06": {
+   "id": "T06",
+   "name": "SMART",
+   "drug": "semaglutide",
+   "paper": {
+    "pmid": 39455729,
+    "pmc": null,
+    "title": "Semaglutide in patients with overweight or obesity and chronic kidney disease without diabetes: a randomized double-blind placebo-controlled clinical trial.",
+    "journal": "Nature medicine",
+    "year": 2024
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "semaglutide 2.4 mg per week",
+      "n": 51
+     },
+     {
+      "name": "placebo",
+      "n": 50
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "semaglutide 2.4 mg/wk subcutaneously",
+      "second_arm": "placebo",
+      "outcome": "total body weight at 24 weeks",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "treatment difference -9.1 (interval -11 to -7.2)",
+      "participants": 101,
+      "weeks": 24.0,
+      "subgroup": false,
+      "sentence": "After 24 weeks of treatment, semaglutide compared with placebo changed total body weight, lean body mass, and fat mass by -9.1 (95% confidence interval [CI], -11.0 to -7.2), -2.5 (95% CI, -6.6 to 1.6), and -3.9 (95% CI, -7.8 to 0.0) kg, respectively.",
+      "pmid": 42308057,
+      "year": 2026,
+      "title": "Effects of Semaglutide on Body Composition and GFR: A Prespecified Analysis of the SMART Trial."
+     }
+    ]
+   }
+  },
+  "T07": {
+   "id": "T07",
+   "name": "SCALE Diabetes",
+   "drug": "liraglutide",
+   "paper": {
+    "pmid": 26284720,
+    "pmc": null,
+    "title": "Efficacy of Liraglutide for Weight Loss Among Patients With Type 2 Diabetes: The SCALE Diabetes Randomized Clinical Trial.",
+    "journal": "JAMA",
+    "year": 2015
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "liraglutide (3.0 mg)",
+      "n": 423
+     },
+     {
+      "name": "liraglutide (1.8 mg)",
+      "n": 211
+     },
+     {
+      "name": "placebo",
+      "n": 212
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "liraglutide (3.0 mg)",
+      "second_arm": "placebo",
+      "outcome": "relative change in weight at week 56",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm 6, second arm 2 (percentage); treatment difference -4 (interval -5.1 to -2.9); P <.001",
+      "participants": 846,
+      "weeks": 56.0,
+      "subgroup": false,
+      "sentence": "Weight loss was 6.0% (6.4 kg) with liraglutide (3.0-mg dose), 4.7% (5.0 kg) with liraglutide (1.8-mg dose), and 2.0% (2.2 kg) with placebo (estimated difference for liraglutide [3.0 mg] vs placebo, -4.00% [95% CI, -5.10% to -2.90%]; liraglutide [1.8 mg] vs placebo, -2.71% [95% CI, -4.00% to -1.42%]; P < .001 for both).",
+      "pmid": 26284720,
+      "year": 2015,
+      "title": "Efficacy of Liraglutide for Weight Loss Among Patients With Type 2 Diabetes: The SCALE Diabetes Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "liraglutide (3.0 mg)",
+      "second_arm": "placebo",
+      "outcome": "weight loss of 5% or greater at week 56",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 54.3, second arm 21.4 (percentage); percentage difference 32.9 (interval 24.6 to 41.2); P <.001",
+      "participants": 846,
+      "weeks": 56.0,
+      "subgroup": false,
+      "sentence": "Weight loss of 5% or greater occurred in 54.3% with liraglutide (3.0 mg) and 40.4% with liraglutide (1.8 mg) vs 21.4% with placebo (estimated difference for liraglutide [3.0 mg] vs placebo, 32.9% [95% CI, 24.6% to 41.2%]; for liraglutide [1.8 mg] vs placebo, 19.0% [95% CI, 9.1% to 28.8%]; P < .001 for both).",
+      "pmid": 26284720,
+      "year": 2015,
+      "title": "Efficacy of Liraglutide for Weight Loss Among Patients With Type 2 Diabetes: The SCALE Diabetes Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "liraglutide (3.0 mg)",
+      "second_arm": "placebo",
+      "outcome": "weight loss greater than 10% at week 56",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 25.2, second arm 6.7 (percentage); percentage difference 18.5 (interval 12.7 to 24.4); P <.001",
+      "participants": 846,
+      "weeks": 56.0,
+      "subgroup": false,
+      "sentence": "Weight loss greater than 10% occurred in 25.2% with liraglutide (3.0 mg) and 15.9% with liraglutide (1.8 mg) vs 6.7% with placebo (estimated difference for liraglutide [3.0 mg] vs placebo, 18.5% [95% CI, 12.7% to 24.4%], P < .001; for liraglutide [1.8 mg] vs placebo, 9.3% [95% CI, 2.7% to 15.8%], P = .006).",
+      "pmid": 26284720,
+      "year": 2015,
+      "title": "Efficacy of Liraglutide for Weight Loss Among Patients With Type 2 Diabetes: The SCALE Diabetes Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "liraglutide (1.8 mg)",
+      "second_arm": "placebo",
+      "outcome": "relative change in weight at week 56",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm 4.7, second arm 2 (percentage); treatment difference -2.71 (interval -4 to -1.42); P <.001",
+      "participants": 846,
+      "weeks": 56.0,
+      "subgroup": false,
+      "sentence": "Weight loss was 6.0% (6.4 kg) with liraglutide (3.0-mg dose), 4.7% (5.0 kg) with liraglutide (1.8-mg dose), and 2.0% (2.2 kg) with placebo (estimated difference for liraglutide [3.0 mg] vs placebo, -4.00% [95% CI, -5.10% to -2.90%]; liraglutide [1.8 mg] vs placebo, -2.71% [95% CI, -4.00% to -1.42%]; P < .001 for both).",
+      "pmid": 26284720,
+      "year": 2015,
+      "title": "Efficacy of Liraglutide for Weight Loss Among Patients With Type 2 Diabetes: The SCALE Diabetes Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "liraglutide (1.8 mg)",
+      "second_arm": "placebo",
+      "outcome": "weight loss of 5% or greater at week 56",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 40.4, second arm 21.4 (percentage); percentage difference 19 (interval 9.1 to 28.8); P <0.001",
+      "participants": 846,
+      "weeks": 56.0,
+      "subgroup": false,
+      "sentence": "Weight loss of 5% or greater occurred in 54.3% with liraglutide (3.0 mg) and 40.4% with liraglutide (1.8 mg) vs 21.4% with placebo (estimated difference for liraglutide [3.0 mg] vs placebo, 32.9% [95% CI, 24.6% to 41.2%]; for liraglutide [1.8 mg] vs placebo, 19.0% [95% CI, 9.1% to 28.8%]; P < .001 for both).",
+      "pmid": 26284720,
+      "year": 2015,
+      "title": "Efficacy of Liraglutide for Weight Loss Among Patients With Type 2 Diabetes: The SCALE Diabetes Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "liraglutide (1.8 mg)",
+      "second_arm": "placebo",
+      "outcome": "weight loss greater than 10% at week 56",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 15.9, second arm 6.7 (percentage); percentage difference 9.3 (interval 2.7 to 15.8); P =.006",
+      "participants": 846,
+      "weeks": 56.0,
+      "subgroup": false,
+      "sentence": "Weight loss greater than 10% occurred in 25.2% with liraglutide (3.0 mg) and 15.9% with liraglutide (1.8 mg) vs 6.7% with placebo (estimated difference for liraglutide [3.0 mg] vs placebo, 18.5% [95% CI, 12.7% to 24.4%], P < .001; for liraglutide [1.8 mg] vs placebo, 9.3% [95% CI, 2.7% to 15.8%], P = .006).",
+      "pmid": 26284720,
+      "year": 2015,
+      "title": "Efficacy of Liraglutide for Weight Loss Among Patients With Type 2 Diabetes: The SCALE Diabetes Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "weight loss (0-56 weeks)",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": null,
+      "participants": 3731,
+      "weeks": 56.0,
+      "subgroup": false,
+      "sentence": "Significantly greater weight loss (0-56 weeks) was observed with liraglutide 3.0 mg versus placebo in all patient groups while on treatment.",
+      "pmid": 29145215,
+      "year": 2017,
+      "title": "Comparison of Efficacy and Safety of Liraglutide 3.0 mg in Individuals with BMI above and below 35 kg/m²: A Post-hoc Analysis."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "weight loss at end-of-treatment",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 7.7, second arm 2.3 (mean)",
+      "participants": 5325,
+      "weeks": null,
+      "subgroup": true,
+      "sentence": "All achieved statistically significant mean weight loss at end-of-treatment with liraglutide 3.0 mg versus placebo: white 7.7% versus 2.3%, black/African-American 6.3% versus 1.4%, Asian 6.3% versus 2.5%, other 7.3% versus 0.49%.",
+      "pmid": 26744025,
+      "year": 2016,
+      "title": "Efficacy and safety of liraglutide 3.0 mg for weight management are similar across races: subgroup analysis across the SCALE and phase II randomized trials."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "weight loss at end-of-treatment",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 6.3, second arm 1.4 (mean)",
+      "participants": 5325,
+      "weeks": null,
+      "subgroup": true,
+      "sentence": "All achieved statistically significant mean weight loss at end-of-treatment with liraglutide 3.0 mg versus placebo: white 7.7% versus 2.3%, black/African-American 6.3% versus 1.4%, Asian 6.3% versus 2.5%, other 7.3% versus 0.49%.",
+      "pmid": 26744025,
+      "year": 2016,
+      "title": "Efficacy and safety of liraglutide 3.0 mg for weight management are similar across races: subgroup analysis across the SCALE and phase II randomized trials."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "weight loss at end-of-treatment",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 6.3, second arm 2.5 (percentage)",
+      "participants": 5325,
+      "weeks": null,
+      "subgroup": true,
+      "sentence": "All achieved statistically significant mean weight loss at end-of-treatment with liraglutide 3.0 mg versus placebo: white 7.7% versus 2.3%, black/African-American 6.3% versus 1.4%, Asian 6.3% versus 2.5%, other 7.3% versus 0.49%.",
+      "pmid": 26744025,
+      "year": 2016,
+      "title": "Efficacy and safety of liraglutide 3.0 mg for weight management are similar across races: subgroup analysis across the SCALE and phase II randomized trials."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "weight loss at end-of-treatment",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 7.3, second arm 0.49 (mean)",
+      "participants": 5325,
+      "weeks": null,
+      "subgroup": true,
+      "sentence": "All achieved statistically significant mean weight loss at end-of-treatment with liraglutide 3.0 mg versus placebo: white 7.7% versus 2.3%, black/African-American 6.3% versus 1.4%, Asian 6.3% versus 2.5%, other 7.3% versus 0.49%.",
+      "pmid": 26744025,
+      "year": 2016,
+      "title": "Efficacy and safety of liraglutide 3.0 mg for weight management are similar across races: subgroup analysis across the SCALE and phase II randomized trials."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "mean weight loss at end-of-treatment",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 7, second arm 1.5 (mean); treatment difference -5.1 (interval -6.2 to -4)",
+      "participants": null,
+      "weeks": null,
+      "subgroup": true,
+      "sentence": "Both subgroups achieved clinically significant mean weight loss at end-of-treatment with liraglutide 3.0 mg versus placebo: Hispanics 7.0% versus 1.5%, treatment difference -5.1% (95% CI, -6.2 to -4.0); non-Hispanics 7.5% versus 2.3%, -5.2% (95% CI, -5.5 to -4.8).",
+      "pmid": 27482610,
+      "year": 2016,
+      "title": "EFFECTS OF LIRAGLUTIDE 3.0 MG ON WEIGHT AND RISK FACTORS IN HISPANIC VERSUS NON-HIPANIC POPULATIONS: SUBGROUP ANALYSIS FROM SCALE RANDOMIZED TRIALS."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "mean weight loss at end-of-treatment",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 7.5, second arm 2.3 (mean); treatment difference -5.2 (interval -5.5 to -4.8)",
+      "participants": null,
+      "weeks": null,
+      "subgroup": true,
+      "sentence": "Both subgroups achieved clinically significant mean weight loss at end-of-treatment with liraglutide 3.0 mg versus placebo: Hispanics 7.0% versus 1.5%, treatment difference -5.1% (95% CI, -6.2 to -4.0); non-Hispanics 7.5% versus 2.3%, -5.2% (95% CI, -5.5 to -4.8).",
+      "pmid": 27482610,
+      "year": 2016,
+      "title": "EFFECTS OF LIRAGLUTIDE 3.0 MG ON WEIGHT AND RISK FACTORS IN HISPANIC VERSUS NON-HIPANIC POPULATIONS: SUBGROUP ANALYSIS FROM SCALE RANDOMIZED TRIALS."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "at least 5% baseline weight loss",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": null,
+      "participants": null,
+      "weeks": null,
+      "subgroup": true,
+      "sentence": "More individuals in both subgroups lost ≥5%, >10%, and >15% of their baseline weight with liraglutide 3.0 mg than with placebo.",
+      "pmid": 27482610,
+      "year": 2016,
+      "title": "EFFECTS OF LIRAGLUTIDE 3.0 MG ON WEIGHT AND RISK FACTORS IN HISPANIC VERSUS NON-HIPANIC POPULATIONS: SUBGROUP ANALYSIS FROM SCALE RANDOMIZED TRIALS."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "at least 5% baseline weight loss",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": null,
+      "participants": null,
+      "weeks": null,
+      "subgroup": true,
+      "sentence": "More individuals in both subgroups lost ≥5%, >10%, and >15% of their baseline weight with liraglutide 3.0 mg than with placebo.",
+      "pmid": 27482610,
+      "year": 2016,
+      "title": "EFFECTS OF LIRAGLUTIDE 3.0 MG ON WEIGHT AND RISK FACTORS IN HISPANIC VERSUS NON-HIPANIC POPULATIONS: SUBGROUP ANALYSIS FROM SCALE RANDOMIZED TRIALS."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "more than 10% baseline weight loss",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": null,
+      "participants": null,
+      "weeks": null,
+      "subgroup": true,
+      "sentence": "More individuals in both subgroups lost ≥5%, >10%, and >15% of their baseline weight with liraglutide 3.0 mg than with placebo.",
+      "pmid": 27482610,
+      "year": 2016,
+      "title": "EFFECTS OF LIRAGLUTIDE 3.0 MG ON WEIGHT AND RISK FACTORS IN HISPANIC VERSUS NON-HIPANIC POPULATIONS: SUBGROUP ANALYSIS FROM SCALE RANDOMIZED TRIALS."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "more than 10% baseline weight loss",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": null,
+      "participants": null,
+      "weeks": null,
+      "subgroup": true,
+      "sentence": "More individuals in both subgroups lost ≥5%, >10%, and >15% of their baseline weight with liraglutide 3.0 mg than with placebo.",
+      "pmid": 27482610,
+      "year": 2016,
+      "title": "EFFECTS OF LIRAGLUTIDE 3.0 MG ON WEIGHT AND RISK FACTORS IN HISPANIC VERSUS NON-HIPANIC POPULATIONS: SUBGROUP ANALYSIS FROM SCALE RANDOMIZED TRIALS."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "more than 15% baseline weight loss",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": null,
+      "participants": null,
+      "weeks": null,
+      "subgroup": true,
+      "sentence": "More individuals in both subgroups lost ≥5%, >10%, and >15% of their baseline weight with liraglutide 3.0 mg than with placebo.",
+      "pmid": 27482610,
+      "year": 2016,
+      "title": "EFFECTS OF LIRAGLUTIDE 3.0 MG ON WEIGHT AND RISK FACTORS IN HISPANIC VERSUS NON-HIPANIC POPULATIONS: SUBGROUP ANALYSIS FROM SCALE RANDOMIZED TRIALS."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "more than 15% baseline weight loss",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": null,
+      "participants": null,
+      "weeks": null,
+      "subgroup": true,
+      "sentence": "More individuals in both subgroups lost ≥5%, >10%, and >15% of their baseline weight with liraglutide 3.0 mg than with placebo.",
+      "pmid": 27482610,
+      "year": 2016,
+      "title": "EFFECTS OF LIRAGLUTIDE 3.0 MG ON WEIGHT AND RISK FACTORS IN HISPANIC VERSUS NON-HIPANIC POPULATIONS: SUBGROUP ANALYSIS FROM SCALE RANDOMIZED TRIALS."
+     },
+     {
+      "first_arm": "liraglutide 3.0mg",
+      "second_arm": "placebo",
+      "outcome": "weight loss from baseline to week 56",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm 8, second arm 2.6 (mean)",
+      "participants": null,
+      "weeks": 56.0,
+      "subgroup": true,
+      "sentence": "In SCALE Obesity and Prediabetes, mean (±SD) weight loss (baseline to week 56) with liraglutide was 8.0±6.7% (2.6±6.9% with placebo); baseline creatinine with liraglutide was 76±15μmol/L and 74±15μmol/L after 56weeks (similar across treatment groups).",
+      "pmid": 28462892,
+      "year": 2017,
+      "title": "Effect of weight reductions on estimated kidney function: Post-hoc analysis of two randomized trials."
+     },
+     {
+      "first_arm": "liraglutide 3.0mg",
+      "second_arm": "placebo",
+      "outcome": "weight loss from baseline to week 56",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm 5.9, second arm 2 (mean change)",
+      "participants": null,
+      "weeks": 56.0,
+      "subgroup": true,
+      "sentence": "In SCALE Diabetes, weight loss with liraglutide was 5.9±5.5% (2.0±4.3% with placebo); baseline creatinine was 79±19μmol/L (77±16μmol/L, placebo) and 79±20μmol/L after 56weeks (76±15μmol/L, placebo).",
+      "pmid": 28462892,
+      "year": 2017,
+      "title": "Effect of weight reductions on estimated kidney function: Post-hoc analysis of two randomized trials."
+     }
+    ]
+   }
+  },
+  "T08": {
+   "id": "T08",
+   "name": "STEP 4",
+   "drug": "semaglutide",
+   "paper": {
+    "pmid": 33755728,
+    "pmc": "PMC7988425",
+    "title": "Effect of Continued Weekly Subcutaneous Semaglutide vs Placebo on Weight Loss Maintenance in Adults With Overweight or Obesity: The STEP 4 Randomized Clinical Trial.",
+    "journal": "JAMA",
+    "year": 2021
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "continued subcutaneous semaglutide",
+      "n": 535
+     },
+     {
+      "name": "placebo",
+      "n": 268
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "continued subcutaneous semaglutide",
+      "second_arm": "the switch to placebo",
+      "outcome": "percent change in body weight from week 20 to week 68",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -7.9, second arm 6.9 (mean change); treatment difference -14.8 (interval -16 to -13.5); P <0.001",
+      "participants": 803,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "With continued semaglutide, mean body weight change from week 20 to week 68 was -7.9% vs +6.9% with the switch to placebo (difference, -14.8 [95% CI, -16.0 to -13.5] percentage points; P < .001).",
+      "pmid": 33755728,
+      "year": 2021,
+      "title": "Effect of Continued Weekly Subcutaneous Semaglutide vs Placebo on Weight Loss Maintenance in Adults With Overweight or Obesity: The STEP 4 Randomized Clinical Trial."
+     }
+    ]
+   }
+  },
+  "T09": {
+   "id": "T09",
+   "name": "STEP 6",
+   "drug": "semaglutide",
+   "paper": {
+    "pmid": 35131037,
+    "pmc": null,
+    "title": "Semaglutide once a week in adults with overweight or obesity, with or without type 2 diabetes in an east Asian population (STEP 6): a randomised, double-blind, double-dummy, placebo-controlled, phase 3a trial.",
+    "journal": "The lancet. Diabetes & endocrinology",
+    "year": 2022
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "semaglutide 2·4 mg",
+      "n": 199
+     },
+     {
+      "name": "placebo (semaglutide 2.4 mg)",
+      "n": null
+     },
+     {
+      "name": "semaglutide 1·7 mg",
+      "n": 101
+     },
+     {
+      "name": "placebo (semaglutide 1.7 mg)",
+      "n": null
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "semaglutide 2·4 mg",
+      "second_arm": "the placebo group",
+      "outcome": "achievement of at least 5% reduction in baseline bodyweight at week 68",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 83, second arm 21 (percentage); odds ratio 21.7 (interval 11.3 to 41.9); P <0·0001",
+      "participants": 401,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "At week 68, a larger proportion of participants had achieved a 5% or higher reduction in baseline bodyweight in the semaglutide 2·4 mg group (160 [83%] of 193 participants) and semaglutide 1·7 mg group (71 [72%] of 98 participants) than in the placebo group (21 [21%] of 100 participants); odds ratio [OR] 21·7 [95% CI 11·3 to 41·9] for semaglutide 2·4 mg vs placebo; OR 11·1 [95% CI 5·5 to 22·2] for semaglutide 1·7 mg vs placebo; both p<0·0001).",
+      "pmid": 35131037,
+      "year": 2022,
+      "title": "Semaglutide once a week in adults with overweight or obesity, with or without type 2 diabetes in an east Asian population (STEP 6): a randomised, double-blind, double-dummy, placebo-controlled, phase 3a trial."
+     },
+     {
+      "first_arm": "semaglutide 1·7 mg",
+      "second_arm": "the placebo group",
+      "outcome": "percentage change in bodyweight from baseline at week 68",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -9.6, second arm -2.1 (mean change); treatment difference -7.5 (interval -9.6 to -5.4); P <0·0001",
+      "participants": 401,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "Estimated mean change in bodyweight from baseline to week 68 was -13·2% (SEM 0·5) in the semaglutide 2·4 mg group and -9·6% (0·8) in the semaglutide 1·7 mg group versus -2·1% (0·8) in the placebo group (estimated treatment difference [ETD] -11·1 percentage points [95% CI -12·9 to -9·2] for semaglutide 2·4 mg vs placebo; -7·5 percentage points [95% CI -9·6 to -5·4] for semaglutide 1·7 mg vs placebo; both p<0·0001).",
+      "pmid": 35131037,
+      "year": 2022,
+      "title": "Semaglutide once a week in adults with overweight or obesity, with or without type 2 diabetes in an east Asian population (STEP 6): a randomised, double-blind, double-dummy, placebo-controlled, phase 3a trial."
+     },
+     {
+      "first_arm": "semaglutide 1·7 mg",
+      "second_arm": "the placebo group",
+      "outcome": "achievement of at least 5% reduction in baseline bodyweight at week 68",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 72, second arm 21 (percentage); odds ratio 11.1 (interval 5.5 to 22.2); P <0·0001",
+      "participants": 401,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "At week 68, a larger proportion of participants had achieved a 5% or higher reduction in baseline bodyweight in the semaglutide 2·4 mg group (160 [83%] of 193 participants) and semaglutide 1·7 mg group (71 [72%] of 98 participants) than in the placebo group (21 [21%] of 100 participants); odds ratio [OR] 21·7 [95% CI 11·3 to 41·9] for semaglutide 2·4 mg vs placebo; OR 11·1 [95% CI 5·5 to 22·2] for semaglutide 1·7 mg vs placebo; both p<0·0001).",
+      "pmid": 35131037,
+      "year": 2022,
+      "title": "Semaglutide once a week in adults with overweight or obesity, with or without type 2 diabetes in an east Asian population (STEP 6): a randomised, double-blind, double-dummy, placebo-controlled, phase 3a trial."
+     }
+    ]
+   }
+  },
+  "T10": {
+   "id": "T10",
+   "name": "STEP 9",
+   "drug": "semaglutide",
+   "paper": {
+    "pmid": 39476339,
+    "pmc": null,
+    "title": "Once-Weekly Semaglutide in Persons with Obesity and Knee Osteoarthritis.",
+    "journal": "The New England journal of medicine",
+    "year": 2024
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "semaglutide 2.4 mg",
+      "n": null
+     },
+     {
+      "name": "placebo",
+      "n": null
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "once-weekly subcutaneous semaglutide (2.4 mg)",
+      "second_arm": "placebo",
+      "outcome": "percentage change in body weight from baseline to week 68",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -13.7, second arm -3.2 (mean change); P <0.001",
+      "participants": 407,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "The mean change in body weight from baseline to week 68 was -13.7% with semaglutide and -3.2% with placebo (P<0.001).",
+      "pmid": 39476339,
+      "year": 2024,
+      "title": "Once-Weekly Semaglutide in Persons with Obesity and Knee Osteoarthritis."
+     }
+    ]
+   }
+  },
+  "T11": {
+   "id": "T11",
+   "name": "STEP 10",
+   "drug": "semaglutide",
+   "paper": {
+    "pmid": 39089293,
+    "pmc": null,
+    "title": "Efficacy and safety of once-weekly semaglutide 2·4 mg versus placebo in people with obesity and prediabetes (STEP 10): a randomised, double-blind, placebo-controlled, multicentre phase 3 trial.",
+    "journal": "The lancet. Diabetes & endocrinology",
+    "year": 2024
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "semaglutide 2·4 mg",
+      "n": 138
+     },
+     {
+      "name": "placebo",
+      "n": 69
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "semaglutide 2·4 mg",
+      "second_arm": "placebo",
+      "outcome": "percentage change in bodyweight at week 52",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -13.9, second arm -2.7 (mean change); treatment difference -11.2 (interval -13 to -9.4); P <0·0001",
+      "participants": null,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "There was a significantly greater reduction in bodyweight with semaglutide 2·4 mg than with placebo at week 52 (-13·9% [SD 0·7] vs -2·7% [0·6]; estimated treatment difference -11·2% [95% CI -13·0 to -9·4]; p<0·0001).",
+      "pmid": 39089293,
+      "year": 2024,
+      "title": "Efficacy and safety of once-weekly semaglutide 2·4 mg versus placebo in people with obesity and prediabetes (STEP 10): a randomised, double-blind, placebo-controlled, multicentre phase 3 trial."
+     }
+    ]
+   }
+  },
+  "T12": {
+   "id": "T12",
+   "name": "SUMMIT",
+   "drug": "tirzepatide",
+   "paper": {
+    "pmid": 39555826,
+    "pmc": null,
+    "title": "Tirzepatide for Heart Failure with Preserved Ejection Fraction and Obesity.",
+    "journal": "The New England journal of medicine",
+    "year": 2024
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "tirzepatide",
+      "n": 364
+     },
+     {
+      "name": "placebo",
+      "n": 367
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "tirzepatide",
+      "second_arm": "placebo",
+      "outcome": "body weight at 52 weeks",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": "treatment difference -14.4",
+      "participants": 731,
+      "weeks": 52.0,
+      "subgroup": true,
+      "sentence": "However, with increasing tertiles of baseline BMI, there were greater improvements in 6MWD (estimated treatment difference [ETD]: 9.9 vs 26.3 vs 37.5 m; P = 0.025), and greater decreases in BW (ETD: -10.7% vs -11.8% vs -14.4%; P = 0.006) and systolic blood pressure (ETD: -1.00 vs -6.65 vs -6.62 mm Hg; P = 0.035) with tirzepatide compared with placebo, with a trend for greater improvement in KCCQ-CSS (P = 0.097).",
+      "pmid": 40701669,
+      "year": 2025,
+      "title": "Impact of Body Mass Index, Central Adiposity, and Weight Loss on the Benefits of Tirzepatide in HFpEF: The SUMMIT Trial."
+     },
+     {
+      "first_arm": "tirzepatide",
+      "second_arm": "placebo",
+      "outcome": "body weight at 52 weeks",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": "treatment difference -10.7",
+      "participants": 731,
+      "weeks": 52.0,
+      "subgroup": true,
+      "sentence": "However, with increasing tertiles of baseline BMI, there were greater improvements in 6MWD (estimated treatment difference [ETD]: 9.9 vs 26.3 vs 37.5 m; P = 0.025), and greater decreases in BW (ETD: -10.7% vs -11.8% vs -14.4%; P = 0.006) and systolic blood pressure (ETD: -1.00 vs -6.65 vs -6.62 mm Hg; P = 0.035) with tirzepatide compared with placebo, with a trend for greater improvement in KCCQ-CSS (P = 0.097).",
+      "pmid": 40701669,
+      "year": 2025,
+      "title": "Impact of Body Mass Index, Central Adiposity, and Weight Loss on the Benefits of Tirzepatide in HFpEF: The SUMMIT Trial."
+     }
+    ]
+   }
+  },
+  "T13": {
+   "id": "T13",
+   "name": "Alba 2021",
+   "drug": "liraglutide",
+   "paper": {
+    "pmid": 33475255,
+    "pmc": null,
+    "title": "Efficacy and safety of glucagon-like peptide-1/glucagon receptor co-agonist JNJ-64565111 in individuals with obesity without type 2 diabetes mellitus: A randomized dose-ranging study.",
+    "journal": "Clinical obesity",
+    "year": 2021
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "placebo",
+      "n": null
+     },
+     {
+      "name": "JNJ-64565111 5.0 mg",
+      "n": null
+     },
+     {
+      "name": "JNJ-64565111 7.4 mg",
+      "n": null
+     },
+     {
+      "name": "JNJ-64565111 10.0 mg",
+      "n": null
+     },
+     {
+      "name": "liraglutide 3.0 mg",
+      "n": null
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "5.0 mg",
+      "second_arm": "placebo",
+      "outcome": "percent change from baseline in body weight at week 26",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": "treatment difference -6.8",
+      "participants": 474,
+      "weeks": 26.0,
+      "subgroup": false,
+      "sentence": "At week 26, placebo-subtracted body weight changes (adjusted for multiplicity) were -6.8%, -8.1% and -10.0% for the JNJ-64565111 5.0 mg, 7.4 mg and 10.0 mg groups, respectively, and -5.8% for the liraglutide group.",
+      "pmid": 33475255,
+      "year": 2021,
+      "title": "Efficacy and safety of glucagon-like peptide-1/glucagon receptor co-agonist JNJ-64565111 in individuals with obesity without type 2 diabetes mellitus: A randomized dose-ranging study."
+     },
+     {
+      "first_arm": "7.4 mg",
+      "second_arm": "placebo",
+      "outcome": "percent change from baseline in body weight at week 26",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": "treatment difference -8.1",
+      "participants": 474,
+      "weeks": 26.0,
+      "subgroup": false,
+      "sentence": "At week 26, placebo-subtracted body weight changes (adjusted for multiplicity) were -6.8%, -8.1% and -10.0% for the JNJ-64565111 5.0 mg, 7.4 mg and 10.0 mg groups, respectively, and -5.8% for the liraglutide group.",
+      "pmid": 33475255,
+      "year": 2021,
+      "title": "Efficacy and safety of glucagon-like peptide-1/glucagon receptor co-agonist JNJ-64565111 in individuals with obesity without type 2 diabetes mellitus: A randomized dose-ranging study."
+     },
+     {
+      "first_arm": "7.4 mg",
+      "second_arm": "the liraglutide group",
+      "outcome": "percent change from baseline in body weight at week 26",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": "first arm -8.1, second arm -5.8 (other)",
+      "participants": 474,
+      "weeks": 26.0,
+      "subgroup": false,
+      "sentence": "At week 26, placebo-subtracted body weight changes (adjusted for multiplicity) were -6.8%, -8.1% and -10.0% for the JNJ-64565111 5.0 mg, 7.4 mg and 10.0 mg groups, respectively, and -5.8% for the liraglutide group.",
+      "pmid": 33475255,
+      "year": 2021,
+      "title": "Efficacy and safety of glucagon-like peptide-1/glucagon receptor co-agonist JNJ-64565111 in individuals with obesity without type 2 diabetes mellitus: A randomized dose-ranging study."
+     },
+     {
+      "first_arm": "10.0 mg",
+      "second_arm": "placebo",
+      "outcome": "percent change from baseline in body weight at week 26",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": "treatment difference -10",
+      "participants": 474,
+      "weeks": 26.0,
+      "subgroup": false,
+      "sentence": "At week 26, placebo-subtracted body weight changes (adjusted for multiplicity) were -6.8%, -8.1% and -10.0% for the JNJ-64565111 5.0 mg, 7.4 mg and 10.0 mg groups, respectively, and -5.8% for the liraglutide group.",
+      "pmid": 33475255,
+      "year": 2021,
+      "title": "Efficacy and safety of glucagon-like peptide-1/glucagon receptor co-agonist JNJ-64565111 in individuals with obesity without type 2 diabetes mellitus: A randomized dose-ranging study."
+     },
+     {
+      "first_arm": "5.0 mg",
+      "second_arm": "10.0 mg groups",
+      "outcome": "percent change from baseline in body weight at week 26",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm -6.8, second arm -10 (other)",
+      "participants": 474,
+      "weeks": 26.0,
+      "subgroup": false,
+      "sentence": "At week 26, placebo-subtracted body weight changes (adjusted for multiplicity) were -6.8%, -8.1% and -10.0% for the JNJ-64565111 5.0 mg, 7.4 mg and 10.0 mg groups, respectively, and -5.8% for the liraglutide group.",
+      "pmid": 33475255,
+      "year": 2021,
+      "title": "Efficacy and safety of glucagon-like peptide-1/glucagon receptor co-agonist JNJ-64565111 in individuals with obesity without type 2 diabetes mellitus: A randomized dose-ranging study."
+     },
+     {
+      "first_arm": "7.4 mg",
+      "second_arm": "10.0 mg groups",
+      "outcome": "percent change from baseline in body weight at week 26",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm -8.1, second arm -10 (other)",
+      "participants": 474,
+      "weeks": 26.0,
+      "subgroup": false,
+      "sentence": "At week 26, placebo-subtracted body weight changes (adjusted for multiplicity) were -6.8%, -8.1% and -10.0% for the JNJ-64565111 5.0 mg, 7.4 mg and 10.0 mg groups, respectively, and -5.8% for the liraglutide group.",
+      "pmid": 33475255,
+      "year": 2021,
+      "title": "Efficacy and safety of glucagon-like peptide-1/glucagon receptor co-agonist JNJ-64565111 in individuals with obesity without type 2 diabetes mellitus: A randomized dose-ranging study."
+     }
+    ]
+   }
+  },
+  "T14": {
+   "id": "T14",
+   "name": "STEP 8",
+   "drug": "semaglutide",
+   "paper": {
+    "pmid": 35015037,
+    "pmc": "PMC8753508",
+    "title": "Effect of Weekly Subcutaneous Semaglutide vs Daily Liraglutide on Body Weight in Adults With Overweight or Obesity Without Diabetes: The STEP 8 Randomized Clinical Trial.",
+    "journal": "JAMA",
+    "year": 2022
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "semaglutide, 2.4 mg",
+      "n": 126
+     },
+     {
+      "name": "matching placebo (semaglutide)",
+      "n": null
+     },
+     {
+      "name": "liraglutide, 3.0 mg",
+      "n": 127
+     },
+     {
+      "name": "matching placebo (liraglutide)",
+      "n": null
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "once-weekly subcutaneous semaglutide, 2.4 mg",
+      "second_arm": "liraglutide",
+      "outcome": "percentage change in body weight at week 68",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -15.8, second arm -6.4 (mean change); treatment difference -9.4 (interval -12 to -6.8); P <.001",
+      "participants": 338,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "The mean weight change from baseline was -15.8% with semaglutide vs -6.4% with liraglutide (difference, -9.4 percentage points [95% CI, -12.0 to -6.8]; P < .001); weight change with pooled placebo was -1.9%.",
+      "pmid": 35015037,
+      "year": 2022,
+      "title": "Effect of Weekly Subcutaneous Semaglutide vs Daily Liraglutide on Body Weight in Adults With Overweight or Obesity Without Diabetes: The STEP 8 Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "once-weekly subcutaneous semaglutide, 2.4 mg",
+      "second_arm": "liraglutide",
+      "outcome": "achievement of 10% or more weight loss at week 68",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 70.9, second arm 25.6 (percentage); odds ratio 6.3 (interval 3.5 to 11.2); P <.001",
+      "participants": 338,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "Participants had significantly greater odds of achieving 10% or more, 15% or more, and 20% or more weight loss with semaglutide vs liraglutide (70.9% of participants vs 25.6% [odds ratio, 6.3 {95% CI, 3.5 to 11.2}], 55.6% vs 12.0% [odds ratio, 7.9 {95% CI, 4.1 to 15.4}], and 38.5% vs 6.0% [odds ratio, 8.2 {95% CI, 3.5 to 19.1}], respectively; all P < .001).",
+      "pmid": 35015037,
+      "year": 2022,
+      "title": "Effect of Weekly Subcutaneous Semaglutide vs Daily Liraglutide on Body Weight in Adults With Overweight or Obesity Without Diabetes: The STEP 8 Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "once-weekly subcutaneous semaglutide, 2.4 mg",
+      "second_arm": "liraglutide",
+      "outcome": "achievement of 15% or more weight loss at week 68",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 55.6, second arm 12 (percentage); odds ratio 7.9 (interval 4.1 to 15.4); P <.001",
+      "participants": 338,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "Participants had significantly greater odds of achieving 10% or more, 15% or more, and 20% or more weight loss with semaglutide vs liraglutide (70.9% of participants vs 25.6% [odds ratio, 6.3 {95% CI, 3.5 to 11.2}], 55.6% vs 12.0% [odds ratio, 7.9 {95% CI, 4.1 to 15.4}], and 38.5% vs 6.0% [odds ratio, 8.2 {95% CI, 3.5 to 19.1}], respectively; all P < .001).",
+      "pmid": 35015037,
+      "year": 2022,
+      "title": "Effect of Weekly Subcutaneous Semaglutide vs Daily Liraglutide on Body Weight in Adults With Overweight or Obesity Without Diabetes: The STEP 8 Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "once-weekly subcutaneous semaglutide, 2.4 mg",
+      "second_arm": "liraglutide",
+      "outcome": "achievement of 20% or more weight loss at week 68",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 38.5, second arm 6 (percentage); odds ratio 8.2 (interval 3.5 to 19.1); P <.001",
+      "participants": 338,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "Participants had significantly greater odds of achieving 10% or more, 15% or more, and 20% or more weight loss with semaglutide vs liraglutide (70.9% of participants vs 25.6% [odds ratio, 6.3 {95% CI, 3.5 to 11.2}], 55.6% vs 12.0% [odds ratio, 7.9 {95% CI, 4.1 to 15.4}], and 38.5% vs 6.0% [odds ratio, 8.2 {95% CI, 3.5 to 19.1}], respectively; all P < .001).",
+      "pmid": 35015037,
+      "year": 2022,
+      "title": "Effect of Weekly Subcutaneous Semaglutide vs Daily Liraglutide on Body Weight in Adults With Overweight or Obesity Without Diabetes: The STEP 8 Randomized Clinical Trial."
+     }
+    ]
+   }
+  },
+  "T15": {
+   "id": "T15",
+   "name": "STEP 7",
+   "drug": "semaglutide",
+   "paper": {
+    "pmid": 38330988,
+    "pmc": null,
+    "title": "Efficacy and safety of once weekly semaglutide 2·4 mg for weight management in a predominantly east Asian population with overweight or obesity (STEP 7): a double-blind, multicentre, randomised controlled trial.",
+    "journal": "The lancet. Diabetes & endocrinology",
+    "year": 2024
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "semaglutide 2·4 mg",
+      "n": 249
+     },
+     {
+      "name": "placebo",
+      "n": 126
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "semaglutide 2·4 mg group",
+      "second_arm": "placebo",
+      "outcome": "percentage change in mean bodyweight to week 44",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -12.1, second arm -3.6 (mean change); treatment difference -8.5 (interval -10.2 to -6.8); P <0.0001",
+      "participants": 375,
+      "weeks": 44.0,
+      "subgroup": false,
+      "sentence": "Estimated mean percentage change in bodyweight from baseline to week 44 was -12·1% (SE 0·5) with semaglutide 2·4 mg versus -3·6% (0·7) with placebo (estimated treatment difference -8·5 percentage points [95% CI -10·2 to -6·8]; p<0·0001).",
+      "pmid": 38330988,
+      "year": 2024,
+      "title": "Efficacy and safety of once weekly semaglutide 2·4 mg for weight management in a predominantly east Asian population with overweight or obesity (STEP 7): a double-blind, multicentre, randomised controlled trial."
+     },
+     {
+      "first_arm": "semaglutide 2·4 mg group",
+      "second_arm": "the placebo group",
+      "outcome": "proportion reaching at least 5% bodyweight reduction at week 44",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 85, second arm 31 (percentage); odds ratio 13.1 (interval 7.4 to 23.1); P <0·0001",
+      "participants": 375,
+      "weeks": 44.0,
+      "subgroup": false,
+      "sentence": "At week 44, the proportion of participants who lost 5% or more of their bodyweight was higher in the semaglutide 2·4 mg group than in the placebo group (203/238 [85%] vs 36/116 [31%]); odds ratio 13·1 (95% CI 7·4-23·1; p<0·0001).",
+      "pmid": 38330988,
+      "year": 2024,
+      "title": "Efficacy and safety of once weekly semaglutide 2·4 mg for weight management in a predominantly east Asian population with overweight or obesity (STEP 7): a double-blind, multicentre, randomised controlled trial."
+     }
+    ]
+   }
+  },
+  "T16": {
+   "id": "T16",
+   "name": "SCALE Insulin",
+   "drug": "liraglutide",
+   "paper": {
+    "pmid": 32139381,
+    "pmc": "PMC7171937",
+    "title": "Efficacy and Safety of Liraglutide 3.0 mg in Individuals With Overweight or Obesity and Type 2 Diabetes Treated With Basal Insulin: The SCALE Insulin Randomized Controlled Trial.",
+    "journal": "Diabetes care",
+    "year": 2020
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "liraglutide 3.0 mg",
+      "n": 198
+     },
+     {
+      "name": "placebo",
+      "n": 198
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "mean weight change at 56 weeks",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -5.8, second arm -1.5 (mean change); treatment difference -4.3 (interval -5.5 to -3.2); P <0.0001",
+      "participants": null,
+      "weeks": 56.0,
+      "subgroup": false,
+      "sentence": "At 56 weeks, mean weight change was -5.8% for liraglutide 3.0 mg versus -1.5% with placebo (estimated treatment difference -4.3% [95% CI -5.5; -3.2]; P < 0.0001).",
+      "pmid": 32139381,
+      "year": 2020,
+      "title": "Efficacy and Safety of Liraglutide 3.0 mg in Individuals With Overweight or Obesity and Type 2 Diabetes Treated With Basal Insulin: The SCALE Insulin Randomized Controlled Trial."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "achievement of ≥5% weight loss at 56 weeks",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 51.8, second arm 24 (percentage); odds ratio 3.41 (interval 2.19 to 5.31); P <0.0001",
+      "participants": null,
+      "weeks": 56.0,
+      "subgroup": false,
+      "sentence": "With liraglutide 3.0 mg, 51.8% of individuals achieved ≥5% weight loss versus 24.0% with placebo (odds ratio 3.41 [95% CI 2.19; 5.31]; P < 0.0001).",
+      "pmid": 32139381,
+      "year": 2020,
+      "title": "Efficacy and Safety of Liraglutide 3.0 mg in Individuals With Overweight or Obesity and Type 2 Diabetes Treated With Basal Insulin: The SCALE Insulin Randomized Controlled Trial."
+     }
+    ]
+   }
+  },
+  "T17": {
+   "id": "T17",
+   "name": "SCALE Obesity and Prediabetes",
+   "drug": "liraglutide",
+   "paper": {
+    "pmid": 26132939,
+    "pmc": null,
+    "title": "A Randomized, Controlled Trial of 3.0 mg of Liraglutide in Weight Management.",
+    "journal": "The New England journal of medicine",
+    "year": 2015
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "liraglutide 3.0 mg",
+      "n": 2487
+     },
+     {
+      "name": "placebo",
+      "n": 1244
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "liraglutide at a dose of 3.0 mg",
+      "second_arm": "the placebo group",
+      "outcome": "change in body weight at week 56",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm 8.4, second arm 2.8 (mean change); treatment difference -5.6 (interval -6 to -5.1); P <0.001",
+      "participants": 3731,
+      "weeks": 56.0,
+      "subgroup": false,
+      "sentence": "At week 56, patients in the liraglutide group had lost a mean of 8.4±7.3 kg of body weight, and those in the placebo group had lost a mean of 2.8±6.5 kg (a difference of -5.6 kg; 95% confidence interval, -6.0 to -5.1; P<0.001, with last-observation-carried-forward imputation).",
+      "pmid": 26132939,
+      "year": 2015,
+      "title": "A Randomized, Controlled Trial of 3.0 mg of Liraglutide in Weight Management."
+     },
+     {
+      "first_arm": "liraglutide at a dose of 3.0 mg",
+      "second_arm": "the placebo group",
+      "outcome": "proportion losing at least 5% of initial body weight at week 56",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 63.2, second arm 27.1 (percentage); P <0.001",
+      "participants": 3731,
+      "weeks": 56.0,
+      "subgroup": false,
+      "sentence": "A total of 63.2% of the patients in the liraglutide group as compared with 27.1% in the placebo group lost at least 5% of their body weight (P<0.001), and 33.1% and 10.6%, respectively, lost more than 10% of their body weight (P<0.001).",
+      "pmid": 26132939,
+      "year": 2015,
+      "title": "A Randomized, Controlled Trial of 3.0 mg of Liraglutide in Weight Management."
+     },
+     {
+      "first_arm": "liraglutide at a dose of 3.0 mg",
+      "second_arm": "the placebo group",
+      "outcome": "proportion losing more than 10% of initial body weight at week 56",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 33.1, second arm 10.6 (percentage); P <0.001",
+      "participants": 3731,
+      "weeks": 56.0,
+      "subgroup": false,
+      "sentence": "A total of 63.2% of the patients in the liraglutide group as compared with 27.1% in the placebo group lost at least 5% of their body weight (P<0.001), and 33.1% and 10.6%, respectively, lost more than 10% of their body weight (P<0.001).",
+      "pmid": 26132939,
+      "year": 2015,
+      "title": "A Randomized, Controlled Trial of 3.0 mg of Liraglutide in Weight Management."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "IWQOL-Lite total score",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 10.6, second arm 7.7 (mean change); treatment difference 3.1 (interval 2.2 to 4); P <0.0001",
+      "participants": null,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "Individuals on liraglutide 3.0 mg (n = 2046) had significantly greater improvements in IWQOL-Lite total score (10.6 ± 13.3) vs. placebo (n = 1020) (7.7 ± 12.8) and SF-36 physical (PCS) and mental (MCS) component summary scores (PCS, 3.6 ± 6.8; MCS, 0.2 ± 8.1) vs. placebo (PCS, 2.2 ± 7.7; MCS, -0.9 ± 9.1).",
+      "pmid": 27198973,
+      "year": 2016,
+      "title": "Improvements in health-related quality of life with liraglutide 3.0 mg compared with placebo in weight management."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "meaningful improvement on IWQOL-Lite total score",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "P <0.0001",
+      "participants": null,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "More patients on liraglutide 3.0 mg experienced meaningful improvement on the IWQOL-Lite total (P < 0.0001) and the SF-36 PCS (P < 0.0001) scores.",
+      "pmid": 27198973,
+      "year": 2016,
+      "title": "Improvements in health-related quality of life with liraglutide 3.0 mg compared with placebo in weight management."
+     },
+     {
+      "first_arm": "liraglutide 3·0 mg",
+      "second_arm": "placebo",
+      "outcome": "weight loss at week 160",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm -6.1, second arm -1.9 (mean change); treatment difference -4.3 (interval -4.9 to -3.7); P <0.0001",
+      "participants": 2254,
+      "weeks": 160.0,
+      "subgroup": false,
+      "sentence": "Liraglutide induced greater weight loss than placebo at week 160 (-6·1 [SD 7·3] vs -1·9% [6·3]; estimated treatment difference -4·3%, 95% CI -4·9 to -3·7, p<0·0001).",
+      "pmid": 28237263,
+      "year": 2017,
+      "title": "3 years of liraglutide versus placebo for type 2 diabetes risk reduction and weight management in individuals with prediabetes: a randomised, double-blind trial."
+     }
+    ]
+   }
+  },
+  "T18": {
+   "id": "T18",
+   "name": "SURMOUNT-2",
+   "drug": "tirzepatide",
+   "paper": {
+    "pmid": 37385275,
+    "pmc": null,
+    "title": "Tirzepatide once weekly for the treatment of obesity in people with type 2 diabetes (SURMOUNT-2): a double-blind, randomised, multicentre, placebo-controlled, phase 3 trial.",
+    "journal": "Lancet (London, England)",
+    "year": 2023
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "tirzepatide 10 mg",
+      "n": 312
+     },
+     {
+      "name": "tirzepatide 15 mg",
+      "n": 311
+     },
+     {
+      "name": "placebo",
+      "n": 315
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "tirzepatide 10 mg",
+      "second_arm": "placebo",
+      "outcome": "percent change in bodyweight from baseline at week 72",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -12.8, second arm -3.2 (mean change); treatment difference -9.6 (interval -11.1 to -8.1); P <0.0001",
+      "participants": 938,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "Least-squares mean change in bodyweight at week 72 with tirzepatide 10 mg and 15 mg was -12·8% (SE 0·6) and -14·7% (0·5), respectively, and -3·2% (0·5) with placebo, resulting in estimated treatment differences versus placebo of -9·6% percentage points (95% CI -11·1 to -8·1) with tirzepatide 10 mg and -11·6% percentage points (-13·0 to -10·1) with tirzepatide 15 mg (all p<0·0001).",
+      "pmid": 37385275,
+      "year": 2023,
+      "title": "Tirzepatide once weekly for the treatment of obesity in people with type 2 diabetes (SURMOUNT-2): a double-blind, randomised, multicentre, placebo-controlled, phase 3 trial."
+     },
+     {
+      "first_arm": "tirzepatide 15 mg",
+      "second_arm": "placebo",
+      "outcome": "percent change in bodyweight from baseline at week 72",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -14.7, second arm -3.2 (mean change); treatment difference -11.6 (interval -13 to -10.1); P <0·0001",
+      "participants": 938,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "Least-squares mean change in bodyweight at week 72 with tirzepatide 10 mg and 15 mg was -12·8% (SE 0·6) and -14·7% (0·5), respectively, and -3·2% (0·5) with placebo, resulting in estimated treatment differences versus placebo of -9·6% percentage points (95% CI -11·1 to -8·1) with tirzepatide 10 mg and -11·6% percentage points (-13·0 to -10·1) with tirzepatide 15 mg (all p<0·0001).",
+      "pmid": 37385275,
+      "year": 2023,
+      "title": "Tirzepatide once weekly for the treatment of obesity in people with type 2 diabetes (SURMOUNT-2): a double-blind, randomised, multicentre, placebo-controlled, phase 3 trial."
+     },
+     {
+      "first_arm": "tirzepatide 10 mg",
+      "second_arm": "15 mg",
+      "outcome": "percent change in bodyweight from baseline at week 72",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm -12.8, second arm -14.7 (mean change)",
+      "participants": 938,
+      "weeks": 72.0,
+      "subgroup": false,
+      "sentence": "Least-squares mean change in bodyweight at week 72 with tirzepatide 10 mg and 15 mg was -12·8% (SE 0·6) and -14·7% (0·5), respectively, and -3·2% (0·5) with placebo, resulting in estimated treatment differences versus placebo of -9·6% percentage points (95% CI -11·1 to -8·1) with tirzepatide 10 mg and -11·6% percentage points (-13·0 to -10·1) with tirzepatide 15 mg (all p<0·0001).",
+      "pmid": 37385275,
+      "year": 2023,
+      "title": "Tirzepatide once weekly for the treatment of obesity in people with type 2 diabetes (SURMOUNT-2): a double-blind, randomised, multicentre, placebo-controlled, phase 3 trial."
+     }
+    ]
+   }
+  },
+  "T19": {
+   "id": "T19",
+   "name": "Astrup 2009",
+   "drug": "liraglutide",
+   "paper": {
+    "pmid": 19853906,
+    "pmc": null,
+    "title": "Effects of liraglutide in the treatment of obesity: a randomised, double-blind, placebo-controlled study.",
+    "journal": "Lancet (London, England)",
+    "year": 2009
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "liraglutide 1.2 mg",
+      "n": null
+     },
+     {
+      "name": "liraglutide 1.8 mg",
+      "n": null
+     },
+     {
+      "name": "liraglutide 2.4 mg",
+      "n": null
+     },
+     {
+      "name": "liraglutide 3.0 mg",
+      "n": null
+     },
+     {
+      "name": "placebo",
+      "n": 98
+     },
+     {
+      "name": "orlistat",
+      "n": 95
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "liraglutide doses (1.2 mg",
+      "second_arm": "placebo",
+      "outcome": "weight change",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm 4.8, second arm 2.8 (mean); mean difference 2.1 (interval 0.6 to 3.6)",
+      "participants": 564,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "Participants on liraglutide lost significantly more weight than did those on placebo (p=0.003 for liraglutide 1.2 mg and p<0.0001 for liraglutide 1.8-3.0 mg) and orlistat (p=0.003 for liraglutide 2.4 mg and p<0.0001 for liraglutide 3.0 mg).",
+      "pmid": 19853906,
+      "year": 2009,
+      "title": "Effects of liraglutide in the treatment of obesity: a randomised, double-blind, placebo-controlled study."
+     },
+     {
+      "first_arm": "1.8 mg",
+      "second_arm": "placebo",
+      "outcome": "weight change",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm 5.5, second arm 2.8 (mean)",
+      "participants": 564,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "Participants on liraglutide lost significantly more weight than did those on placebo (p=0.003 for liraglutide 1.2 mg and p<0.0001 for liraglutide 1.8-3.0 mg) and orlistat (p=0.003 for liraglutide 2.4 mg and p<0.0001 for liraglutide 3.0 mg).",
+      "pmid": 19853906,
+      "year": 2009,
+      "title": "Effects of liraglutide in the treatment of obesity: a randomised, double-blind, placebo-controlled study."
+     },
+     {
+      "first_arm": "2.4 mg",
+      "second_arm": "placebo",
+      "outcome": "weight change",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm 6.3, second arm 2.8 (mean)",
+      "participants": 564,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "Participants on liraglutide lost significantly more weight than did those on placebo (p=0.003 for liraglutide 1.2 mg and p<0.0001 for liraglutide 1.8-3.0 mg) and orlistat (p=0.003 for liraglutide 2.4 mg and p<0.0001 for liraglutide 3.0 mg).",
+      "pmid": 19853906,
+      "year": 2009,
+      "title": "Effects of liraglutide in the treatment of obesity: a randomised, double-blind, placebo-controlled study."
+     },
+     {
+      "first_arm": "3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "weight change",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": null,
+      "participants": 564,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "Participants on liraglutide lost significantly more weight than did those on placebo (p=0.003 for liraglutide 1.2 mg and p<0.0001 for liraglutide 1.8-3.0 mg) and orlistat (p=0.003 for liraglutide 2.4 mg and p<0.0001 for liraglutide 3.0 mg).",
+      "pmid": 19853906,
+      "year": 2009,
+      "title": "Effects of liraglutide in the treatment of obesity: a randomised, double-blind, placebo-controlled study."
+     },
+     {
+      "first_arm": "3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "weight loss greater than 5%",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm 76, second arm 30 (percentage)",
+      "participants": 564,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "More individuals (76%, n=70) lost more than 5% weight with liraglutide 3.0 mg that with placebo (30%, n=29) or orlistat (44%, n=42).",
+      "pmid": 19853906,
+      "year": 2009,
+      "title": "Effects of liraglutide in the treatment of obesity: a randomised, double-blind, placebo-controlled study."
+     },
+     {
+      "first_arm": "3.0 mg",
+      "second_arm": "placebo",
+      "outcome": "weight loss at year 1",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "mean difference 5.8 (interval 3.7 to 8); P <=0.0001",
+      "participants": 564,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "From randomization to year 1, liraglutide 3.0 mg recipients lost 5.8 kg (95% confidence interval 3.7-8.0) more weight than those on placebo and 3.8 kg (1.6-6.0) more than those on orlistat (P0.0001; intention-to-treat, last-observation-carried-forward).",
+      "pmid": 21844879,
+      "year": 2011,
+      "title": "Safety, tolerability and sustained weight loss over 2 years with the once-daily human GLP-1 analog, liraglutide."
+     },
+     {
+      "first_arm": "liraglutide doses (1.2 mg",
+      "second_arm": "orlistat",
+      "outcome": "weight change",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": "first arm 4.8, second arm 4.1 (mean)",
+      "participants": 564,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "Mean weight loss with liraglutide 1.2-3.0 mg was 4.8 kg, 5.5 kg, 6.3 kg, and 7.2 kg compared with 2.8 kg with placebo and 4.1 kg with orlistat, and was 2.1 kg (95% CI 0.6-3.6) to 4.4 kg (2.9-6.0) greater than that with placebo.",
+      "pmid": 19853906,
+      "year": 2009,
+      "title": "Effects of liraglutide in the treatment of obesity: a randomised, double-blind, placebo-controlled study."
+     },
+     {
+      "first_arm": "1.8 mg",
+      "second_arm": "4.1 kg with orlistat",
+      "outcome": "weight change",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": "first arm 5.5, second arm 4.1 (mean)",
+      "participants": 564,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "Mean weight loss with liraglutide 1.2-3.0 mg was 4.8 kg, 5.5 kg, 6.3 kg, and 7.2 kg compared with 2.8 kg with placebo and 4.1 kg with orlistat, and was 2.1 kg (95% CI 0.6-3.6) to 4.4 kg (2.9-6.0) greater than that with placebo.",
+      "pmid": 19853906,
+      "year": 2009,
+      "title": "Effects of liraglutide in the treatment of obesity: a randomised, double-blind, placebo-controlled study."
+     },
+     {
+      "first_arm": "2.4 mg",
+      "second_arm": "orlistat",
+      "outcome": "weight change",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm 6.3, second arm 4.1 (mean); P =0.003",
+      "participants": 564,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "Participants on liraglutide lost significantly more weight than did those on placebo (p=0.003 for liraglutide 1.2 mg and p<0.0001 for liraglutide 1.8-3.0 mg) and orlistat (p=0.003 for liraglutide 2.4 mg and p<0.0001 for liraglutide 3.0 mg).",
+      "pmid": 19853906,
+      "year": 2009,
+      "title": "Effects of liraglutide in the treatment of obesity: a randomised, double-blind, placebo-controlled study."
+     },
+     {
+      "first_arm": "3.0 mg",
+      "second_arm": "orlistat",
+      "outcome": "weight change",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm 7.2, second arm 4.1 (mean); P <0.0001",
+      "participants": 564,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "Participants on liraglutide lost significantly more weight than did those on placebo (p=0.003 for liraglutide 1.2 mg and p<0.0001 for liraglutide 1.8-3.0 mg) and orlistat (p=0.003 for liraglutide 2.4 mg and p<0.0001 for liraglutide 3.0 mg).",
+      "pmid": 19853906,
+      "year": 2009,
+      "title": "Effects of liraglutide in the treatment of obesity: a randomised, double-blind, placebo-controlled study."
+     },
+     {
+      "first_arm": "3.0 mg",
+      "second_arm": "orlistat",
+      "outcome": "weight loss greater than 5%",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm 76, second arm 44 (percentage)",
+      "participants": 564,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "More individuals (76%, n=70) lost more than 5% weight with liraglutide 3.0 mg that with placebo (30%, n=29) or orlistat (44%, n=42).",
+      "pmid": 19853906,
+      "year": 2009,
+      "title": "Effects of liraglutide in the treatment of obesity: a randomised, double-blind, placebo-controlled study."
+     },
+     {
+      "first_arm": "liraglutide doses (1.2 mg",
+      "second_arm": "3.0 mg",
+      "outcome": "weight change",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm 4.8, second arm 7.2 (mean)",
+      "participants": 564,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "Mean weight loss with liraglutide 1.2-3.0 mg was 4.8 kg, 5.5 kg, 6.3 kg, and 7.2 kg compared with 2.8 kg with placebo and 4.1 kg with orlistat, and was 2.1 kg (95% CI 0.6-3.6) to 4.4 kg (2.9-6.0) greater than that with placebo.",
+      "pmid": 19853906,
+      "year": 2009,
+      "title": "Effects of liraglutide in the treatment of obesity: a randomised, double-blind, placebo-controlled study."
+     },
+     {
+      "first_arm": "1.8 mg",
+      "second_arm": "2.4 mg",
+      "outcome": "weight change",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm 5.5, second arm 6.3 (mean)",
+      "participants": 564,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "Mean weight loss with liraglutide 1.2-3.0 mg was 4.8 kg, 5.5 kg, 6.3 kg, and 7.2 kg compared with 2.8 kg with placebo and 4.1 kg with orlistat, and was 2.1 kg (95% CI 0.6-3.6) to 4.4 kg (2.9-6.0) greater than that with placebo.",
+      "pmid": 19853906,
+      "year": 2009,
+      "title": "Effects of liraglutide in the treatment of obesity: a randomised, double-blind, placebo-controlled study."
+     },
+     {
+      "first_arm": "3.0 mg",
+      "second_arm": "those on orlistat",
+      "outcome": "weight loss at year 1",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "treatment difference 3.8 (interval 1.6 to 6)",
+      "participants": 564,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "From randomization to year 1, liraglutide 3.0 mg recipients lost 5.8 kg (95% confidence interval 3.7-8.0) more weight than those on placebo and 3.8 kg (1.6-6.0) more than those on orlistat (P0.0001; intention-to-treat, last-observation-carried-forward).",
+      "pmid": 21844879,
+      "year": 2011,
+      "title": "Safety, tolerability and sustained weight loss over 2 years with the once-daily human GLP-1 analog, liraglutide."
+     }
+    ]
+   }
+  },
+  "T20": {
+   "id": "T20",
+   "name": "OASIS 1",
+   "drug": "semaglutide",
+   "paper": {
+    "pmid": 37385278,
+    "pmc": null,
+    "title": "Oral semaglutide 50 mg taken once per day in adults with overweight or obesity (OASIS 1): a randomised, double-blind, placebo-controlled, phase 3 trial.",
+    "journal": "Lancet (London, England)",
+    "year": 2023
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "oral semaglutide 50 mg",
+      "n": 334
+     },
+     {
+      "name": "placebo",
+      "n": 333
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "oral semaglutide 50 mg",
+      "second_arm": "placebo",
+      "outcome": "percentage change in bodyweight at week 68",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -15.1, second arm -2.4 (mean change); treatment difference -12.7 (interval -14.2 to -11.3); P <0·0001",
+      "participants": 667,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "The estimated mean bodyweight change from baseline to week 68 was -15·1% (SE 0·5) with oral semaglutide 50 mg versus -2·4% (0·5) with placebo (estimated treatment difference -12·7 percentage points, 95% CI -14·2 to -11·3; p<0·0001).",
+      "pmid": 37385278,
+      "year": 2023,
+      "title": "Oral semaglutide 50 mg taken once per day in adults with overweight or obesity (OASIS 1): a randomised, double-blind, placebo-controlled, phase 3 trial."
+     },
+     {
+      "first_arm": "oral semaglutide 50 mg",
+      "second_arm": "placebo",
+      "outcome": "reaching a bodyweight reduction of at least 5% at week 68",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 85, second arm 26 (percentage); odds ratio 12.6 (interval 8.5 to 18.7); P <0·0001",
+      "participants": 667,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "More participants reached bodyweight reductions of at least 5% (269 [85%] of 317 vs 76 [26%] of 295; odds ratio [OR] 12·6, 95% CI 8·5 to 18·7; p<0·0001), 10% (220 [69%] vs 35 [12%]; OR 14·7, 9·6 to 22·6), 15% (170 [54%] vs 17 [6%]; OR 17·9, 10·4 to 30·7), and 20% (107 [34%] vs 8 [3%]; OR 18·5, 8·8 to 38·9) at week 68 with oral semaglutide 50 mg versus placebo.",
+      "pmid": 37385278,
+      "year": 2023,
+      "title": "Oral semaglutide 50 mg taken once per day in adults with overweight or obesity (OASIS 1): a randomised, double-blind, placebo-controlled, phase 3 trial."
+     },
+     {
+      "first_arm": "oral semaglutide 50 mg",
+      "second_arm": "placebo",
+      "outcome": "reaching a bodyweight reduction of at least 10% at week 68",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 69, second arm 12 (percentage); odds ratio 14.7 (interval 9.6 to 22.6)",
+      "participants": 667,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "More participants reached bodyweight reductions of at least 5% (269 [85%] of 317 vs 76 [26%] of 295; odds ratio [OR] 12·6, 95% CI 8·5 to 18·7; p<0·0001), 10% (220 [69%] vs 35 [12%]; OR 14·7, 9·6 to 22·6), 15% (170 [54%] vs 17 [6%]; OR 17·9, 10·4 to 30·7), and 20% (107 [34%] vs 8 [3%]; OR 18·5, 8·8 to 38·9) at week 68 with oral semaglutide 50 mg versus placebo.",
+      "pmid": 37385278,
+      "year": 2023,
+      "title": "Oral semaglutide 50 mg taken once per day in adults with overweight or obesity (OASIS 1): a randomised, double-blind, placebo-controlled, phase 3 trial."
+     },
+     {
+      "first_arm": "oral semaglutide 50 mg",
+      "second_arm": "placebo",
+      "outcome": "reaching a bodyweight reduction of at least 15% at week 68",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 54, second arm 6 (percentage); odds ratio 17.9 (interval 10.4 to 30.7)",
+      "participants": 667,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "More participants reached bodyweight reductions of at least 5% (269 [85%] of 317 vs 76 [26%] of 295; odds ratio [OR] 12·6, 95% CI 8·5 to 18·7; p<0·0001), 10% (220 [69%] vs 35 [12%]; OR 14·7, 9·6 to 22·6), 15% (170 [54%] vs 17 [6%]; OR 17·9, 10·4 to 30·7), and 20% (107 [34%] vs 8 [3%]; OR 18·5, 8·8 to 38·9) at week 68 with oral semaglutide 50 mg versus placebo.",
+      "pmid": 37385278,
+      "year": 2023,
+      "title": "Oral semaglutide 50 mg taken once per day in adults with overweight or obesity (OASIS 1): a randomised, double-blind, placebo-controlled, phase 3 trial."
+     },
+     {
+      "first_arm": "oral semaglutide 50 mg",
+      "second_arm": "placebo",
+      "outcome": "reaching a bodyweight reduction of at least 20% at week 68",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 34, second arm 3 (percentage); odds ratio 18.5 (interval 8.8 to 38.9)",
+      "participants": 667,
+      "weeks": 68.0,
+      "subgroup": false,
+      "sentence": "More participants reached bodyweight reductions of at least 5% (269 [85%] of 317 vs 76 [26%] of 295; odds ratio [OR] 12·6, 95% CI 8·5 to 18·7; p<0·0001), 10% (220 [69%] vs 35 [12%]; OR 14·7, 9·6 to 22·6), 15% (170 [54%] vs 17 [6%]; OR 17·9, 10·4 to 30·7), and 20% (107 [34%] vs 8 [3%]; OR 18·5, 8·8 to 38·9) at week 68 with oral semaglutide 50 mg versus placebo.",
+      "pmid": 37385278,
+      "year": 2023,
+      "title": "Oral semaglutide 50 mg taken once per day in adults with overweight or obesity (OASIS 1): a randomised, double-blind, placebo-controlled, phase 3 trial."
+     }
+    ]
+   }
+  },
+  "T21": {
+   "id": "T21",
+   "name": "Altintas Dogan 2022",
+   "drug": "liraglutide",
+   "paper": {
+    "pmid": 35237033,
+    "pmc": "PMC8882670",
+    "title": "Respiratory Effects of Treatment with a Glucagon-Like Peptide-1 Receptor Agonist in Patients Suffering from Obesity and Chronic Obstructive Pulmonary Disease.",
+    "journal": "International journal of chronic obstructive pulmonary disease",
+    "year": 2022
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "liraglutide (3.0 mg, s.c.)",
+      "n": null
+     },
+     {
+      "name": "placebo (s.c.)",
+      "n": null
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "liraglutide (3.0 mg, s.c.)",
+      "second_arm": "placebo",
+      "outcome": "weight loss",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": null,
+      "participants": 40,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "Compared with placebo, liraglutide use resulted in significant weight loss, increased forced vital capacity (FVC) and carbon monoxide diffusion capacity, and improved CAT-score.",
+      "pmid": 35237033,
+      "year": 2022,
+      "title": "Respiratory Effects of Treatment with a Glucagon-Like Peptide-1 Receptor Agonist in Patients Suffering from Obesity and Chronic Obstructive Pulmonary Disease."
+     }
+    ]
+   }
+  },
+  "T22": {
+   "id": "T22",
+   "name": "SURMOUNT-OSA",
+   "drug": "tirzepatide",
+   "paper": {
+    "pmid": 38912654,
+    "pmc": "PMC11598664",
+    "title": "Tirzepatide for the Treatment of Obstructive Sleep Apnea and Obesity.",
+    "journal": "The New England journal of medicine",
+    "year": 2024
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "tirzepatide, trial 1 (not receiving PAP at baseline)",
+      "n": null
+     },
+     {
+      "name": "placebo, trial 1 (not receiving PAP at baseline)",
+      "n": null
+     },
+     {
+      "name": "tirzepatide, trial 2 (receiving PAP at baseline)",
+      "n": null
+     },
+     {
+      "name": "placebo, trial 2 (receiving PAP at baseline)",
+      "n": null
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "tirzepatide",
+      "second_arm": "placebo",
+      "outcome": "percent change in body weight",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": null,
+      "participants": 469,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "Significant improvements in the measurements for all prespecified key secondary end points were observed with tirzepatide as compared with placebo.",
+      "pmid": 38912654,
+      "year": 2024,
+      "title": "Tirzepatide for the Treatment of Obstructive Sleep Apnea and Obesity."
+     },
+     {
+      "first_arm": "tirzepatide (10/15 mg)",
+      "second_arm": "placebo",
+      "outcome": "weight change from baseline to Week 52",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": null,
+      "participants": 469,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "In both studies, tirzepatide treatment was consistently associated with greater improvements in PROMs and objective assessments than placebo.",
+      "pmid": 42412744,
+      "year": 2026,
+      "title": "Changes in patient-reported outcomes and objective assessments based on baseline symptom severity in SURMOUNT-OSA: post-hoc analyses."
+     },
+     {
+      "first_arm": "tirzepatide (10/15 mg)",
+      "second_arm": "placebo",
+      "outcome": "weight change from baseline to Week 52",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": null,
+      "participants": 469,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "In both studies, tirzepatide treatment was consistently associated with greater improvements in PROMs and objective assessments than placebo.",
+      "pmid": 42412744,
+      "year": 2026,
+      "title": "Changes in patient-reported outcomes and objective assessments based on baseline symptom severity in SURMOUNT-OSA: post-hoc analyses."
+     }
+    ]
+   }
+  },
+  "T23": {
+   "id": "T23",
+   "name": "SURMOUNT-CN",
+   "drug": "tirzepatide",
+   "paper": {
+    "pmid": 38819983,
+    "pmc": "PMC11337071",
+    "title": "Tirzepatide for Weight Reduction in Chinese Adults With Obesity: The SURMOUNT-CN Randomized Clinical Trial.",
+    "journal": "JAMA",
+    "year": 2024
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "tirzepatide 10 mg",
+      "n": 70
+     },
+     {
+      "name": "tirzepatide 15 mg",
+      "n": 71
+     },
+     {
+      "name": "placebo",
+      "n": 69
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "tirzepatide 10 mg",
+      "second_arm": "placebo",
+      "outcome": "percent change in body weight from baseline at week 52",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -13.6, second arm -2.3 (mean change); treatment difference -11.3 (interval -14.3 to -8.3); P <.001",
+      "participants": 210,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "The mean change in body weight at week 52 was -13.6% (95% CI, -15.8% to -11.4%) with tirzepatide 10 mg, -17.5% (95% CI, -19.7% to -15.3%) with tirzepatide 15 mg, and -2.3% with placebo (difference between 10 mg and placebo, -11.3% [95% CI, -14.3% to -8.3%; P < .001]; difference between 15 mg and placebo, -15.1% [95% CI, -18.2% to -12.1%; P < .001]).",
+      "pmid": 38819983,
+      "year": 2024,
+      "title": "Tirzepatide for Weight Reduction in Chinese Adults With Obesity: The SURMOUNT-CN Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "tirzepatide 10 mg",
+      "second_arm": "placebo",
+      "outcome": "weight reduction of at least 5% at week 52",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 87.7, second arm 29.3 (percentage); P <.001",
+      "participants": 210,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "The percentage of participants achieving body weight reductions of 5% or greater was 87.7% with tirzepatide 10 mg, 85.8% with tirzepatide 15 mg, and 29.3% with placebo (P < .001 for comparisons with placebo).",
+      "pmid": 38819983,
+      "year": 2024,
+      "title": "Tirzepatide for Weight Reduction in Chinese Adults With Obesity: The SURMOUNT-CN Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "tirzepatide 15 mg",
+      "second_arm": "placebo",
+      "outcome": "percent change in body weight from baseline at week 52",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -17.5, second arm -2.3 (mean change); treatment difference -15.1 (interval -18.2 to -12.1); P <.001",
+      "participants": 210,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "The mean change in body weight at week 52 was -13.6% (95% CI, -15.8% to -11.4%) with tirzepatide 10 mg, -17.5% (95% CI, -19.7% to -15.3%) with tirzepatide 15 mg, and -2.3% with placebo (difference between 10 mg and placebo, -11.3% [95% CI, -14.3% to -8.3%; P < .001]; difference between 15 mg and placebo, -15.1% [95% CI, -18.2% to -12.1%; P < .001]).",
+      "pmid": 38819983,
+      "year": 2024,
+      "title": "Tirzepatide for Weight Reduction in Chinese Adults With Obesity: The SURMOUNT-CN Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "tirzepatide 15 mg",
+      "second_arm": "placebo",
+      "outcome": "weight reduction of at least 5% at week 52",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 85.8, second arm 29.3 (percentage); P <.001",
+      "participants": 210,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "The percentage of participants achieving body weight reductions of 5% or greater was 87.7% with tirzepatide 10 mg, 85.8% with tirzepatide 15 mg, and 29.3% with placebo (P < .001 for comparisons with placebo).",
+      "pmid": 38819983,
+      "year": 2024,
+      "title": "Tirzepatide for Weight Reduction in Chinese Adults With Obesity: The SURMOUNT-CN Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "tirzepatide 10 mg",
+      "second_arm": "tirzepatide 15 mg",
+      "outcome": "weight reduction of at least 5% at week 52",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm 87.7, second arm 85.8 (percentage)",
+      "participants": 210,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "The percentage of participants achieving body weight reductions of 5% or greater was 87.7% with tirzepatide 10 mg, 85.8% with tirzepatide 15 mg, and 29.3% with placebo (P < .001 for comparisons with placebo).",
+      "pmid": 38819983,
+      "year": 2024,
+      "title": "Tirzepatide for Weight Reduction in Chinese Adults With Obesity: The SURMOUNT-CN Randomized Clinical Trial."
+     }
+    ]
+   }
+  },
+  "T24": {
+   "id": "T24",
+   "name": "Nahra 2021",
+   "drug": "liraglutide",
+   "paper": {
+    "pmid": 34016612,
+    "pmc": "PMC8247525",
+    "title": "Effects of Cotadutide on Metabolic and Hepatic Parameters in Adults With Overweight or Obesity and Type 2 Diabetes: A 54-Week Randomized Phase 2b Study.",
+    "journal": "Diabetes care",
+    "year": 2021
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "cotadutide 100 μg",
+      "n": 100
+     },
+     {
+      "name": "cotadutide 200 μg",
+      "n": 256
+     },
+     {
+      "name": "cotadutide 300 μg",
+      "n": 256
+     },
+     {
+      "name": "placebo",
+      "n": 110
+     },
+     {
+      "name": "liraglutide 1.8 mg",
+      "n": 110
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "cotadutide 100 μg",
+      "second_arm": "placebo",
+      "outcome": "body weight at week 14",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": null,
+      "participants": 834,
+      "weeks": 14.0,
+      "subgroup": false,
+      "sentence": "Cotadutide significantly decreased HbA1c and body weight at weeks 14 and 54 versus placebo (all P < 0.001).",
+      "pmid": 34016612,
+      "year": 2021,
+      "title": "Effects of Cotadutide on Metabolic and Hepatic Parameters in Adults With Overweight or Obesity and Type 2 Diabetes: A 54-Week Randomized Phase 2b Study."
+     },
+     {
+      "first_arm": "cotadutide 100 μg",
+      "second_arm": "placebo",
+      "outcome": "body weight at week 54",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": null,
+      "participants": 834,
+      "weeks": 54.0,
+      "subgroup": false,
+      "sentence": "Cotadutide significantly decreased HbA1c and body weight at weeks 14 and 54 versus placebo (all P < 0.001).",
+      "pmid": 34016612,
+      "year": 2021,
+      "title": "Effects of Cotadutide on Metabolic and Hepatic Parameters in Adults With Overweight or Obesity and Type 2 Diabetes: A 54-Week Randomized Phase 2b Study."
+     },
+     {
+      "first_arm": "200 μg",
+      "second_arm": "placebo",
+      "outcome": "body weight at week 14",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "P <0.001",
+      "participants": 834,
+      "weeks": 14.0,
+      "subgroup": false,
+      "sentence": "Cotadutide significantly decreased HbA1c and body weight at weeks 14 and 54 versus placebo (all P < 0.001).",
+      "pmid": 34016612,
+      "year": 2021,
+      "title": "Effects of Cotadutide on Metabolic and Hepatic Parameters in Adults With Overweight or Obesity and Type 2 Diabetes: A 54-Week Randomized Phase 2b Study."
+     },
+     {
+      "first_arm": "200 μg",
+      "second_arm": "placebo",
+      "outcome": "body weight at week 54",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "P <0.001",
+      "participants": 834,
+      "weeks": 54.0,
+      "subgroup": false,
+      "sentence": "Cotadutide significantly decreased HbA1c and body weight at weeks 14 and 54 versus placebo (all P < 0.001).",
+      "pmid": 34016612,
+      "year": 2021,
+      "title": "Effects of Cotadutide on Metabolic and Hepatic Parameters in Adults With Overweight or Obesity and Type 2 Diabetes: A 54-Week Randomized Phase 2b Study."
+     },
+     {
+      "first_arm": "300 μg",
+      "second_arm": "placebo",
+      "outcome": "body weight at week 14",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "P <0.001",
+      "participants": 834,
+      "weeks": 14.0,
+      "subgroup": false,
+      "sentence": "Cotadutide significantly decreased HbA1c and body weight at weeks 14 and 54 versus placebo (all P < 0.001).",
+      "pmid": 34016612,
+      "year": 2021,
+      "title": "Effects of Cotadutide on Metabolic and Hepatic Parameters in Adults With Overweight or Obesity and Type 2 Diabetes: A 54-Week Randomized Phase 2b Study."
+     },
+     {
+      "first_arm": "300 μg",
+      "second_arm": "placebo",
+      "outcome": "body weight at week 54",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": null,
+      "participants": 834,
+      "weeks": 54.0,
+      "subgroup": false,
+      "sentence": "Cotadutide significantly decreased HbA1c and body weight at weeks 14 and 54 versus placebo (all P < 0.001).",
+      "pmid": 34016612,
+      "year": 2021,
+      "title": "Effects of Cotadutide on Metabolic and Hepatic Parameters in Adults With Overweight or Obesity and Type 2 Diabetes: A 54-Week Randomized Phase 2b Study."
+     }
+    ]
+   }
+  },
+  "P01": {
+   "id": "P01",
+   "name": "STEP-HFpEF DM",
+   "drug": "semaglutide",
+   "paper": {
+    "pmid": 38587233,
+    "pmc": null,
+    "title": "Semaglutide in Patients with Obesity-Related Heart Failure and Type 2 Diabetes.",
+    "journal": "The New England journal of medicine",
+    "year": 2024
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "semaglutide (2.4 mg)",
+      "n": null
+     },
+     {
+      "name": "placebo",
+      "n": null
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "once-weekly semaglutide (2.4 mg)",
+      "second_arm": "placebo",
+      "outcome": "change in body weight at 52 weeks",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -9.8, second arm -3.4 (mean change); treatment difference -6.4 (interval -7.6 to -5.2); P <0.001",
+      "participants": 616,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "The mean change in the KCCQ-CSS was 13.7 points with semaglutide and 6.4 points with placebo (estimated difference, 7.3 points; 95% confidence interval [CI], 4.1 to 10.4; P<0.001), and the mean percentage change in body weight was -9.8% with semaglutide and -3.4% with placebo (estimated difference, -6.4 percentage points; 95% CI, -7.6 to -5.2; P<0.001).",
+      "pmid": 38587233,
+      "year": 2024,
+      "title": "Semaglutide in Patients with Obesity-Related Heart Failure and Type 2 Diabetes."
+     }
+    ]
+   }
+  },
+  "P02": {
+   "id": "P02",
+   "name": "SCALE Maintenance",
+   "drug": "liraglutide",
+   "paper": {
+    "pmid": 23812094,
+    "pmc": null,
+    "title": "Weight maintenance and additional weight loss with liraglutide after low-calorie-diet-induced weight loss: the SCALE Maintenance randomized study.",
+    "journal": "International journal of obesity (2005)",
+    "year": 2013
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "liraglutide 3.0 mg per day",
+      "n": null
+     },
+     {
+      "name": "placebo",
+      "n": null
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "liraglutide 3.0 mg per day",
+      "second_arm": "placebo",
+      "outcome": "percentage weight change from randomization at week 56",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm 6.2, second arm 0.2 (mean change); treatment difference -6.1 (interval -7.5 to -4.6); P <0.0001",
+      "participants": 422,
+      "weeks": 56.0,
+      "subgroup": false,
+      "sentence": "From randomization to week 56, weight decreased an additional mean 6.2% (s.d. 7.3) with liraglutide and 0.2% (s.d. 7.0) with placebo (estimated difference -6.1% (95% class intervals -7.5 to -4.6), P<0.0001).",
+      "pmid": 23812094,
+      "year": 2013,
+      "title": "Weight maintenance and additional weight loss with liraglutide after low-calorie-diet-induced weight loss: the SCALE Maintenance randomized study."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg per day",
+      "second_arm": "those receiving placebo",
+      "outcome": "maintenance of initial ≥5% weight loss at week 56",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 81.4, second arm 48.9 (percentage); odds ratio 4.8 (interval 3 to 7.7); P <0.0001",
+      "participants": 422,
+      "weeks": 56.0,
+      "subgroup": false,
+      "sentence": "More participants receiving liraglutide (81.4%) maintained the ≥5% run-in weight loss, compared with those receiving placebo (48.9%) (estimated odds ratio 4.8 (3.0; 7.7), P<0.0001), and 50.5% versus 21.8% of participants lost ≥5% of randomization weight (estimated odds ratio 3.9 (2.4; 6.1), P<0.0001).",
+      "pmid": 23812094,
+      "year": 2013,
+      "title": "Weight maintenance and additional weight loss with liraglutide after low-calorie-diet-induced weight loss: the SCALE Maintenance randomized study."
+     },
+     {
+      "first_arm": "liraglutide 3.0 mg per day",
+      "second_arm": "those receiving placebo",
+      "outcome": "loss of ≥5% of randomization weight at week 56",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 50.5, second arm 21.8 (percentage); odds ratio 3.9 (interval 2.4 to 6.1); P <0.0001",
+      "participants": 422,
+      "weeks": 56.0,
+      "subgroup": false,
+      "sentence": "More participants receiving liraglutide (81.4%) maintained the ≥5% run-in weight loss, compared with those receiving placebo (48.9%) (estimated odds ratio 4.8 (3.0; 7.7), P<0.0001), and 50.5% versus 21.8% of participants lost ≥5% of randomization weight (estimated odds ratio 3.9 (2.4; 6.1), P<0.0001).",
+      "pmid": 23812094,
+      "year": 2013,
+      "title": "Weight maintenance and additional weight loss with liraglutide after low-calorie-diet-induced weight loss: the SCALE Maintenance randomized study."
+     }
+    ]
+   }
+  },
+  "P03": {
+   "id": "P03",
+   "name": "LOSEIT",
+   "drug": "liraglutide",
+   "paper": {
+    "pmid": 33471039,
+    "pmc": null,
+    "title": "Liraglutide after diet-induced weight loss for pain and weight control in knee osteoarthritis: a randomized controlled trial.",
+    "journal": "The American journal of clinical nutrition",
+    "year": 2021
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "liraglutide 3 mg/d",
+      "n": null
+     },
+     {
+      "name": "placebo",
+      "n": null
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "liraglutide 3 mg/d",
+      "second_arm": "placebo group",
+      "outcome": "change in body weight from week 0 to 52",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -2.8, second arm 1.2 (mean change); mean difference 3.9 (interval -6.9 to -1); P =0.008",
+      "participants": 156,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "From week 0 to 52 there was a significant difference in body weight between the liraglutide and placebo group (mean changes: -2.8 and +1.2 kg, respectively; group difference, 3.9 kg; 95% CI: -6.9, -1.0; P = 0.008).",
+      "pmid": 33471039,
+      "year": 2021,
+      "title": "Liraglutide after diet-induced weight loss for pain and weight control in knee osteoarthritis: a randomized controlled trial."
+     },
+     {
+      "first_arm": "liraglutide 3 ​mg/day",
+      "second_arm": "placebo",
+      "outcome": "body weight change",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "treatment difference -4.1 (interval -6 to -2.1); P <0.0001",
+      "participants": null,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "The liraglutide group lost -4.1 ​kg more than placebo (95% CI -6.0 to -2.1; P ​< ​0.0001) and improved in KOOS function 3.8 points more than placebo (95% CI 0.9 to 6.7; P ​= ​0.01).",
+      "pmid": 36475294,
+      "year": 2022,
+      "title": "Changes in physical activity during a one-year weight loss trial with liraglutide vs placebo in participants with knee osteoarthritis: Secondary analyses of a randomised controlled trial."
+     }
+    ]
+   }
+  },
+  "P04": {
+   "id": "P04",
+   "name": "S-LITE",
+   "drug": "liraglutide",
+   "paper": {
+    "pmid": 33951361,
+    "pmc": null,
+    "title": "Healthy Weight Loss Maintenance with Exercise, Liraglutide, or Both Combined.",
+    "journal": "The New England journal of medicine",
+    "year": 2021
+   },
+   "sheet": {
+    "arms": [
+     {
+      "name": "exercise program plus placebo",
+      "n": null
+     },
+     {
+      "name": "liraglutide plus usual activity",
+      "n": null
+     },
+     {
+      "name": "exercise program plus liraglutide therapy",
+      "n": null
+     },
+     {
+      "name": "placebo plus usual activity",
+      "n": null
+     }
+    ],
+    "records": [
+     {
+      "first_arm": "treatment with liraglutide (3.0 mg per day) plus usual activity",
+      "second_arm": "placebo",
+      "outcome": "change in body weight from randomization to end of treatment",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "mean difference -6.8 (interval -10.4 to -3.1); P <0.001",
+      "participants": 195,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "At 1 year, all the active-treatment strategies led to greater weight loss than placebo: difference in the exercise group, -4.1 kg (95% confidence interval [CI], -7.8 to -0.4; P = 0.03); in the liraglutide group, -6.8 kg (95% CI, -10.4 to -3.1; P<0.001); and in the combination group, -9.5 kg (95% CI, -13.1 to -5.9; P<0.001).",
+      "pmid": 33951361,
+      "year": 2021,
+      "title": "Healthy Weight Loss Maintenance with Exercise, Liraglutide, or Both Combined."
+     },
+     {
+      "first_arm": "exercise program plus liraglutide therapy",
+      "second_arm": "placebo",
+      "outcome": "change in body weight from randomization to end of treatment",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "treatment difference -9.5 (interval -13.1 to -5.9); P <0.001",
+      "participants": 195,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "At 1 year, all the active-treatment strategies led to greater weight loss than placebo: difference in the exercise group, -4.1 kg (95% confidence interval [CI], -7.8 to -0.4; P = 0.03); in the liraglutide group, -6.8 kg (95% CI, -10.4 to -3.1; P<0.001); and in the combination group, -9.5 kg (95% CI, -13.1 to -5.9; P<0.001).",
+      "pmid": 33951361,
+      "year": 2021,
+      "title": "Healthy Weight Loss Maintenance with Exercise, Liraglutide, or Both Combined."
+     },
+     {
+      "first_arm": "liraglutide",
+      "second_arm": "placebo",
+      "outcome": "postprandial appetite suppression score at one year after weight loss",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 0, second arm -14 (percentage); P =0.023",
+      "participants": 215,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "Liraglutide prevented the decrease in postprandial appetite suppression score compared with placebo (0% vs. -14%; P = 0.023) and maintained weight loss.",
+      "pmid": 35970829,
+      "year": 2022,
+      "title": "Exploratory analysis of eating- and physical activity-related outcomes from a randomized controlled trial for weight loss maintenance with exercise and liraglutide single or combination treatment."
+     },
+     {
+      "first_arm": "the combination",
+      "second_arm": "placebo",
+      "outcome": "change in body weight at one year after weight loss",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": null,
+      "participants": 215,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "The combination of exercise and liraglutide increased cognitive restraint score (13% vs. -9%; P = 0.042), reflecting a conscious restriction of food intake, and decreased sedentary time by 41 min/day (-10 vs. 31 min/day; 95%CI, -82.3 to -0.2; P = 0.049) compared with placebo, which may have facilitated the additional weight loss.",
+      "pmid": 35970829,
+      "year": 2022,
+      "title": "Exploratory analysis of eating- and physical activity-related outcomes from a randomized controlled trial for weight loss maintenance with exercise and liraglutide single or combination treatment."
+     },
+     {
+      "first_arm": "the combination",
+      "second_arm": "placebo",
+      "outcome": "sedentary time at one year after weight loss",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "first arm -10, second arm 31 (other); treatment difference -41 (interval -82.3 to -0.2); P =0.049",
+      "participants": 215,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "The combination of exercise and liraglutide increased cognitive restraint score (13% vs. -9%; P = 0.042), reflecting a conscious restriction of food intake, and decreased sedentary time by 41 min/day (-10 vs. 31 min/day; 95%CI, -82.3 to -0.2; P = 0.049) compared with placebo, which may have facilitated the additional weight loss.",
+      "pmid": 35970829,
+      "year": 2022,
+      "title": "Exploratory analysis of eating- and physical activity-related outcomes from a randomized controlled trial for weight loss maintenance with exercise and liraglutide single or combination treatment."
+     },
+     {
+      "first_arm": "the combination",
+      "second_arm": "placebo",
+      "outcome": "cognitive restraint score at one year after weight loss",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "first arm 13, second arm -9 (percentage); P =0.042",
+      "participants": 215,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "The combination of exercise and liraglutide increased cognitive restraint score (13% vs. -9%; P = 0.042), reflecting a conscious restriction of food intake, and decreased sedentary time by 41 min/day (-10 vs. 31 min/day; 95%CI, -82.3 to -0.2; P = 0.049) compared with placebo, which may have facilitated the additional weight loss.",
+      "pmid": 35970829,
+      "year": 2022,
+      "title": "Exploratory analysis of eating- and physical activity-related outcomes from a randomized controlled trial for weight loss maintenance with exercise and liraglutide single or combination treatment."
+     },
+     {
+      "first_arm": "the combination of exercise and liraglutide",
+      "second_arm": "participants who had previously received placebo",
+      "outcome": "maintenance of weight loss of at least 10% of initial body weight from week -8 to week 104",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "odds ratio 7.2 (interval 2.4 to 21.3)",
+      "participants": 109,
+      "weeks": 104.0,
+      "subgroup": false,
+      "sentence": "More participants who had previously received combination treatment maintained a weight loss of at least 10% of initial body weight one year after treatment termination (week -8 to 104) compared with participants who had previously received placebo (odds ratio [OR] 7.2 [2.4; 21.3]) and liraglutide (OR 4.2 [1.6; 10.8]).",
+      "pmid": 38544798,
+      "year": 2024,
+      "title": "Healthy weight loss maintenance with exercise, GLP-1 receptor agonist, or both combined followed by one year without treatment: a post-treatment analysis of a randomised placebo-controlled trial."
+     },
+     {
+      "first_arm": "the combination",
+      "second_arm": "the placebo group",
+      "outcome": "weight loss during the study",
+      "direction": "higher",
+      "test": "none_given",
+      "numbers": "first arm 16.88, second arm 7.03 (mean change)",
+      "participants": 195,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "The total estimated mean change in weight losses during the study was 7.03 kg (95% CI, 4.25-9.80 kg) in the placebo group, 11.19 kg (95% CI, 8.40-13.99 kg) in the exercise group, 13.74 kg (95% CI, 11.04-16.44 kg) in the liraglutide group, and 16.88 kg (95% CI, 14.23-19.54 kg) in the combination group.",
+      "pmid": 38916894,
+      "year": 2024,
+      "title": "Bone Health After Exercise Alone, GLP-1 Receptor Agonist Treatment, or Combination Treatment: A Secondary Analysis of a Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "glucagon-like peptide-1 receptor agonist liraglutide 3 mg once-daily plus usual activity",
+      "second_arm": "placebo",
+      "outcome": "body weight",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": null,
+      "participants": 193,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "Compared with placebo (- 7.8%), relative muscle strength (strength normalized to body weight) was higher with exercise (- 0.4%), liraglutide (+ 1.0%), and the combined treatment (+ 3.3%) because of lower weight and preserved absolute strength.",
+      "pmid": 41579235,
+      "year": 2026,
+      "title": "Physical Fitness with Exercise and GLP-1 Receptor Agonist Treatment Alone or Combined After Diet-Induced Weight Loss: A Secondary Analysis of a Randomized Controlled Trial in Adults with Obesity."
+     },
+     {
+      "first_arm": "exercise plus liraglutide combined",
+      "second_arm": "placebo",
+      "outcome": "body weight",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": null,
+      "participants": 193,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "Compared with placebo (- 7.8%), relative muscle strength (strength normalized to body weight) was higher with exercise (- 0.4%), liraglutide (+ 1.0%), and the combined treatment (+ 3.3%) because of lower weight and preserved absolute strength.",
+      "pmid": 41579235,
+      "year": 2026,
+      "title": "Physical Fitness with Exercise and GLP-1 Receptor Agonist Treatment Alone or Combined After Diet-Induced Weight Loss: A Secondary Analysis of a Randomized Controlled Trial in Adults with Obesity."
+     },
+     {
+      "first_arm": "a moderate-to-vigorous-intensity exercise program plus placebo",
+      "second_arm": "placebo",
+      "outcome": "change in body weight from randomization to end of treatment",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "treatment difference -4.1 (interval -7.8 to -0.4); P =0.03",
+      "participants": 195,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "At 1 year, all the active-treatment strategies led to greater weight loss than placebo: difference in the exercise group, -4.1 kg (95% confidence interval [CI], -7.8 to -0.4; P = 0.03); in the liraglutide group, -6.8 kg (95% CI, -10.4 to -3.1; P<0.001); and in the combination group, -9.5 kg (95% CI, -13.1 to -5.9; P<0.001).",
+      "pmid": 33951361,
+      "year": 2021,
+      "title": "Healthy Weight Loss Maintenance with Exercise, Liraglutide, or Both Combined."
+     },
+     {
+      "first_arm": "a moderate-to-vigorous-intensity exercise program plus placebo",
+      "second_arm": "The combination strategy",
+      "outcome": "change in body weight from randomization to end of treatment",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "treatment difference -5.4 (interval -9 to -1.7); P =0.004",
+      "participants": 195,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "The combination strategy led to greater weight loss than exercise (difference, -5.4 kg; 95% CI, -9.0 to -1.7; P = 0.004) but not liraglutide (-2.7 kg; 95% CI, -6.3 to 0.8; P = 0.13).",
+      "pmid": 33951361,
+      "year": 2021,
+      "title": "Healthy Weight Loss Maintenance with Exercise, Liraglutide, or Both Combined."
+     },
+     {
+      "first_arm": "with exercise",
+      "second_arm": "placebo",
+      "outcome": "change in body weight at one year after weight loss",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": null,
+      "participants": 215,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "Exercise after weight loss did not increase appetite or sedentary behavior compared with placebo, despite increased exercise energy expenditure and maintained weight loss.",
+      "pmid": 35970829,
+      "year": 2022,
+      "title": "Exploratory analysis of eating- and physical activity-related outcomes from a randomized controlled trial for weight loss maintenance with exercise and liraglutide single or combination treatment."
+     },
+     {
+      "first_arm": "with exercise",
+      "second_arm": "placebo",
+      "outcome": "sedentary time at one year after weight loss",
+      "direction": "no_difference",
+      "test": "not_significant",
+      "numbers": null,
+      "participants": 215,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "Exercise after weight loss did not increase appetite or sedentary behavior compared with placebo, despite increased exercise energy expenditure and maintained weight loss.",
+      "pmid": 35970829,
+      "year": 2022,
+      "title": "Exploratory analysis of eating- and physical activity-related outcomes from a randomized controlled trial for weight loss maintenance with exercise and liraglutide single or combination treatment."
+     },
+     {
+      "first_arm": "supervised exercise",
+      "second_arm": "placebo",
+      "outcome": "maintenance of weight loss of at least 10% of initial body weight from week -8 to week 104",
+      "direction": "higher",
+      "test": "significant",
+      "numbers": "odds ratio 3.7 (interval 1.2 to 11.1)",
+      "participants": 109,
+      "weeks": 104.0,
+      "subgroup": false,
+      "sentence": "More participants who had previously received supervised exercise maintained a weight loss of at least 10% compared with placebo (OR 3.7 [1.2; 11.1]).",
+      "pmid": 38544798,
+      "year": 2024,
+      "title": "Healthy weight loss maintenance with exercise, GLP-1 receptor agonist, or both combined followed by one year without treatment: a post-treatment analysis of a randomised placebo-controlled trial."
+     },
+     {
+      "first_arm": "supervised exercise",
+      "second_arm": "after termination of liraglutide",
+      "outcome": "weight regain during weeks 52–104",
+      "direction": "lower",
+      "test": "significant",
+      "numbers": "mean difference 6 (interval 2.1 to 10)",
+      "participants": 109,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "During the year after termination of treatment (week 52-104), weight regain was 6.0 kg [2.1; 10.0] larger after termination of liraglutide compared with after termination of supervised exercise and 2.5 kg [-1.5 to 6.5] compared with after termination of combination treatment.",
+      "pmid": 38544798,
+      "year": 2024,
+      "title": "Healthy weight loss maintenance with exercise, GLP-1 receptor agonist, or both combined followed by one year without treatment: a post-treatment analysis of a randomised placebo-controlled trial."
+     },
+     {
+      "first_arm": "the GLP-1 receptor agonist once-daily subcutaneous liraglutide 3.0 mg",
+      "second_arm": "after termination of combination treatment",
+      "outcome": "weight regain during weeks 52–104",
+      "direction": "higher",
+      "test": "not_significant",
+      "numbers": "mean difference 2.5 (interval -1.5 to 6.5)",
+      "participants": 109,
+      "weeks": 52.0,
+      "subgroup": false,
+      "sentence": "During the year after termination of treatment (week 52-104), weight regain was 6.0 kg [2.1; 10.0] larger after termination of liraglutide compared with after termination of supervised exercise and 2.5 kg [-1.5 to 6.5] compared with after termination of combination treatment.",
+      "pmid": 38544798,
+      "year": 2024,
+      "title": "Healthy weight loss maintenance with exercise, GLP-1 receptor agonist, or both combined followed by one year without treatment: a post-treatment analysis of a randomised placebo-controlled trial."
+     },
+     {
+      "first_arm": "a moderate- to vigorous-intensity exercise program (exercise alone)",
+      "second_arm": "the combination group",
+      "outcome": "weight loss during the study",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": "first arm 11.19, second arm 16.88 (mean change)",
+      "participants": 195,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "The total estimated mean change in weight losses during the study was 7.03 kg (95% CI, 4.25-9.80 kg) in the placebo group, 11.19 kg (95% CI, 8.40-13.99 kg) in the exercise group, 13.74 kg (95% CI, 11.04-16.44 kg) in the liraglutide group, and 16.88 kg (95% CI, 14.23-19.54 kg) in the combination group.",
+      "pmid": 38916894,
+      "year": 2024,
+      "title": "Bone Health After Exercise Alone, GLP-1 Receptor Agonist Treatment, or Combination Treatment: A Secondary Analysis of a Randomized Clinical Trial."
+     },
+     {
+      "first_arm": "exercise plus placebo",
+      "second_arm": "placebo",
+      "outcome": "body weight",
+      "direction": "lower",
+      "test": "none_given",
+      "numbers": null,
+      "participants": 193,
+      "weeks": null,
+      "subgroup": false,
+      "sentence": "Compared with placebo (- 7.8%), relative muscle strength (strength normalized to body weight) was higher with exercise (- 0.4%), liraglutide (+ 1.0%), and the combined treatment (+ 3.3%) because of lower weight and preserved absolute strength.",
+      "pmid": 41579235,
+      "year": 2026,
+      "title": "Physical Fitness with Exercise and GLP-1 Receptor Agonist Treatment Alone or Combined After Diet-Induced Weight Loss: A Secondary Analysis of a Randomized Controlled Trial in Adults with Obesity."
+     }
+    ]
+   }
+  }
+ }
+}
