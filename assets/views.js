@@ -6,7 +6,7 @@ import * as sync from './sync.js';
 import * as api from './api.js';
 
 /** Stored with every answer; bump it whenever the form or the answer format changes. */
-export const APP_VERSION = '1.0';
+export const APP_VERSION = '1.1'; // 1.1: the form names the drug of the review question
 const CODE_ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ'; // Crockford base32: no I, L, O, U
 const CODE_RE = /^[0-9A-HJKMNP-TV-Z]{10}$/;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -27,7 +27,7 @@ const DOT = {
 // The extraction form (protocol, section 4). `ng` false means the field has no "not given" tick of its own.
 const FIELDS = [
   { id: 'drug_dose', title: 'Drug and dose of the GLP-1 arm', kind: 'text',
-    hint: 'If the trial has several doses of the drug, give the highest dose and extract its result below.' },
+    hint: (drug) => `The arm of ${drug}, with its dose and how often it is given. If the trial has several doses of ${drug}, give the highest dose and extract its result below.` },
   { id: 'comparator', title: 'Comparator', kind: 'text',
     hint: 'The placebo arm, as the source names it.' },
   { id: 'n_randomized', title: 'Number of participants randomized', kind: 'number',
@@ -399,7 +399,7 @@ function showReady(step) {
   $('main').replaceChildren(h('section', { class: 'intro' },
     h('p', { class: 'eyebrow' }, `${partLabel(part)}, trial ${step.ti + 1} of ${part.items.length}`),
     h('h1', {}, step.trial.name),
-    h('p', { class: 'lede' }, part.condition === 'A'
+    h('p', { class: 'lede' }, `Body weight with ${step.trial.drug} against placebo. `, part.condition === 'A'
       ? 'You will extract from the paper. The clock starts when you press Start.'
       : 'You will extract from the evidence base’s record sheet. The clock starts when you press Start.'),
     h('div', { class: 'actions' },
@@ -520,6 +520,7 @@ function showTrial(step, draft) {
   const err = h('p', { class: 'form-error', role: 'alert' });
   const form = h('form', { class: 'form-pane', novalidate: true, onsubmit: (event) => { event.preventDefault(); submitTrial(form, err); } },
     h('h2', { class: 'pane-title' }, `Extraction form: ${work.trial.name}`),
+    h('p', { class: 'ask' }, 'Extract for: body weight with ', h('strong', {}, work.trial.drug), ' against placebo.'),
     FIELDS.map((def, i) => fieldBlock(def, i + 1)),
     confidenceBlock(),
     h('div', { class: 'q' },
@@ -623,7 +624,7 @@ function fieldBlock(def, no) {
     'Not given in my source');
   block.append(
     h('div', { class: 'q-head' }, h('span', { class: 'q-title' }, `${no}. ${def.title}`), tick),
-    def.hint ? h('p', { class: 'q-hint' }, def.hint) : null,
+    def.hint ? h('p', { class: 'q-hint' }, typeof def.hint === 'function' ? def.hint(work.trial.drug) : def.hint) : null,
     wrap);
   if (state.ng) block.classList.add('off');
   return block;
