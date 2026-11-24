@@ -23,6 +23,14 @@ Online since 2026-11-23 at https://danielliangajj.github.io/leb-reader-study/ (r
 The reader number is in the link: `?r=1` works paper, evidence base, paper, evidence base; `?r=2` the opposite.
 Without `?r=` the page only lets a reader resume with a code.
 
+## Test mode
+
+For the study team, to try the page: add `&test=1` to a link (`?r=1&test=1` or `?r=2&test=1`). The page is the one a
+reader sees, with three differences. Nothing is sent to the database. What is typed is kept in the browser under
+keys of its own (`rdrtest:`), apart from a real session. Each part and each trial has a Skip button, so the later
+screens (the evidence base's record sheets, the survey, the finish) can be reached without filling 28 forms. The
+welcome screen has a button to erase the test and start over. A reader's link never carries the parameter.
+
 ## What is stored for a trial
 
 `answer.fields` (the eight fields, each with its "not given" tick), `answer.confidence` (1 to 5), `answer.note`,

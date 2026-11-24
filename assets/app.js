@@ -3,6 +3,7 @@ import * as config from '../config.js';
 import * as api from './api.js';
 import * as sync from './sync.js';
 import { initUI, showWelcome, showFatal } from './views.js';
+import { TEST } from './mode.js';
 
 async function loadConfig() {
   let url = config.SUPABASE_URL || '';
@@ -22,7 +23,7 @@ async function loadConfig() {
 
 async function main() {
   const { url, key } = await loadConfig();
-  api.configure(url, key);
+  if (!TEST) api.configure(url, key);   // test mode never talks to the database
   let study;
   try {
     const res = await fetch('data/study.json', { cache: 'no-cache' });

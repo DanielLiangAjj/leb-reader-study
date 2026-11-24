@@ -4,6 +4,7 @@ import { h } from './dom.js';
 import * as store from './storage.js';
 import * as sync from './sync.js';
 import * as api from './api.js';
+import { TEST } from './mode.js';
 
 /** Stored with every answer; bump it whenever the form or the answer format changes. */
 export const APP_VERSION = '1.1'; // 1.1: the form names the drug of the review question
@@ -141,6 +142,7 @@ function renderTopbar({ part = null, count = '', clock = false } = {}) {
     h('div', { class: 'tb-row' },
       h('div', { class: 'tb-left' },
         h('span', { class: 'brand' }, 'Extracting trial results'),
+        TEST ? h('span', { class: 'tb-sheet' }, 'TEST MODE') : null,
         part ? h('span', { class: 'tb-sheet' }, partLabel(part)) : null,
         part ? h('span', { class: `cond-tag${COND[part.condition].cls}` }, COND[part.condition].name) : null,
         count ? h('span', { class: 'tb-count' }, count) : null),
@@ -158,7 +160,8 @@ function renderTopbar({ part = null, count = '', clock = false } = {}) {
 
 function renderBanners() {
   const list = [];
-  if (!api.configured()) list.push(['banner banner-local', 'Saving to this browser only (no server configured). Download your answers at the end.']);
+  if (TEST) list.push(['banner banner-local', 'Test mode: nothing you enter is sent to the study’s database. It stays in this browser, apart from any real session.']);
+  else if (!api.configured()) list.push(['banner banner-local', 'Saving to this browser only (no server configured). Download your answers at the end.']);
   else if (syncInfo.status === 'offline') list.push(['banner banner-offline', "Offline: the server can't be reached right now. Your answers are kept in this browser and will be sent automatically when the connection returns."]);
   if (!store.storageWorks()) list.push(['banner banner-error', 'This browser is not keeping data between visits (private window or storage blocked). Keep this page open, and download your answers before you close it.']);
   const sig = JSON.stringify(list);
@@ -224,8 +227,20 @@ export function showWelcome() {
     sequenceTable(seq),
     h('p', { class: 'muted' }, `In all ${minutesText(total)}, over as many sittings as you like. The times are rough guesses.`),
     h('p', { class: 'consent' }, 'Your name and email are stored with your answers so we can credit and contact you; nothing else about you is collected.'),
+    TEST ? testPanel(reader) : null,
     current && current.code ? continuePanel(current)
       : [reader ? startPanel(reader) : h('div', { class: 'warn-box' }, 'To start, please open the link you were sent: it ends in ?r=1 or ?r=2. If you have already started, resume with your code below.'), resumePanel()]));
+}
+
+/** Test mode only: what the mode does, the other reader's order, and a way to start over. */
+function testPanel(reader) {
+  const other = reader === '2' ? '1' : '2';
+  return h('div', { class: 'warn-box' },
+    h('p', {}, h('strong', {}, 'Test mode. '), 'This is the page as a reader sees it, with three differences: nothing is sent to the database, ',
+      'each part and each trial has a Skip button, and the name and email you type stay in this browser. Times and answers of a test are not part of the study.'),
+    h('div', { class: 'actions' },
+      h('a', { class: 'btn btn-small', href: `?r=${other}&test=1` }, `Open the test as reader ${other}`),
+      h('button', { type: 'button', class: 'btn btn-small', onclick: () => { store.clearTestData(); window.location.reload(); } }, 'Erase my test and start over')));
 }
 
 function continuePanel(cur) {
@@ -387,7 +402,8 @@ function showPartIntro(step) {
     h('div', { class: 'panel' }, h('h2', {}, 'In this part'), rulesFor(part)),
     codeLine(),
     h('details', { class: 'guide' }, h('summary', {}, 'Where you are in the study'), sequenceTable(sequence(), { marks: true })),
-    h('div', { class: 'actions' }, h('button', { type: 'button', class: 'btn btn-primary', onclick: () => showReady(step) }, 'Continue'))));
+    h('div', { class: 'actions' }, h('button', { type: 'button', class: 'btn btn-primary', onclick: () => showReady(step) }, 'Continue'),
+      TEST ? h('button', { type: 'button', class: 'btn', onclick: () => skipInTest(restOfPart(step)) }, 'Skip this whole part (test mode)') : null)));
   window.scrollTo(0, 0);
 }
 
@@ -404,6 +420,7 @@ function showReady(step) {
       : 'You will extract from the evidence base’s record sheet. The clock starts when you press Start.'),
     h('div', { class: 'actions' },
       h('button', { type: 'button', class: 'btn btn-primary', onclick: () => showTrial(step, null) }, 'Start'),
+      TEST ? h('button', { type: 'button', class: 'btn', onclick: () => skipInTest([step]) }, 'Skip this trial (test mode)') : null,
       h('span', { class: 'muted' }, 'You can stop here and come back later with your code.'))));
   window.scrollTo(0, 0);
 }
@@ -529,6 +546,7 @@ function showTrial(step, draft) {
     err,
     h('div', { class: 'submit-row' },
       h('button', { type: 'submit', class: 'btn btn-primary' }, 'Submit this trial'),
+      TEST ? h('button', { type: 'button', class: 'btn', onclick: () => skipInTest([work.step]) }, 'Skip (test mode)') : null,
       h('span', { class: 'muted' }, 'Submitting stops the clock. A submitted form cannot be reopened.')));
   form.addEventListener('input', () => persistDraft());
   form.addEventListener('change', () => persistDraft());
@@ -687,6 +705,27 @@ function submitTrial(form, err) {
   go();
 }
 
+/** Test mode only: the trials of this part that have no form yet, from this one on. */
+function restOfPart(step) {
+  return step.part.items.map((id, ti) => ({ ...step, ti, id, trial: study.trials[id] }))
+    .filter((s) => !session.answers.has(`${s.part.sheet}/${s.id}`));
+}
+
+/** Test mode only: mark trials as done without a form, so the later screens can be reached quickly. */
+function skipInTest(steps) {
+  if (!TEST) return;
+  closeWork();
+  const at = new Date().toISOString();
+  for (const s of steps) {
+    saveRecord(s.part.sheet, s.id, {
+      answer: { skipped_in_test: true, reader: Number(session.reader), condition: s.part.condition, part: s.part.part, block: s.part.no || null, position: s.ti + 1, trial: s.trial.name },
+      elapsed_ms: null, client_ts: at, app_version: APP_VERSION,
+    });
+    store.clearDraft(session.code, s.part.sheet, s.id);
+  }
+  go();
+}
+
 function saveRecord(sheet, itemId, record) {
   store.saveAnswer(session.code, sheet, itemId, record);
   session.answers.set(`${sheet}/${itemId}`, record);
@@ -758,7 +797,9 @@ function showFinish() {
   $('main').replaceChildren(h('section', { class: 'panel-page finish' },
     h('h1', {}, 'Thank you'),
     h('p', { class: 'lede' }, 'You have finished all the trials of the study.'),
-    local
+    TEST
+      ? h('div', { class: 'warn-box' }, 'Test mode: nothing was sent. The download shows what the study would store for a reader.')
+      : local
       ? h('div', { class: 'warn-box' }, 'Your answers are in this browser only. Please download them and send the file to the study team.')
       : h('p', {}, 'Your answers are saved on the server when the dot at the top says Saved. A downloaded copy is a useful backup.'),
     h('div', { class: 'actions' },

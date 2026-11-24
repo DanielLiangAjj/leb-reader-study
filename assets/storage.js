@@ -8,7 +8,9 @@
 //   rdr:d:<code>:<sheet>:<item_id>   the form being filled in for a trial and the state of its clock, before Submit saves it
 //   rdr:done:<code>                  ISO time the reader reached the finish screen
 
-const P = 'rdr:';
+import { TEST } from './mode.js';
+
+const P = TEST ? 'rdrtest:' : 'rdr:';   // test mode keeps its own keys (same layout), apart from a real session
 const mem = new Map();
 let persistent = true;
 
@@ -57,6 +59,12 @@ function getJSON(key, fallback = null) {
   try { return JSON.parse(raw); } catch { return fallback; }
 }
 const setJSON = (key, value) => setRaw(key, JSON.stringify(value));
+
+/** Test mode only: forget everything the test stored in this browser. A real session is never touched. */
+export function clearTestData() {
+  if (!TEST) return;
+  for (const key of keysWithPrefix(P)) delRaw(key);
+}
 
 // ---- identity -------------------------------------------------------------------------------
 export const getCurrent = () => getJSON(`${P}current`);
