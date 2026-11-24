@@ -7,7 +7,7 @@ import * as api from './api.js';
 import { TEST } from './mode.js';
 
 /** Stored with every answer; bump it whenever the form or the answer format changes. */
-export const APP_VERSION = '1.1'; // 1.1: the form names the drug of the review question
+export const APP_VERSION = '1.2'; // 1.1: the form names the drug of the review question; 1.2: the instructions say that the time is a result and ask for each trial in one go
 const CODE_ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ'; // Crockford base32: no I, L, O, U
 const CODE_RE = /^[0-9A-HJKMNP-TV-Z]{10}$/;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -223,7 +223,7 @@ export function showWelcome() {
     h('h1', {}, 'Extracting trial results'),
     h('p', { class: 'lede' }, 'We built an evidence base automatically from the abstracts of randomized trials. This study asks whether it saves a reviewer time: you fill the same short extraction form for a set of trials, for some of them from the paper and for the others from what the evidence base already holds.'),
     h('p', {}, 'The question is the one of a systematic review: in adults with overweight or obesity, how does body weight change with a GLP-1 receptor agonist compared with placebo? For each trial you fill eight fields (drug and dose, comparator, number randomized, time of the result, how the weight result is expressed, direction, size, statistical test). Any field can be answered “Not given in my source”.'),
-    h('p', {}, 'The page times each trial from Start to Submit. Work at your normal pace, as you would for a real review; this is a test of the two sources, not of you. You can stop between trials and come back; please finish a block in one sitting if you can.'),
+    h('p', {}, 'The page times each trial from Start to Submit. That time is one of the two results of the study; the other is whether the fields are right. So please do each trial in one go: press Start only when you can work undisturbed for about ten minutes, and press Pause if you are interrupted. Work at your normal pace, as you would for a real review, and do not hurry; this is a test of the two sources, not of you. You can stop between trials and come back; please finish a block in one sitting if you can.'),
     sequenceTable(seq),
     h('p', { class: 'muted' }, `In all ${minutesText(total)}, over as many sittings as you like. The times are rough guesses.`),
     h('p', { class: 'consent' }, 'Your name and email are stored with your answers so we can credit and contact you; nothing else about you is collected.'),
@@ -375,8 +375,8 @@ async function resume(code) {
 
 function rulesFor(part) {
   const common = [
-    'The clock starts when you press Start and stops when you submit the form. Use Pause if you are interrupted.',
-    'Work at your normal pace, as you would when extracting for a real review.',
+    'The clock starts when you press Start and stops when you submit the form. That time is a result of the study, so do each trial in one go, without a break. If you are interrupted, press Pause.',
+    'Work at your normal pace, as you would when extracting for a real review. Do not hurry: a correct form matters as much as the time.',
     'A field your source does not give is answered “Not given in my source”. That is an answer, not a failure.',
   ];
   const own = part.condition === 'A'
@@ -421,7 +421,7 @@ function showReady(step) {
     h('div', { class: 'actions' },
       h('button', { type: 'button', class: 'btn btn-primary', onclick: () => showTrial(step, null) }, 'Start'),
       TEST ? h('button', { type: 'button', class: 'btn', onclick: () => skipInTest([step]) }, 'Skip this trial (test mode)') : null,
-      h('span', { class: 'muted' }, 'You can stop here and come back later with your code.'))));
+      h('span', { class: 'muted' }, 'Once you press Start, please finish this trial in one go. If you need a break, take it now: you can come back later with your code.'))));
   window.scrollTo(0, 0);
 }
 
