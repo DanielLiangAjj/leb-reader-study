@@ -596,9 +596,12 @@ function showTrial(step, draft) {
   closeWork();
   setWide(true);
   const at = now();
+  // A draft saved by an older version of the form lacks the newer fields: start from the empty form and lay the draft over it.
+  const fields = emptyFields();
+  for (const id of Object.keys(fields)) if (draft && draft.fields && draft.fields[id]) fields[id] = { ...fields[id], ...draft.fields[id] };
   work = {
     step, trial: step.trial,
-    fields: (draft && draft.fields) || emptyFields(),
+    fields,
     confidence: (draft && draft.confidence) || null,
     note: (draft && draft.note) || '',
     opened: (draft && draft.opened) || [],
