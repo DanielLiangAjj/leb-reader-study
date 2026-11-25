@@ -1,13 +1,18 @@
-// Screens and flow of the reader study: welcome, the introduction of each part, one trial at a time with a clock,
-// a short survey, and the finish screen.
+// Screens and flow of the page: welcome, the home screen with the three parts, and Part 1 (the timed extraction: the
+// introduction of each block, one trial at a time with a clock, and the questions at its end).
+// Part 2 (check of an answer key) is in key.js and Part 3 (second reading of 40 items) in second.js.
 import { h } from './dom.js';
 import * as store from './storage.js';
 import * as sync from './sync.js';
 import * as api from './api.js';
 import { TEST } from './mode.js';
+import * as keyPart from './key.js';
+import * as secondPart from './second.js';
 
 /** Stored with every answer; bump it whenever the form or the answer format changes. */
-export const APP_VERSION = '1.2'; // 1.1: the form names the drug of the review question; 1.2: the instructions say that the time is a result and ask for each trial in one go
+// 1.1: the form names the drug of the review question; 1.2: the instructions say that the time is a result and ask for each trial in one go;
+// 2.0: three parts on one page (timed extraction, check of an answer key, second reading), and questions on the reader's experience
+export const APP_VERSION = '2.0';
 const CODE_ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ'; // Crockford base32: no I, L, O, U
 const CODE_RE = /^[0-9A-HJKMNP-TV-Z]{10}$/;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -48,7 +53,19 @@ const FIELDS = [
 ];
 const TEST_OPTIONS = [['p', 'A P value is given'], ['significant', 'Called significant, no P value'],
   ['not_significant', 'Called not significant, no P value'], ['none', 'No test is given in my source']];
+const SURVEY_SOURCE = [['paper', 'The paper'], ['sheet', 'The record sheet'], ['same', 'No difference']];
+const SURVEY_SPEED = [['much_slower', 'Much slower'], ['slower', 'Somewhat slower'], ['same', 'About the same'], ['faster', 'Somewhat faster'], ['much_faster', 'Much faster']];
 const SURVEY_USE = [['yes', 'Yes, as they are'], ['yes_check', 'Yes, and then check them against the papers'], ['no', 'No']];
+const SURVEY_WANT = [['never', 'Never'], ['few', 'For a few trials'], ['half', 'For about half'], ['most', 'For most trials']];
+// The questions at the end of Part 1 (protocol, section 8). The first six need an answer.
+const SURVEY = [
+  { id: 'easier', title: 'Which source was easier to read?', options: SURVEY_SOURCE },
+  { id: 'tiring', title: 'Over a whole block of trials, which source was less tiring to work from?', options: SURVEY_SOURCE },
+  { id: 'sure', title: 'With which source were you more sure that your form was right?', options: SURVEY_SOURCE },
+  { id: 'speed', title: 'Compared with the papers, extracting from the record sheets felt:', options: SURVEY_SPEED },
+  { id: 'want_paper', title: 'While you worked from a record sheet, how often did you want to open the paper?', options: SURVEY_WANT },
+  { id: 'use', title: 'For a real review, would you start the data extraction from the evidence base’s records?', options: SURVEY_USE },
+];
 
 let study = null;
 let session = null;   // {code, name, email, reader, answers: Map "sheet/item" -> record}
@@ -60,8 +77,14 @@ let downloaded = false;
 const $ = (id) => document.getElementById(id);
 const now = () => Date.now();
 
-export function initUI(studyData) {
+export function initUI(studyData, keyData, secondData) {
   study = studyData;
+  const context = {
+    session: () => session, saveRecord, renderTopbar, renderBanners, setWide, showHome,
+    mount: (node) => $('main').replaceChildren(node), version: APP_VERSION, test: TEST,
+  };
+  keyPart.init(context, keyData);
+  secondPart.init(context, secondData);
   sync.onStatus((info) => { syncInfo = info; paintStatus(); });
   document.addEventListener('visibilitychange', onVisibility);
   window.addEventListener('pagehide', () => { if (work) persistDraft(); });
@@ -81,7 +104,7 @@ const totalTrials = () => sequence().reduce((n, p) => n + p.items.length, 0);
 const doneTrials = () => sequence().reduce((n, p) => n + p.items.filter((id) => session.answers.has(`${p.sheet}/${id}`)).length, 0);
 const partLabel = (part) => (part.part === 'practice' ? 'Practice' : `Block ${part.no} of 4`);
 
-/** The first trial without a submitted form, then the survey, then nothing. */
+/** Part 1: the first trial without a submitted form, then the questions at its end, then nothing. */
 function nextStep() {
   const seq = sequence();
   for (let pi = 0; pi < seq.length; pi++) {
@@ -95,10 +118,28 @@ function nextStep() {
   return null;
 }
 
+/** After signing in: a trial whose clock already runs comes first; otherwise the home screen with the three parts. */
+function enter() {
+  const step = nextStep();
+  if (step && !step.survey) {
+    const draft = store.loadDraft(session.code, step.part.sheet, step.id);
+    if (draft && draft.timing && draft.timing.started_at) { showTrial(step, draft); return; }
+  }
+  showHome();
+}
+
+/** The next screen of Part 1. */
 function go() {
   closeWork();
   const step = nextStep();
-  if (!step) { showFinish(); return; }
+  if (!step) {
+    if (!store.getFinished(session.code)) {   // Part 1 is complete: the server keeps the time (readers.completed_at)
+      store.setFinished(session.code, new Date().toISOString());
+      sync.enqueue({ kind: 'finish', code: session.code });
+    }
+    showHome('Part 1 is done. Thank you.');
+    return;
+  }
   if (step.survey) { showSurvey(); return; }
   const draft = store.loadDraft(session.code, step.part.sheet, step.id);
   if (draft && draft.timing && draft.timing.started_at) { showTrial(step, draft); return; } // the clock of this trial already runs
@@ -131,19 +172,23 @@ function paintDot(node) {
   node.replaceChildren(h('span', { class: 'dot', 'aria-hidden': 'true' }), h('span', { class: 'dot-label', 'aria-hidden': 'true' }, label));
 }
 
-function renderTopbar({ part = null, count = '', clock = false } = {}) {
+function renderTopbar({ part = null, label = '', count = '', clock = false, home = false, progress = null } = {}) {
   const top = $('topbar');
   if (!session) { top.hidden = true; top.replaceChildren(); return; }
-  const done = doneTrials();
-  const total = totalTrials();
+  // The thin bar under the top bar: the trials of Part 1 by default; Parts 2 and 3 pass their own count; false hides it.
+  const done = progress ? progress.done : doneTrials();
+  const total = progress ? progress.total : totalTrials();
+  const barTitle = progress ? progress.title : `${done} of ${total} trials done, practice included`;
   const copy = h('button', { type: 'button', class: 'btn-link', onclick: () => copyText(copy, session.code, 'Copy') }, 'Copy');
   top.hidden = false;
-  top.replaceChildren(
+  top.replaceChildren(...[
     h('div', { class: 'tb-row' },
       h('div', { class: 'tb-left' },
-        h('span', { class: 'brand' }, 'Extracting trial results'),
+        h('span', { class: 'brand' }, 'Evidence base study'),
         TEST ? h('span', { class: 'tb-sheet' }, 'TEST MODE') : null,
-        part ? h('span', { class: 'tb-sheet' }, partLabel(part)) : null,
+        home ? h('button', { type: 'button', class: 'btn btn-small', onclick: () => showHome() }, 'All three parts') : null,
+        label ? h('span', { class: 'tb-sheet' }, label) : null,
+        part ? h('span', { class: 'tb-sheet' }, `Part 1: ${partLabel(part).toLowerCase()}`) : null,
         part ? h('span', { class: `cond-tag${COND[part.condition].cls}` }, COND[part.condition].name) : null,
         count ? h('span', { class: 'tb-count' }, count) : null),
       h('div', { class: 'tb-right' },
@@ -152,10 +197,10 @@ function renderTopbar({ part = null, count = '', clock = false } = {}) {
         h('span', { class: 'code-chip', title: 'Your code is how you continue on another device: choose "Resume with a code" there.' },
           h('span', { class: 'code-label' }, 'Your code'), h('code', { class: 'code' }, session.code), copy),
         statusDot())),
-    h('div', {
-      class: 'progress', role: 'progressbar', 'aria-label': 'Overall progress', 'aria-valuemin': 0, 'aria-valuemax': total, 'aria-valuenow': done,
-      title: `${done} of ${total} trials done, practice included`,
-    }, h('div', { class: 'progress-fill', style: `width:${(total ? (100 * done) / total : 0).toFixed(2)}%` })));
+    progress === false ? null : h('div', {
+      class: 'progress', role: 'progressbar', 'aria-label': 'Progress in this part', 'aria-valuemin': 0, 'aria-valuemax': total, 'aria-valuenow': done,
+      title: barTitle,
+    }, h('div', { class: 'progress-fill', style: `width:${(total ? (100 * done) / total : 0).toFixed(2)}%` }))].filter(Boolean));
 }
 
 function renderBanners() {
@@ -219,13 +264,18 @@ export function showWelcome() {
   const reader = readerFromLink();
   const seq = study.readers[(current && current.reader) || reader || '1'];
   const total = seq.reduce((n, p) => n + p.items.length * MINUTES[p.condition], 0);
+  const row = (no, name, what, time) => h('tr', {}, h('td', {}, h('strong', {}, `Part ${no}. `), name), h('td', {}, what), h('td', {}, time));
   $('main').replaceChildren(h('section', { class: 'welcome' },
-    h('h1', {}, 'Extracting trial results'),
-    h('p', { class: 'lede' }, 'We built an evidence base automatically from the abstracts of randomized trials. This study asks whether it saves a reviewer time: you fill the same short extraction form for a set of trials, for some of them from the paper and for the others from what the evidence base already holds.'),
-    h('p', {}, 'The question is the one of a systematic review: in adults with overweight or obesity, how does body weight change with a GLP-1 receptor agonist compared with placebo? For each trial you fill eight fields (drug and dose, comparator, number randomized, time of the result, how the weight result is expressed, direction, size, statistical test). Any field can be answered “Not given in my source”.'),
-    h('p', {}, 'The page times each trial from Start to Submit. That time is one of the two results of the study; the other is whether the fields are right. So please do each trial in one go: press Start only when you can work undisturbed for about ten minutes, and press Pause if you are interrupted. Work at your normal pace, as you would for a real review, and do not hurry; this is a test of the two sources, not of you. You can stop between trials and come back; please finish a block in one sitting if you can.'),
-    sequenceTable(seq),
-    h('p', { class: 'muted' }, `In all ${minutesText(total)}, over as many sittings as you like. The times are rough guesses.`),
+    h('h1', {}, 'A study of an evidence base of clinical trials'),
+    h('p', { class: 'lede' }, 'We built an evidence base automatically from the abstracts of randomized trials: for each trial it holds the groups that were compared, the outcomes, and what the abstract says about each comparison. We ask you, as a clinician, to help us test it. There are three parts.'),
+    h('table', { class: 'seq parts' },
+      h('thead', {}, h('tr', {}, h('th', {}, 'Part'), h('th', {}, 'What you do'), h('th', {}, 'Rough time'))),
+      h('tbody', {},
+        row(1, 'Timed extraction', `You fill a short extraction form for ${seq.reduce((n, p) => n + p.items.length, 0)} trials: for half of them from the paper, for the other half from what the evidence base holds. The page times each trial.`, minutesText(total)),
+        row(2, 'Check of an answer key', `For ${keyPart.total() || 50} abstracts you say whether you agree with each result our answer key lists.`, 'about 3 h for all; a little over 1 h for the first 20'),
+        row(3, 'Second reading', `For ${secondPart.total() || 40} items you read a few short texts and choose which of three or four answers fits.`, 'about 1 h'))),
+    h('p', {}, 'Part 1 comes first. Parts 2 and 3 show where the evidence base was right and where it was wrong, and that must not change how you work while you are timed. After Part 1 you can do Parts 2 and 3 in either order.'),
+    h('p', {}, 'Every part has its own instructions with an example, shown when you open it. You can stop at any point and come back later, on this device or another, with the code the page gives you. Nothing has to be done in one day.'),
     h('p', { class: 'consent' }, 'Your name and email are stored with your answers so we can credit and contact you; nothing else about you is collected.'),
     TEST ? testPanel(reader) : null,
     current && current.code ? continuePanel(current)
@@ -236,8 +286,9 @@ export function showWelcome() {
 function testPanel(reader) {
   const other = reader === '2' ? '1' : '2';
   return h('div', { class: 'warn-box' },
-    h('p', {}, h('strong', {}, 'Test mode. '), 'This is the page as a reader sees it, with three differences: nothing is sent to the database, ',
-      'each part and each trial has a Skip button, and the name and email you type stay in this browser. Times and answers of a test are not part of the study.'),
+    h('p', {}, h('strong', {}, 'Test mode. '), 'This is the page as a reader sees it, with four differences: nothing is sent to the database, ',
+      'each block and each trial of Part 1 has a Skip button, Parts 2 and 3 are open without finishing Part 1 and any of their items can be opened, ',
+      'and the name and email you type stay in this browser. Times and answers of a test are not part of the study.'),
     h('div', { class: 'actions' },
       h('a', { class: 'btn btn-small', href: `?r=${other}&test=1` }, `Open the test as reader ${other}`),
       h('button', { type: 'button', class: 'btn btn-small', onclick: () => { store.clearTestData(); window.location.reload(); } }, 'Erase my test and start over')));
@@ -330,7 +381,7 @@ function startNew(name, email, reader) {
   store.setIdentity(who.code, who);
   sync.enqueue({ kind: 'register', code: who.code, reader: Number(reader), name, email, user_agent: navigator.userAgent });
   session = { ...who, answers: new Map() };
-  go();
+  enter();
 }
 
 /** Open the session of a code: what the server holds and what this browser holds, the later answer winning. Returns '' or a message. */
@@ -367,7 +418,7 @@ async function resume(code) {
   }
   session = { ...who, answers };
   sync.kick();
-  go();
+  enter();
   return '';
 }
 
@@ -389,19 +440,19 @@ function rulesFor(part) {
 
 function showPartIntro(step) {
   setWide(false);
-  renderTopbar({ part: step.part });
+  renderTopbar({ part: step.part, home: true });
   renderBanners();
   const { part } = step;
   const practice = part.part === 'practice';
   $('main').replaceChildren(h('section', { class: 'intro' },
-    h('p', { class: 'eyebrow' }, partLabel(part)),
+    h('p', { class: 'eyebrow' }, `Part 1, ${partLabel(part).toLowerCase()}`),
     h('h1', {}, COND[part.condition].name),
     h('p', { class: 'lede' }, practice
       ? `Two practice trials, to get used to the form and the source. They are not scored. Allow ${minutesText(part.items.length * MINUTES[part.condition])}.`
       : `${part.items.length} trials. Allow ${minutesText(part.items.length * MINUTES[part.condition])}, and please finish this block in one sitting if you can.`),
     h('div', { class: 'panel' }, h('h2', {}, 'In this part'), rulesFor(part)),
     codeLine(),
-    h('details', { class: 'guide' }, h('summary', {}, 'Where you are in the study'), sequenceTable(sequence(), { marks: true })),
+    h('details', { class: 'guide' }, h('summary', {}, 'Where you are in Part 1'), sequenceTable(sequence(), { marks: true })),
     h('div', { class: 'actions' }, h('button', { type: 'button', class: 'btn btn-primary', onclick: () => showReady(step) }, 'Continue'),
       TEST ? h('button', { type: 'button', class: 'btn', onclick: () => skipInTest(restOfPart(step)) }, 'Skip this whole part (test mode)') : null)));
   window.scrollTo(0, 0);
@@ -410,10 +461,10 @@ function showPartIntro(step) {
 function showReady(step) {
   setWide(false);
   const { part } = step;
-  renderTopbar({ part, count: `Trial ${step.ti + 1} of ${part.items.length}` });
+  renderTopbar({ part, count: `Trial ${step.ti + 1} of ${part.items.length}`, home: true });
   renderBanners();
   $('main').replaceChildren(h('section', { class: 'intro' },
-    h('p', { class: 'eyebrow' }, `${partLabel(part)}, trial ${step.ti + 1} of ${part.items.length}`),
+    h('p', { class: 'eyebrow' }, `Part 1, ${partLabel(part).toLowerCase()}, trial ${step.ti + 1} of ${part.items.length}`),
     h('h1', {}, step.trial.name),
     h('p', { class: 'lede' }, `Body weight with ${step.trial.drug} against placebo. `, part.condition === 'A'
       ? 'You will extract from the paper. The clock starts when you press Start.'
@@ -732,41 +783,51 @@ function saveRecord(sheet, itemId, record) {
   sync.enqueue({ kind: 'rating', code: session.code, sheet, item_id: itemId, ...record });
 }
 
-// ---- survey and finish ----------------------------------------------------------------------------
+// ---- the questions at the end of Part 1 ----------------------------------------------------------
 
 function showSurvey() {
   setWide(false);
-  renderTopbar();
+  renderTopbar({ label: 'Part 1: last questions', home: true });
   renderBanners();
-  const state = { use: '', missing: '', other: '' };
+  const state = { missing: '', other: '' };
   const err = h('p', { class: 'form-error', role: 'alert' });
   const area = (key) => h('textarea', { rows: 4, maxlength: 4000, oninput: (e) => { state[key] = e.target.value; } });
-  $('main').replaceChildren(h('form', {
+  const blocks = SURVEY.map((q, i) => h('div', { class: 'q', 'data-field': q.id },
+    h('div', { class: 'q-head' }, h('span', { class: 'q-title' }, `${i + 1}. ${q.title}`)),
+    radios(`s-${q.id}`, q.options, '', (v) => { state[q.id] = v; })));
+  const form = h('form', {
     class: 'panel-page survey', novalidate: true,
     onsubmit: (event) => {
       event.preventDefault();
-      if (!state.use) { err.textContent = 'Please answer the first question.'; return; }
+      const open = SURVEY.filter((q) => !state[q.id]).map((q) => q.id);
+      blocks.forEach((b) => b.classList.toggle('missing', open.includes(b.dataset.field)));
+      if (open.length) {
+        err.textContent = 'Please answer questions 1 to 6 (the ones marked in red).';
+        const first = form.querySelector('.q.missing');
+        if (first) first.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        return;
+      }
       const at = new Date().toISOString();
-      saveRecord('survey', 'S1', {
-        answer: { reader: Number(session.reader), use: state.use, missing: state.missing.trim(), other: state.other.trim() },
-        elapsed_ms: null, client_ts: at, app_version: APP_VERSION,
-      });
+      const answer = { reader: Number(session.reader), questions: 2, missing: state.missing.trim(), other: state.other.trim() };
+      for (const q of SURVEY) answer[q.id] = state[q.id];
+      saveRecord('survey', 'S1', { answer, elapsed_ms: null, client_ts: at, app_version: APP_VERSION });
       go();
     },
   },
-  h('p', { class: 'eyebrow' }, 'All trials done'),
-  h('h1', {}, 'Three last questions'),
+  h('p', { class: 'eyebrow' }, 'Part 1: all trials done'),
+  h('h1', {}, 'Eight last questions'),
+  h('p', { class: 'lede' }, 'About three minutes. They ask how the two sources felt to work from. There is no right answer: we want your opinion as it is, also where it does not favour the evidence base.'),
+  h('p', { class: 'muted' }, '“The record sheet” is what you saw when you extracted from the evidence base.'),
+  blocks,
   h('div', { class: 'q' },
-    h('div', { class: 'q-head' }, h('span', { class: 'q-title' }, 'Would you start the data extraction of a review from the evidence base’s records?')),
-    radios('s-use', SURVEY_USE, '', (v) => { state.use = v; })),
-  h('div', { class: 'q' },
-    h('div', { class: 'q-head' }, h('span', { class: 'q-title' }, 'What was missing from the record sheets, or wrong in them? (optional)')),
+    h('div', { class: 'q-head' }, h('span', { class: 'q-title' }, '7. What was missing from the record sheets, or wrong in them? (optional)')),
     area('missing')),
   h('div', { class: 'q' },
-    h('div', { class: 'q-head' }, h('span', { class: 'q-title' }, 'Anything else we should know? (optional)')),
+    h('div', { class: 'q-head' }, h('span', { class: 'q-title' }, '8. What would make the record sheets more useful to you? Anything else we should know? (optional)')),
     area('other')),
   err,
-  h('div', { class: 'actions' }, h('button', { type: 'submit', class: 'btn btn-primary' }, 'Finish'))));
+  h('div', { class: 'actions' }, h('button', { type: 'submit', class: 'btn btn-primary' }, 'Finish Part 1')));
+  $('main').replaceChildren(form);
   window.scrollTo(0, 0);
 }
 
@@ -785,26 +846,111 @@ function downloadAnswers() {
   downloaded = true;
 }
 
-function showFinish() {
+// ---- Part 1: its introduction ------------------------------------------------------------------------
+
+function showPart1Intro() {
   setWide(false);
-  renderTopbar();
+  renderTopbar({ label: 'Part 1: timed extraction', home: true });
   renderBanners();
-  if (!store.getFinished(session.code)) {
-    store.setFinished(session.code, new Date().toISOString());
-    sync.enqueue({ kind: 'finish', code: session.code });
-  }
-  const local = !api.configured();
-  $('main').replaceChildren(h('section', { class: 'panel-page finish' },
-    h('h1', {}, 'Thank you'),
-    h('p', { class: 'lede' }, 'You have finished all the trials of the study.'),
-    TEST
-      ? h('div', { class: 'warn-box' }, 'Test mode: nothing was sent. The download shows what the study would store for a reader.')
-      : local
-      ? h('div', { class: 'warn-box' }, 'Your answers are in this browser only. Please download them and send the file to the study team.')
-      : h('p', {}, 'Your answers are saved on the server when the dot at the top says Saved. A downloaded copy is a useful backup.'),
+  const seq = sequence();
+  const total = seq.reduce((n, p) => n + p.items.length * MINUTES[p.condition], 0);
+  $('main').replaceChildren(h('section', { class: 'intro' },
+    h('p', { class: 'eyebrow' }, 'Part 1 of 3'),
+    h('h1', {}, 'Timed extraction'),
+    h('p', { class: 'lede' }, 'Does the evidence base save a reviewer time? You fill the same short extraction form for a set of trials, for some of them from the paper and for the others from what the evidence base already holds.'),
+    h('div', { class: 'panel' },
+      h('h2', {}, 'The task'),
+      h('p', {}, 'The question is the one of a systematic review: in adults with overweight or obesity, how does body weight change with a GLP-1 receptor agonist compared with placebo? For each trial you fill eight fields (drug and dose, comparator, number randomized, time of the result, how the weight result is expressed, direction, size, statistical test). Any field can be answered “Not given in my source”.'),
+      h('p', {}, 'You never see the same trial twice. Each trial is done from the paper by one reader and from the evidence base by the other, so the two sources are compared on the same trials without anyone working from memory.')),
+    h('div', { class: 'panel' },
+      h('h2', {}, 'The time is a result'),
+      h('p', {}, 'The page times each trial from Start to Submit. That time is one of the two results of this part; the other is whether the fields are right. So please do each trial in one go: press Start only when you can work undisturbed for about ten minutes, and press Pause if you are interrupted.'),
+      h('p', {}, 'Work at your normal pace, as you would for a real review, and do not hurry; this is a test of the two sources, not of you. You can stop between trials and come back; please finish a block in one sitting if you can.')),
+    h('div', { class: 'panel' },
+      h('h2', {}, 'The order of work'),
+      sequenceTable(seq, { marks: true }),
+      h('p', { class: 'muted' }, `In all ${minutesText(total)}, over as many sittings as you like. The times are rough guesses. After the last block there are eight short questions about how the two sources felt to work from.`)),
+    codeLine(),
     h('div', { class: 'actions' },
-      h('button', { type: 'button', class: `btn${local ? ' btn-primary' : ''}`, onclick: downloadAnswers }, 'Download my answers')),
-    codeLine()));
+      h('button', { type: 'button', class: 'btn btn-primary', onclick: go }, doneTrials() ? 'Continue' : 'Go to the practice trials'),
+      h('button', { type: 'button', class: 'btn', onclick: () => showHome() }, 'Back to the three parts'))));
+  window.scrollTo(0, 0);
+}
+
+// ---- the home screen: the three parts ---------------------------------------------------------------
+
+function partCard({ no, title, state, tone, what, time, actions, note }) {
+  return h('div', { class: `part-card${tone ? ` ${tone}` : ''}` },
+    h('div', { class: 'part-head' },
+      h('span', { class: 'part-no' }, `Part ${no}`),
+      h('h2', {}, title),
+      h('span', { class: 'part-state' }, state)),
+    h('p', {}, what),
+    h('p', { class: 'muted' }, time),
+    note ? h('p', { class: 'part-note' }, note) : null,
+    actions && actions.length ? h('div', { class: 'actions' }, actions) : null);
+}
+
+function showHome(flash = '') {
+  closeWork();
+  setWide(false);
+  renderTopbar({ progress: false });
+  renderBanners();
+  const step = nextStep();
+  const part1Done = !step;
+  const trials = doneTrials();
+  const trialsAll = totalTrials();
+  const open23 = part1Done || TEST;
+  const locked = 'Opens when Part 1 is done, so that what you see here cannot change how you work while you are timed.';
+  const kDone = keyPart.done();
+  const kAll = keyPart.total();
+  const sDone = secondPart.done();
+  const sAll = secondPart.total();
+  const allDone = part1Done && kDone === kAll && sDone === sAll;
+  const local = !api.configured();
+  const btn = (label, onclick, primary) => h('button', { type: 'button', class: `btn${primary ? ' btn-primary' : ''}`, onclick }, label);
+  const seq = sequence();
+  const minutes = seq.reduce((n, p) => n + p.items.length * MINUTES[p.condition], 0);
+  const next = part1Done ? (kDone < kAll ? 2 : (sDone < sAll ? 3 : 0)) : 1;   // the part the page suggests now
+
+  $('main').replaceChildren(h('section', { class: 'home' },
+    flash ? h('p', { class: 'note-done' }, flash) : null,
+    h('h1', {}, allDone ? 'Thank you' : `Welcome, ${session.name}`),
+    h('p', { class: 'lede' }, allDone ? 'You have finished all three parts.'
+      : 'Three parts. Part 1 comes first; Parts 2 and 3 can then be done in either order. Stop whenever you like and come back with your code.'),
+    partCard({
+      no: 1, title: 'Timed extraction', tone: part1Done ? 'done' : 'now',
+      state: part1Done ? 'Done' : (step.survey ? 'All trials done, eight questions left' : (trials ? `${trials} of ${trialsAll} trials done` : 'Not started')),
+      what: `A short extraction form for ${trialsAll} trials (4 of them practice): for half from the paper, for half from the evidence base. The page times each trial.`,
+      time: `${minutesText(minutes)[0].toUpperCase()}${minutesText(minutes).slice(1)}, over as many sittings as you like.`,
+      actions: part1Done ? [] : [
+        btn(step.survey ? 'Answer the eight questions' : (trials ? 'Continue Part 1' : 'Start Part 1'), () => (trials || step.survey ? go() : showPart1Intro()), next === 1),
+        trials && !step.survey ? btn('Read the instructions of Part 1 again', showPart1Intro, false) : null],
+    }),
+    partCard({
+      no: 2, title: 'Check of an answer key', tone: !open23 ? 'locked' : (kAll && kDone === kAll ? 'done' : (next === 2 ? 'now' : '')),
+      state: !keyPart.available() ? 'Could not be loaded' : (kDone === kAll ? 'Done' : (kDone ? `${kDone} of ${kAll} abstracts done` : 'Not started')),
+      what: `For ${kAll || 50} abstracts of trial reports, you say whether you agree with each result our answer key lists: Yes, No or Cannot decide.`,
+      time: 'About 3 hours for all 50; a little over 1 hour for the first 20. No clock.',
+      note: !open23 ? locked : (TEST && !part1Done ? 'Test mode: open without Part 1.' : ''),
+      actions: [h('button', { type: 'button', class: `btn${next === 2 ? ' btn-primary' : ''}`, disabled: !open23 || !keyPart.available(), onclick: keyPart.open },
+        kDone === kAll && kAll ? 'Open Part 2 again' : (kDone ? 'Continue Part 2' : 'Start Part 2'))],
+    }),
+    partCard({
+      no: 3, title: 'Second reading of 40 items', tone: !open23 ? 'locked' : (sAll && sDone === sAll ? 'done' : (next === 3 ? 'now' : '')),
+      state: !secondPart.available() ? 'Could not be loaded' : (sDone === sAll ? 'Done' : (sDone ? `${sDone} of ${sAll} items done` : 'Not started')),
+      what: `For ${sAll || 40} items, in four sets of ten, you read a few short texts and choose which of three or four answers fits.`,
+      time: 'About 1 hour. No clock.',
+      note: !open23 ? locked : (TEST && !part1Done ? 'Test mode: open without Part 1.' : ''),
+      actions: [h('button', { type: 'button', class: `btn${next === 3 ? ' btn-primary' : ''}`, disabled: !open23 || !secondPart.available(), onclick: secondPart.open },
+        sDone === sAll && sAll ? 'Open Part 3 again' : (sDone ? 'Continue Part 3' : 'Start Part 3'))],
+    }),
+    codeLine(),
+    TEST ? h('div', { class: 'warn-box' }, 'Test mode: nothing is sent. The download shows what the study would store for a reader.')
+      : local ? h('div', { class: 'warn-box' }, 'Your answers are in this browser only. Please download them and send the file to the study team.')
+      : h('p', { class: 'muted' }, 'Your answers are saved on the server when the dot at the top says Saved. A downloaded copy is a useful backup.'),
+    h('div', { class: 'actions' },
+      h('button', { type: 'button', class: `btn${local && allDone ? ' btn-primary' : ''}`, onclick: downloadAnswers }, 'Download my answers'))));
   window.scrollTo(0, 0);
 }
 

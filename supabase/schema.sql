@@ -78,6 +78,9 @@ end;
 $$;
 
 -- rdr_save_form: upsert one submitted form; when the row exists, keep whichever has the later client_ts.
+-- sheet: 'practice' and 'scored' are the trials of Part 1; 'survey' holds everything else, told apart by item_id:
+-- S1 (the questions at the end of Part 1), K01 to K50 (Part 2, one abstract of the answer key) and H01 to H40 (Part 3,
+-- one item of the second reading). Nothing here had to change for Parts 2 and 3.
 create or replace function public.rdr_save_form(
   p_code text,
   p_sheet text,
