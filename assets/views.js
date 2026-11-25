@@ -12,16 +12,17 @@ import * as secondPart from './second.js';
 /** Stored with every answer; bump it whenever the form or the answer format changes. */
 // 1.1: the form names the drug of the review question; 1.2: the instructions say that the time is a result and ask for each trial in one go;
 // 2.0: three parts on one page (timed extraction, check of an answer key, second reading), and questions on the reader's experience
-export const APP_VERSION = '2.0';
+// 2.1: the form of Part 1 has sixteen fields, and a trial of the evidence base has two steps (the record sheet, then the paper)
+export const APP_VERSION = '2.1';
 const CODE_ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ'; // Crockford base32: no I, L, O, U
 const CODE_RE = /^[0-9A-HJKMNP-TV-Z]{10}$/;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // Rough minutes per trial behind the times on the welcome page. They are guesses, not measurements;
 // the practice trials give the first real figures.
-const MINUTES = { A: 8, B: 3 };
+const MINUTES = { A: 13, B: 11 };
 const COND = {
   A: { name: 'From the paper', short: 'paper', cls: '' },
-  B: { name: 'From the evidence base', short: 'evidence base', cls: ' b' },
+  B: { name: 'Evidence base first, then the paper', short: 'evidence base, then the paper', cls: ' b' },
 };
 const DOT = {
   saved: ['Saved', 'All answers are saved on the server.'],
@@ -30,41 +31,69 @@ const DOT = {
   local: ['This browser only', 'No server is configured: answers are saved in this browser only.'],
 };
 
-// The extraction form (protocol, section 4). `ng` false means the field has no "not given" tick of its own.
+// The extraction form (protocol, sections 4 and 17): sixteen fields in four groups, the kinds of items a review's data
+// collection form asks for. A line with `group` is a heading. `ng` false means the field has no "not given" tick of its own.
 const FIELDS = [
+  { group: 'The treatments' },
   { id: 'drug_dose', title: 'Drug and dose of the GLP-1 arm', kind: 'text',
-    hint: (drug) => `The arm of ${drug}, with its dose and how often it is given. If the trial has several doses of ${drug}, give the highest dose and extract its result below.` },
+    hint: (drug) => `The arm of ${drug}, with its dose and how often it is given. If the trial has several doses of ${drug}, give the highest dose. Every field below is about that arm and the placebo arm.` },
   { id: 'comparator', title: 'Comparator', kind: 'text',
     hint: 'The placebo arm, as the source names it.' },
-  { id: 'n_randomized', title: 'Number of participants randomized', kind: 'number',
-    hint: 'All arms of the trial together.' },
+  { group: 'The trial and its participants' },
+  { id: 'n_randomized', title: 'Number of participants randomized', kind: 'arms3',
+    hint: 'All arms of the trial together, and each of the two arms you extract.' },
+  { id: 'diabetes', title: 'Type 2 diabetes among the participants', kind: 'choice',
+    hint: 'As the eligibility criteria or the description of the participants say.',
+    options: [['all', 'All had type 2 diabetes'], ['none', 'None (people with diabetes were excluded)'], ['some', 'Some had it']] },
+  { id: 'bmi', title: 'Mean body-mass index at baseline', kind: 'number', unit: 'kg/m²',
+    hint: 'Of all participants. If the source gives it by arm only, take the arm of the drug.' },
+  { id: 'blinding', title: 'Blinding', kind: 'choice',
+    hint: 'As the source describes the trial.',
+    options: [['double', 'Double-blind'], ['open', 'Open-label or single-blind']] },
+  { group: 'Body weight' },
   { id: 'weeks', title: 'Time of the body-weight result', kind: 'number', unit: 'weeks',
     hint: 'Weeks from randomization to the main weight result.' },
   { id: 'measure', title: 'How the weight result is expressed', kind: 'choice',
-    hint: 'Take the percent change in body weight when the source gives it; if not, the change in kg; if not, what the source gives. Fields 6 to 8 are about this result.',
+    hint: 'Take the percent change in body weight when the source gives it; if not, the change in kg; if not, what the source gives. Fields 9 to 13 are about this result.',
     options: [['percent', 'Percent change in body weight'], ['kg', 'Change in kg'], ['threshold', 'Share reaching a weight-loss threshold'], ['other', 'Other']] },
   { id: 'direction', title: 'Direction: body weight with the drug against placebo', kind: 'choice',
     hint: 'As the source reports it. A larger share reaching a weight-loss threshold with the drug counts as lower body weight.',
     options: [['lower', 'Lower with the drug'], ['no_difference', 'No difference'], ['higher', 'Higher with the drug']] },
   { id: 'size', title: 'Size of the effect', kind: 'size',
     hint: 'The value in each arm, or the difference between the arms with its interval. Fill what the source gives, with the sign as printed.' },
+  { id: 'spread', title: 'Spread of the value in each arm', kind: 'spread',
+    hint: 'The standard deviation, standard error or confidence interval that the source gives with the value of each arm in field 10. A meta-analysis cannot pool the trial without it.' },
+  { id: 'n_analysed', title: 'Number of participants analysed for this result', kind: 'pair',
+    hint: 'In each arm, as the source gives it for the weight result.' },
   { id: 'test', title: 'Statistical test between the two arms', kind: 'test', ng: false,
-    hint: 'For the result of fields 5 to 7.' },
+    hint: 'For the result of fields 8 to 10.' },
+  { id: 'responders', title: 'Participants who lost 5% or more of their body weight', kind: 'pair',
+    hint: 'In each arm, as a number or as a percentage, whichever the source gives. Write the % sign with a percentage.' },
+  { group: 'Safety' },
+  { id: 'ae_stop', title: 'Participants who stopped treatment because of adverse events', kind: 'pair',
+    hint: 'In each arm, as a number or as a percentage.' },
+  { id: 'sae', title: 'Participants with a serious adverse event', kind: 'pair',
+    hint: 'In each arm, as a number or as a percentage.' },
 ];
+const FORM_FIELDS = FIELDS.filter((f) => f.id);
+const SPREAD_OPTIONS = [['sd', 'Standard deviation'], ['se', 'Standard error'], ['ci', '95% confidence interval'], ['other', 'Other']];
 const TEST_OPTIONS = [['p', 'A P value is given'], ['significant', 'Called significant, no P value'],
   ['not_significant', 'Called not significant, no P value'], ['none', 'No test is given in my source']];
 const SURVEY_SOURCE = [['paper', 'The paper'], ['sheet', 'The record sheet'], ['same', 'No difference']];
+const SURVEY_WAY = [['paper', 'The paper alone'], ['sheet', 'The record sheet first, then the paper'], ['same', 'No difference']];
+const SURVEY_BEFORE = [['none', 'None'], ['few', 'One or two'], ['many', 'Three or more']];
 const SURVEY_SPEED = [['much_slower', 'Much slower'], ['slower', 'Somewhat slower'], ['same', 'About the same'], ['faster', 'Somewhat faster'], ['much_faster', 'Much faster']];
 const SURVEY_USE = [['yes', 'Yes, as they are'], ['yes_check', 'Yes, and then check them against the papers'], ['no', 'No']];
 const SURVEY_WANT = [['never', 'Never'], ['few', 'For a few trials'], ['half', 'For about half'], ['most', 'For most trials']];
-// The questions at the end of Part 1 (protocol, section 8). The first six need an answer.
+// The questions at the end of Part 1 (protocol, sections 16 and 17). The first seven need an answer.
 const SURVEY = [
-  { id: 'easier', title: 'Which source was easier to read?', options: SURVEY_SOURCE },
-  { id: 'tiring', title: 'Over a whole block of trials, which source was less tiring to work from?', options: SURVEY_SOURCE },
-  { id: 'sure', title: 'With which source were you more sure that your form was right?', options: SURVEY_SOURCE },
-  { id: 'speed', title: 'Compared with the papers, extracting from the record sheets felt:', options: SURVEY_SPEED },
-  { id: 'want_paper', title: 'While you worked from a record sheet, how often did you want to open the paper?', options: SURVEY_WANT },
+  { id: 'easier', title: 'Which was easier to read: the paper or the record sheet?', options: SURVEY_SOURCE },
+  { id: 'tiring', title: 'Over a whole block of trials, which way of working was less tiring?', options: SURVEY_WAY },
+  { id: 'sure', title: 'With which way of working were you more sure that your final form was right?', options: SURVEY_WAY },
+  { id: 'speed', title: 'Compared with the paper alone, starting from the record sheet felt:', options: SURVEY_SPEED },
+  { id: 'changed', title: 'In step 2, how often did the paper make you change a value you had taken from the record sheet?', options: SURVEY_WANT },
   { id: 'use', title: 'For a real review, would you start the data extraction from the evidence base’s records?', options: SURVEY_USE },
+  { id: 'before', title: 'Before this study, for how many systematic reviews had you extracted data?', options: SURVEY_BEFORE },
 ];
 
 let study = null;
@@ -271,7 +300,7 @@ export function showWelcome() {
     h('table', { class: 'seq parts' },
       h('thead', {}, h('tr', {}, h('th', {}, 'Part'), h('th', {}, 'What you do'), h('th', {}, 'Rough time'))),
       h('tbody', {},
-        row(1, 'Timed extraction', `You fill a short extraction form for ${seq.reduce((n, p) => n + p.items.length, 0)} trials: for half of them from the paper, for the other half from what the evidence base holds. The page times each trial.`, minutesText(total)),
+        row(1, 'Timed extraction', `You fill an extraction form of sixteen fields for ${seq.reduce((n, p) => n + p.items.length, 0)} trials: for half of them from the paper alone, for the other half from the evidence base first and then checked against the paper. The page times each trial.`, minutesText(total)),
         row(2, 'Check of an answer key', `For ${keyPart.total() || 50} abstracts you say whether you agree with each result our answer key lists.`, 'about 3 h for all; a little over 1 h for the first 20'),
         row(3, 'Second reading', `For ${secondPart.total() || 40} items you read a few short texts and choose which of three or four answers fits.`, 'about 1 h'))),
     h('p', {}, 'Part 1 comes first. Parts 2 and 3 show where the evidence base was right and where it was wrong, and that must not change how you work while you are timed. After Part 1 you can do Parts 2 and 3 in either order.'),
@@ -433,8 +462,9 @@ function rulesFor(part) {
   const own = part.condition === 'A'
     ? ['For each trial the page names the main report and links to it. Extract from its full text, as a reviewer would. If the journal asks you to sign in, use the library’s access.',
       'Do not open the evidence base, its record sheets or any summary of the trial.']
-    : ['For each trial the page shows a record sheet: the arms the evidence base lists for the trial and every result on body weight it holds, each with the sentence it was read from.',
-      'Extract from the sheet only. Do not open the paper, PubMed or any other source.'];
+    : ['Each trial has two steps, as it would in real work. Step 1: the page shows a record sheet, which is everything the evidence base holds for the trial: its arms, its participants and every result, each with the sentence it was read from. Fill the form from the sheet alone, and tick “Not on the record sheet” for what it does not give. Do not open the paper or any other source in this step.',
+      'Step 2: the page then links to the paper. Check each value you took from the sheet against the paper, correct what is wrong, and fill what the sheet did not give, as you would before using the data in a review.',
+      'The clock runs through both steps. We look at the two steps apart and together.'];
   return h('ul', { class: 'rule-list' }, [...own, ...common].map((t) => h('li', {}, t)));
 }
 
@@ -468,7 +498,7 @@ function showReady(step) {
     h('h1', {}, step.trial.name),
     h('p', { class: 'lede' }, `Body weight with ${step.trial.drug} against placebo. `, part.condition === 'A'
       ? 'You will extract from the paper. The clock starts when you press Start.'
-      : 'You will extract from the evidence base’s record sheet. The clock starts when you press Start.'),
+      : 'Step 1: you extract from the evidence base’s record sheet. Step 2: you check with the paper. The clock starts when you press Start and runs through both steps.'),
     h('div', { class: 'actions' },
       h('button', { type: 'button', class: 'btn btn-primary', onclick: () => showTrial(step, null) }, 'Start'),
       TEST ? h('button', { type: 'button', class: 'btn', onclick: () => skipInTest([step]) }, 'Skip this trial (test mode)') : null,
@@ -505,6 +535,7 @@ function persistDraft() {
   work.timing.last_seen = now();
   store.saveDraft(session.code, work.step.part.sheet, work.step.id, {
     fields: work.fields, confidence: work.confidence, note: work.note, timing: work.timing, opened: work.opened,
+    stage: work.stage, sheetFields: work.sheetFields,
   });
 }
 
@@ -551,10 +582,13 @@ function closeWork() {
 // ---- the trial screen ---------------------------------------------------------------------------
 
 function emptyFields() {
+  const pair = () => ({ drug: '', placebo: '', ng: false });
   return {
-    drug_dose: { value: '', ng: false }, comparator: { value: '', ng: false }, n_randomized: { value: '', ng: false },
+    drug_dose: { value: '', ng: false }, comparator: { value: '', ng: false },
+    n_randomized: { value: '', drug: '', placebo: '', ng: false }, diabetes: { value: '', ng: false }, bmi: { value: '', ng: false }, blinding: { value: '', ng: false },
     weeks: { value: '', ng: false }, measure: { value: '', other: '', ng: false }, direction: { value: '', ng: false },
-    size: { drug: '', placebo: '', difference: '', low: '', high: '', ng: false }, test: { value: '', p: '' },
+    size: { drug: '', placebo: '', difference: '', low: '', high: '', ng: false }, spread: { stat: '', drug: '', placebo: '', ng: false },
+    n_analysed: pair(), test: { value: '', p: '' }, responders: pair(), ae_stop: pair(), sae: pair(),
   };
 }
 
@@ -569,6 +603,9 @@ function showTrial(step, draft) {
     note: (draft && draft.note) || '',
     opened: (draft && draft.opened) || [],
     timing: (draft && draft.timing) || { started_at: at, paused_ms: 0, pauses: 0, hidden_ms: 0, closed_ms: 0, reloads: 0, pause_started: null, hidden_since: null, last_seen: at },
+    // 0: from the paper, one step. With the evidence base: 1 = the record sheet alone, 2 = the check with the paper.
+    stage: (draft && draft.stage) || (step.part.condition === 'B' ? 1 : 0),
+    sheetFields: (draft && draft.sheetFields) || null,   // the form as it stood at the end of step 1
     tick: null,
   };
   const t = work.timing;
@@ -582,32 +619,65 @@ function showTrial(step, draft) {
     t.reloads += 1;
     t.hidden_since = null;
   }
+  renderTrial();
+  persistDraft();
+  let ticks = 0;
+  work.tick = setInterval(() => { paintClock(); ticks += 1; if (ticks % 5 === 0) persistDraft(); }, 1000); // the draft carries the time last seen
+  if (t.pause_started) showPaused();
+}
+
+/** Draw the trial on screen from `work`. Called again when a trial of the evidence base moves from step 1 to step 2. */
+function renderTrial() {
+  const { step } = work;
   const { part } = step;
-  renderTopbar({ part, count: `Trial ${step.ti + 1} of ${part.items.length}`, clock: true });
+  renderTopbar({ part, count: `Trial ${step.ti + 1} of ${part.items.length}${work.stage ? `, step ${work.stage} of 2` : ''}`, clock: true });
   renderBanners();
+  const last = work.stage !== 1;   // the step that ends with Submit
   const err = h('p', { class: 'form-error', role: 'alert' });
-  const form = h('form', { class: 'form-pane', novalidate: true, onsubmit: (event) => { event.preventDefault(); submitTrial(form, err); } },
+  let no = 0;
+  const form = h('form', { class: 'form-pane', novalidate: true, onsubmit: (event) => { event.preventDefault(); if (last) submitTrial(form, err); else finishSheetStep(form, err); } },
     h('h2', { class: 'pane-title' }, `Extraction form: ${work.trial.name}`),
-    h('p', { class: 'ask' }, 'Extract for: body weight with ', h('strong', {}, work.trial.drug), ' against placebo.'),
-    FIELDS.map((def, i) => fieldBlock(def, i + 1)),
-    confidenceBlock(),
-    h('div', { class: 'q' },
+    h('p', { class: 'ask' }, 'Extract for: ', h('strong', {}, work.trial.drug), ' against placebo.'),
+    work.stage === 1 ? h('p', { class: 'step-note' }, h('strong', {}, 'Step 1 of 2: the record sheet alone. '), 'Fill what the sheet gives. Tick “Not on the record sheet” for the rest. The paper comes in step 2.') : null,
+    work.stage === 2 ? h('p', { class: 'step-note' }, h('strong', {}, 'Step 2 of 2: check with the paper. '), 'Open the paper. Check each value you took from the sheet, correct what is wrong, and fill the fields the sheet did not give. The clock is still running.') : null,
+    FIELDS.map((def) => (def.group ? h('h3', { class: 'form-group' }, def.group) : fieldBlock(def, ++no))),
+    last ? confidenceBlock() : null,
+    last ? h('div', { class: 'q' },
       h('div', { class: 'q-head' }, h('span', { class: 'q-title' }, 'Anything to note about this trial (optional)')),
-      h('textarea', { rows: 2, maxlength: 1000, oninput: (e) => { work.note = e.target.value; } }, work.note)),
+      h('textarea', { rows: 2, maxlength: 1000, oninput: (e) => { work.note = e.target.value; } }, work.note)) : null,
     err,
     h('div', { class: 'submit-row' },
-      h('button', { type: 'submit', class: 'btn btn-primary' }, 'Submit this trial'),
+      h('button', { type: 'submit', class: 'btn btn-primary' }, last ? 'Submit this trial' : 'Done with the sheet: go to step 2'),
       TEST ? h('button', { type: 'button', class: 'btn', onclick: () => skipInTest([work.step]) }, 'Skip (test mode)') : null,
-      h('span', { class: 'muted' }, 'Submitting stops the clock. A submitted form cannot be reopened.')));
+      h('span', { class: 'muted' }, last ? 'Submitting stops the clock. A submitted form cannot be reopened.' : 'The clock keeps running. You cannot come back to step 1.')));
   form.addEventListener('input', () => persistDraft());
   form.addEventListener('change', () => persistDraft());
   $('main').replaceChildren(h('section', { class: 'work' }, sourcePane(part.condition), form));
   window.scrollTo(0, 0);
-  persistDraft();
   paintClock();
-  let ticks = 0;
-  work.tick = setInterval(() => { paintClock(); ticks += 1; if (ticks % 5 === 0) persistDraft(); }, 1000); // the draft carries the time last seen
-  if (t.pause_started) showPaused();
+}
+
+/** End of step 1 of a trial of the evidence base: keep the form as it stands, then open the paper. */
+function finishSheetStep(form, err) {
+  const missing = missingFields(false);
+  form.querySelectorAll('.q').forEach((q) => q.classList.toggle('missing', missing.includes(q.dataset.field)));
+  if (missing.length) {
+    err.textContent = 'Please fill every field the sheet gives and tick “Not on the record sheet” for the others (the fields marked in red).';
+    const first = form.querySelector('.q.missing');
+    if (first) first.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    return;
+  }
+  const t = work.timing;
+  work.sheetFields = JSON.parse(JSON.stringify(work.fields));
+  t.stage1_ms = activeMs(t);
+  for (const def of FORM_FIELDS) {   // what the sheet did not give is asked again, now of the paper
+    const s = work.fields[def.id];
+    if (s.ng) s.ng = false;
+    if (def.kind === 'test' && s.value === 'none') s.value = '';
+  }
+  work.stage = 2;
+  persistDraft();
+  renderTrial();
 }
 
 function frozenDate() {
@@ -615,47 +685,81 @@ function frozenDate() {
   return Number.isNaN(d.getTime()) ? study.frozen : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 }
 
-function sourcePane(condition) {
-  const { trial } = work;
-  if (condition === 'A') {
-    const p = trial.paper;
-    const open = (what, href, label) => h('a', {
-      class: 'btn', href, target: '_blank', rel: 'noopener',
-      onclick: () => { work.opened.push({ what, at_ms: activeMs(work.timing) }); persistDraft(); },
-    }, label);
-    return h('aside', { class: 'source-pane' },
-      h('h2', { class: 'pane-title' }, 'Your source: the paper'),
-      h('p', { class: 'paper-title' }, p.title || trial.name),
-      h('p', { class: 'paper-meta' }, [p.journal, p.year, `PubMed id ${p.pmid}`].filter(Boolean).join(', ')),
-      h('div', { class: 'paper-links' },
-        p.pmc ? open('pmc', `https://pmc.ncbi.nlm.nih.gov/articles/${p.pmc}/`, 'Open the free full text') : null,
-        open('pubmed', `https://pubmed.ncbi.nlm.nih.gov/${p.pmid}/`, p.pmc ? 'Open in PubMed' : 'Open in PubMed (link to the full text is on that page)')),
-      h('p', { class: 'muted' }, 'The paper opens in a new tab; this page keeps your form. Extract from the full text. If the journal asks you to sign in, use the library’s access.'),
-      h('p', { class: 'muted' }, 'Do not open the evidence base, its record sheets or any summary of this trial.'));
-  }
-  const { arms, records } = trial.sheet;
-  return h('aside', { class: 'source-pane' },
-    h('h2', { class: 'pane-title' }, 'Your source: record sheet from the evidence base'),
-    h('p', { class: 'muted' }, `The evidence base as frozen on ${frozenDate()}. Extract from this sheet only; do not open the paper or PubMed.`),
+function paperBlock() {
+  const p = work.trial.paper;
+  const open = (what, href, label) => h('a', {
+    class: 'btn', href, target: '_blank', rel: 'noopener',
+    onclick: () => { work.opened.push({ what, at_ms: activeMs(work.timing) }); persistDraft(); },
+  }, label);
+  return [
+    h('p', { class: 'paper-title' }, p.title || work.trial.name),
+    h('p', { class: 'paper-meta' }, [p.journal, p.year, `PubMed id ${p.pmid}`].filter(Boolean).join(', ')),
+    h('div', { class: 'paper-links' },
+      p.pmc ? open('pmc', `https://pmc.ncbi.nlm.nih.gov/articles/${p.pmc}/`, 'Open the free full text') : null,
+      open('pubmed', `https://pubmed.ncbi.nlm.nih.gov/${p.pmid}/`, p.pmc ? 'Open in PubMed' : 'Open in PubMed (link to the full text is on that page)')),
+    h('p', { class: 'muted' }, 'The paper opens in a new tab; this page keeps your form. Use the full text, with its tables. If the journal asks you to sign in, use the library’s access.'),
+  ];
+}
+
+function recordCard(r, i) {
+  return h('div', { class: 'rec' },
+    h('p', { class: 'rec-head' }, `Record ${i + 1}${r.subgroup ? ' (a subgroup analysis)' : ''}`),
+    h('dl', {},
+      h('dt', {}, 'First arm'), h('dd', {}, r.first_arm || ''),
+      h('dt', {}, 'Second arm'), h('dd', {}, r.second_arm || ''),
+      h('dt', {}, 'Outcome'), h('dd', {}, r.outcome || ''),
+      h('dt', {}, 'First against second'), h('dd', {}, `${r.direction || 'not stated'}; statistical test: ${String(r.test || 'not read').replace(/_/g, ' ')}`),
+      h('dt', {}, 'Numbers'), h('dd', {}, r.numbers || 'none read'),
+      h('dt', {}, 'Participants'), h('dd', {}, r.participants ? Number(r.participants).toLocaleString('en-US') : 'not read'),
+      h('dt', {}, 'Time of the result'), h('dd', {}, r.weeks ? `${r.weeks} weeks` : 'not read')),
+    h('p', { class: 'sentence' }, `“${r.sentence}”`),
+    h('p', { class: 'src' }, `Read from PubMed id ${r.pmid} (${r.year}): ${r.title}`));
+}
+
+/** Everything the evidence base holds for the trial: main report, arms, participants, and its records in three groups. */
+function sheetBlock() {
+  const { arms, populations, records } = work.trial.sheet;
+  const p = work.trial.paper;
+  const of = (g) => records.filter((r) => (r.group || 'weight') === g);
+  const weight = of('weight');
+  const fold = (title, list, open) => (list.length
+    ? h('details', { class: 'rec-group', open }, h('summary', {}, `${title} (${list.length})`), list.map(recordCard)) : null);
+  const n = (x) => (x.n ? ` (n = ${Number(x.n).toLocaleString('en-US')})` : '');
+  return [
+    h('p', { class: 'muted' }, `The evidence base as frozen on ${frozenDate()}. It was read from abstracts.`),
+    h('h3', {}, 'Main report'),
+    h('p', { class: 'sheet-line' }, [p.title, [p.journal, p.year].filter(Boolean).join(', ')].filter(Boolean).join(' ')),
     h('h3', {}, 'Arms the evidence base lists for the main report'),
     arms && arms.length
-      ? h('ul', { class: 'arms' }, arms.map((a) => h('li', {}, a.name + (a.n ? ` (n = ${Number(a.n).toLocaleString('en-US')})` : ''))))
+      ? h('ul', { class: 'arms' }, arms.map((a) => h('li', {}, a.name + n(a))))
       : h('p', { class: 'empty-sheet' }, 'The evidence base holds no arm list for the main report of this trial.'),
-    h('h3', {}, records.length ? `Records on body weight (${records.length})` : 'Records on body weight'),
-    records.length
-      ? records.map((r, i) => h('div', { class: 'rec' },
-        h('p', { class: 'rec-head' }, `Record ${i + 1}${r.subgroup ? ' (a subgroup analysis)' : ''}`),
-        h('dl', {},
-          h('dt', {}, 'First arm'), h('dd', {}, r.first_arm || ''),
-          h('dt', {}, 'Second arm'), h('dd', {}, r.second_arm || ''),
-          h('dt', {}, 'Outcome'), h('dd', {}, r.outcome || ''),
-          h('dt', {}, 'First against second'), h('dd', {}, `${r.direction || 'not stated'}; statistical test: ${String(r.test || 'not read').replace(/_/g, ' ')}`),
-          h('dt', {}, 'Numbers'), h('dd', {}, r.numbers || 'none read'),
-          h('dt', {}, 'Participants'), h('dd', {}, r.participants ? Number(r.participants).toLocaleString('en-US') : 'not read'),
-          h('dt', {}, 'Time of the result'), h('dd', {}, r.weeks ? `${r.weeks} weeks` : 'not read')),
-        h('p', { class: 'sentence' }, `“${r.sentence}”`),
-        h('p', { class: 'src' }, `Read from PubMed id ${r.pmid} (${r.year}): ${r.title}`)))
-      : h('p', { class: 'empty-sheet' }, 'The evidence base holds no passing record on body weight for this trial.'));
+    populations && populations.length ? h('h3', {}, 'Participants it lists') : null,
+    populations && populations.length ? h('ul', { class: 'arms' }, populations.map((q) => h('li', {}, q.name + n(q) + (q.overall ? '' : ' (a subgroup)')))) : null,
+    h('h3', {}, weight.length ? `Results on body weight (${weight.length})` : 'Results on body weight'),
+    weight.length ? weight.map(recordCard) : h('p', { class: 'empty-sheet' }, 'The evidence base holds no passing record on body weight for this trial.'),
+    fold('Results on adverse events and stopping treatment', of('safety'), true),
+    fold('Other results the evidence base holds for this trial', of('other'), false),
+  ];
+}
+
+function sourcePane(condition) {
+  if (condition === 'A') {
+    return h('aside', { class: 'source-pane' },
+      h('h2', { class: 'pane-title' }, 'Your source: the paper'),
+      paperBlock(),
+      h('p', { class: 'muted' }, 'Do not open the evidence base, its record sheets or any summary of this trial.'));
+  }
+  if (work.stage === 1) {
+    return h('aside', { class: 'source-pane' },
+      h('h2', { class: 'pane-title' }, 'Step 1. Your source: the record sheet of the evidence base'),
+      h('p', { class: 'muted' }, 'In this step use the sheet only. Do not open the paper or PubMed yet.'),
+      sheetBlock());
+  }
+  return h('aside', { class: 'source-pane' },
+    h('h2', { class: 'pane-title' }, 'Step 2. Check with the paper'),
+    paperBlock(),
+    h('h2', { class: 'pane-title', style: 'margin-top:18px' }, 'The record sheet, for reference'),
+    sheetBlock());
 }
 
 function radios(name, options, current, onPick) {
@@ -670,6 +774,7 @@ function fieldBlock(def, no) {
     type: 'text', autocomplete: 'off', maxlength: 200, value: state[key] || '', ...props,
     oninput: (e) => { state[key] = e.target.value; },
   });
+  const mini = (key, label) => h('label', { class: 'mini' }, label, text(key, { inputmode: 'decimal' }));
   let body;
   if (def.kind === 'text') {
     body = text('value');
@@ -679,22 +784,38 @@ function fieldBlock(def, no) {
     const other = def.id === 'measure' ? text('other', { placeholder: 'Which?', hidden: state.value !== 'other' }) : null;
     body = h('div', {}, radios(`f-${def.id}`, def.options, state.value, (v) => { state.value = v; if (other) other.hidden = v !== 'other'; }), other);
   } else if (def.kind === 'size') {
-    const mini = (key, label) => h('label', { class: 'mini' }, label, text(key, { inputmode: 'decimal' }));
     body = h('div', {},
       h('div', { class: 'row' }, mini('drug', 'Drug arm'), mini('placebo', 'Placebo arm')),
       h('div', { class: 'row', style: 'margin-top:8px' }, mini('difference', 'Difference'), mini('low', 'Interval from'), mini('high', 'to')));
+  } else if (def.kind === 'arms3') {
+    body = h('div', { class: 'row' }, mini('value', 'All arms together'), mini('drug', 'Drug arm'), mini('placebo', 'Placebo arm'));
+  } else if (def.kind === 'pair') {
+    body = h('div', { class: 'row' }, mini('drug', 'Drug arm'), mini('placebo', 'Placebo arm'));
+  } else if (def.kind === 'spread') {
+    body = h('div', {},
+      radios(`f-${def.id}`, SPREAD_OPTIONS, state.stat, (v) => { state.stat = v; }),
+      h('div', { class: 'row', style: 'margin-top:8px' }, mini('drug', 'Drug arm'), mini('placebo', 'Placebo arm')));
   } else {
     const p = text('p', { class: 'short', placeholder: 'for example <0.001', hidden: state.value !== 'p' });
     body = h('div', {}, radios(`f-${def.id}`, TEST_OPTIONS, state.value, (v) => { state.value = v; p.hidden = v !== 'p'; }), p);
   }
   const wrap = h('div', { class: 'q-body' }, body);
+  const tickLabel = work.stage === 1 ? 'Not on the record sheet' : (work.stage === 2 ? 'Not given in the paper' : 'Not given in my source');
   const tick = def.ng === false ? null : h('label', { class: 'ng' },
     h('input', { type: 'checkbox', checked: state.ng, onchange: (e) => { state.ng = e.target.checked; block.classList.toggle('off', state.ng); } }),
-    'Not given in my source');
-  block.append(
+    tickLabel);
+  // Step 2: say for each field whether its value came from the sheet (check it) or still has to be found in the paper.
+  let origin = null;
+  if (work.stage === 2 && work.sheetFields && work.sheetFields[def.id]) {
+    const was = work.sheetFields[def.id];
+    const given = def.kind === 'test' ? (was.value && was.value !== 'none') : !was.ng;
+    origin = h('p', { class: `origin ${given ? 'from-sheet' : 'from-paper'}` }, given ? 'From the sheet. Check it against the paper.' : 'Not on the sheet. Look in the paper.');
+  }
+  block.append(...[
     h('div', { class: 'q-head' }, h('span', { class: 'q-title' }, `${no}. ${def.title}`), tick),
+    origin,
     def.hint ? h('p', { class: 'q-hint' }, typeof def.hint === 'function' ? def.hint(work.trial.drug) : def.hint) : null,
-    wrap);
+    wrap].filter(Boolean));
   if (state.ng) block.classList.add('off');
   return block;
 }
@@ -709,21 +830,24 @@ function confidenceBlock() {
 
 const filled = (s) => String(s == null ? '' : s).trim() !== '';
 
-/** Ids of the fields that are neither filled nor ticked "not given". */
-function missingFields() {
+/** Ids of the fields that are neither filled nor ticked "not given"; the confidence question counts in the last step. */
+function missingFields(withConfidence = true) {
   const f = work.fields;
   const out = [];
-  for (const def of FIELDS) {
+  for (const def of FORM_FIELDS) {
     const s = f[def.id];
     if (s.ng) continue;
     let ok;
     if (def.kind === 'text' || def.kind === 'number') ok = filled(s.value);
     else if (def.kind === 'choice') ok = filled(s.value) && (s.value !== 'other' || filled(s.other));
     else if (def.kind === 'size') ok = (filled(s.drug) && filled(s.placebo)) || filled(s.difference);
+    else if (def.kind === 'arms3') ok = filled(s.value) || filled(s.drug) || filled(s.placebo);
+    else if (def.kind === 'pair') ok = filled(s.drug) || filled(s.placebo);
+    else if (def.kind === 'spread') ok = filled(s.stat) && (filled(s.drug) || filled(s.placebo));
     else ok = filled(s.value) && (s.value !== 'p' || filled(s.p));
     if (!ok) out.push(def.id);
   }
-  if (!work.confidence) out.push('confidence');
+  if (withConfidence && !work.confidence) out.push('confidence');
   return out;
 }
 
@@ -731,7 +855,8 @@ function submitTrial(form, err) {
   const missing = missingFields();
   form.querySelectorAll('.q').forEach((q) => q.classList.toggle('missing', missing.includes(q.dataset.field)));
   if (missing.length) {
-    err.textContent = 'Please fill every field or tick “Not given in my source” (the fields marked in red).';
+    err.textContent = work.stage === 2 ? 'Please fill every field or tick “Not given in the paper” (the fields marked in red).'
+      : 'Please fill every field or tick “Not given in my source” (the fields marked in red).';
     const first = form.querySelector('.q.missing');
     if (first) first.scrollIntoView({ block: 'center', behavior: 'smooth' });
     return;
@@ -744,6 +869,9 @@ function submitTrial(form, err) {
     reader: Number(session.reader), condition: step.part.condition, part: step.part.part, block: step.part.no || null,
     position: step.ti + 1, trial: work.trial.name,
     fields: work.fields, confidence: work.confidence, note: work.note.trim(),
+    // A trial of the evidence base: the form as it stood after step 1 (the record sheet alone) and the time of that step.
+    steps: work.stage === 2 ? 2 : 1,
+    sheet_step: work.stage === 2 ? { fields: work.sheetFields, active_ms: t.stage1_ms == null ? null : t.stage1_ms } : null,
     timing: {
       started_at: new Date(t.started_at).toISOString(), submitted_at: new Date(at).toISOString(),
       active_ms: activeMs(t, at), paused_ms: t.paused_ms, pauses: t.pauses, hidden_ms: t.hidden_ms, closed_ms: t.closed_ms, reloads: t.reloads,
@@ -802,28 +930,28 @@ function showSurvey() {
       const open = SURVEY.filter((q) => !state[q.id]).map((q) => q.id);
       blocks.forEach((b) => b.classList.toggle('missing', open.includes(b.dataset.field)));
       if (open.length) {
-        err.textContent = 'Please answer questions 1 to 6 (the ones marked in red).';
+        err.textContent = 'Please answer questions 1 to 7 (the ones marked in red).';
         const first = form.querySelector('.q.missing');
         if (first) first.scrollIntoView({ block: 'center', behavior: 'smooth' });
         return;
       }
       const at = new Date().toISOString();
-      const answer = { reader: Number(session.reader), questions: 2, missing: state.missing.trim(), other: state.other.trim() };
+      const answer = { reader: Number(session.reader), questions: 3, missing: state.missing.trim(), other: state.other.trim() };
       for (const q of SURVEY) answer[q.id] = state[q.id];
       saveRecord('survey', 'S1', { answer, elapsed_ms: null, client_ts: at, app_version: APP_VERSION });
       go();
     },
   },
   h('p', { class: 'eyebrow' }, 'Part 1: all trials done'),
-  h('h1', {}, 'Eight last questions'),
-  h('p', { class: 'lede' }, 'About three minutes. They ask how the two sources felt to work from. There is no right answer: we want your opinion as it is, also where it does not favour the evidence base.'),
-  h('p', { class: 'muted' }, '“The record sheet” is what you saw when you extracted from the evidence base.'),
+  h('h1', {}, 'Nine last questions'),
+  h('p', { class: 'lede' }, 'About three minutes. They ask how the two ways of working felt. There is no right answer: we want your opinion as it is, also where it does not favour the evidence base.'),
+  h('p', { class: 'muted' }, '“The record sheet” is what the evidence base showed you in step 1.'),
   blocks,
   h('div', { class: 'q' },
-    h('div', { class: 'q-head' }, h('span', { class: 'q-title' }, '7. What was missing from the record sheets, or wrong in them? (optional)')),
+    h('div', { class: 'q-head' }, h('span', { class: 'q-title' }, '8. What was missing from the record sheets, or wrong in them? (optional)')),
     area('missing')),
   h('div', { class: 'q' },
-    h('div', { class: 'q-head' }, h('span', { class: 'q-title' }, '8. What would make the record sheets more useful to you? Anything else we should know? (optional)')),
+    h('div', { class: 'q-head' }, h('span', { class: 'q-title' }, '9. What would make the record sheets more useful to you? Anything else we should know? (optional)')),
     area('other')),
   err,
   h('div', { class: 'actions' }, h('button', { type: 'submit', class: 'btn btn-primary' }, 'Finish Part 1')));
@@ -857,19 +985,30 @@ function showPart1Intro() {
   $('main').replaceChildren(h('section', { class: 'intro' },
     h('p', { class: 'eyebrow' }, 'Part 1 of 3'),
     h('h1', {}, 'Timed extraction'),
-    h('p', { class: 'lede' }, 'Does the evidence base save a reviewer time? You fill the same short extraction form for a set of trials, for some of them from the paper and for the others from what the evidence base already holds.'),
+    h('p', { class: 'lede' }, 'Does the evidence base save a reviewer time, and does it change how right the extracted data are? You fill the same extraction form for a set of trials in two ways of working: from the paper alone, and from the evidence base first with the paper as a check.'),
     h('div', { class: 'panel' },
       h('h2', {}, 'The task'),
-      h('p', {}, 'The question is the one of a systematic review: in adults with overweight or obesity, how does body weight change with a GLP-1 receptor agonist compared with placebo? For each trial you fill eight fields (drug and dose, comparator, number randomized, time of the result, how the weight result is expressed, direction, size, statistical test). Any field can be answered “Not given in my source”.'),
-      h('p', {}, 'You never see the same trial twice. Each trial is done from the paper by one reader and from the evidence base by the other, so the two sources are compared on the same trials without anyone working from memory.')),
+      h('p', {}, 'The question is the one of a systematic review: in adults with overweight or obesity, how does a GLP-1 receptor agonist compare with placebo? For each trial you fill sixteen fields, the kinds of items a review’s data collection form asks for:'),
+      h('ul', { class: 'rule-list' },
+        h('li', {}, h('strong', {}, 'The treatments: '), 'drug and dose, comparator.'),
+        h('li', {}, h('strong', {}, 'The trial and its participants: '), 'number randomized, type 2 diabetes, mean body-mass index, blinding.'),
+        h('li', {}, h('strong', {}, 'Body weight: '), 'time of the result, how it is expressed, direction, size, spread, number analysed, statistical test, and how many lost 5% or more.'),
+        h('li', {}, h('strong', {}, 'Safety: '), 'how many stopped treatment because of adverse events, and how many had a serious adverse event.')),
+      h('p', {}, 'Any field can be answered “Not given in my source”. That is an answer, not a failure: no paper reports everything.')),
+    h('div', { class: 'panel' },
+      h('h2', {}, 'The two ways of working'),
+      h('ul', { class: 'rule-list' },
+        h('li', {}, h('strong', {}, 'From the paper. '), 'The page links to the main report of the trial. You extract from its full text, as a reviewer does today.'),
+        h('li', {}, h('strong', {}, 'Evidence base first, then the paper. '), 'Step 1: the page shows what the evidence base holds for the trial, and you fill what it gives. Step 2: the page links to the paper; you check what you took from the evidence base and fill the rest. This is how such a tool would be used in a real review: as a first pass that a person then checks.')),
+      h('p', {}, 'You never see the same trial twice. Each trial is done one way by you and the other way by the second reader, so the two ways are compared on the same trials without anyone working from memory.')),
     h('div', { class: 'panel' },
       h('h2', {}, 'The time is a result'),
-      h('p', {}, 'The page times each trial from Start to Submit. That time is one of the two results of this part; the other is whether the fields are right. So please do each trial in one go: press Start only when you can work undisturbed for about ten minutes, and press Pause if you are interrupted.'),
-      h('p', {}, 'Work at your normal pace, as you would for a real review, and do not hurry; this is a test of the two sources, not of you. You can stop between trials and come back; please finish a block in one sitting if you can.')),
+      h('p', {}, 'The page times each trial from Start to Submit. That time is one of the two results of this part; the other is whether the fields are right. So please do each trial in one go: press Start only when you can work undisturbed for about fifteen minutes, and press Pause if you are interrupted.'),
+      h('p', {}, 'Work at your normal pace, as you would for a real review, and do not hurry; this is a test of the two ways of working, not of you. You can stop between trials and come back; please finish a block in one sitting if you can.')),
     h('div', { class: 'panel' },
       h('h2', {}, 'The order of work'),
       sequenceTable(seq, { marks: true }),
-      h('p', { class: 'muted' }, `In all ${minutesText(total)}, over as many sittings as you like. The times are rough guesses. After the last block there are eight short questions about how the two sources felt to work from.`)),
+      h('p', { class: 'muted' }, `In all ${minutesText(total)}, over as many sittings as you like. The times are rough guesses. After the last block there are nine short questions about how the two ways of working felt.`)),
     codeLine(),
     h('div', { class: 'actions' },
       h('button', { type: 'button', class: 'btn btn-primary', onclick: go }, doneTrials() ? 'Continue' : 'Go to the practice trials'),
@@ -920,11 +1059,11 @@ function showHome(flash = '') {
       : 'Three parts. Part 1 comes first; Parts 2 and 3 can then be done in either order. Stop whenever you like and come back with your code.'),
     partCard({
       no: 1, title: 'Timed extraction', tone: part1Done ? 'done' : 'now',
-      state: part1Done ? 'Done' : (step.survey ? 'All trials done, eight questions left' : (trials ? `${trials} of ${trialsAll} trials done` : 'Not started')),
-      what: `A short extraction form for ${trialsAll} trials (4 of them practice): for half from the paper, for half from the evidence base. The page times each trial.`,
+      state: part1Done ? 'Done' : (step.survey ? 'All trials done, nine questions left' : (trials ? `${trials} of ${trialsAll} trials done` : 'Not started')),
+      what: `An extraction form of sixteen fields for ${trialsAll} trials (4 of them practice): for half from the paper alone, for half from the evidence base first and then the paper. The page times each trial.`,
       time: `${minutesText(minutes)[0].toUpperCase()}${minutesText(minutes).slice(1)}, over as many sittings as you like.`,
       actions: part1Done ? [] : [
-        btn(step.survey ? 'Answer the eight questions' : (trials ? 'Continue Part 1' : 'Start Part 1'), () => (trials || step.survey ? go() : showPart1Intro()), next === 1),
+        btn(step.survey ? 'Answer the nine questions' : (trials ? 'Continue Part 1' : 'Start Part 1'), () => (trials || step.survey ? go() : showPart1Intro()), next === 1),
         trials && !step.survey ? btn('Read the instructions of Part 1 again', showPart1Intro, false) : null],
     }),
     partCard({

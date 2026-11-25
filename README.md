@@ -1,11 +1,12 @@
 # Reader study page
 
 The page on which two clinicians test the living evidence base (`docs/evaluation/reader_study_protocol.md` in the
-`living-evidence-base` repository). Since version 2.0 (2026-11-24) it holds three parts behind one link:
+`living-evidence-base` repository). Since version 2.0 (2026-11-24) it holds three parts behind one link; version 2.1 of the
+same day made Part 1 closer to how a review is really done (below).
 
 | Part | What the clinician does | Rough time |
 |---|---|---|
-| 1. Timed extraction | Fills the same extraction form of eight fields for 24 trials of GLP-1 drugs against placebo, 12 from the paper and 12 from the record sheet of the evidence base. The page times each trial. Four practice trials come first, eight questions on the experience come last | 2 h 35 min |
+| 1. Timed extraction | Fills the same extraction form of sixteen fields for 24 trials of GLP-1 drugs against placebo: 12 from the paper alone, and 12 from the record sheet of the evidence base first and then checked against the paper. The page times each trial. Four practice trials come first, nine questions on the experience come last | 5 h 35 min (a guess) |
 | 2. Check of an answer key | For the 50 gold abstracts, answers Yes, No or Cannot decide on every row of the key: the trial, each of the 268 findings, and whether anything is missing | 3 h for all 50; a little over 1 h for the first 20 |
 | 3. Second reading | For 40 items in four sets of ten, reads a few short texts and chooses one of the set's three or four answers. Our own first reading is not shown | 1 h |
 
@@ -17,6 +18,26 @@ Online since 2026-11-23 at https://danielliangajj.github.io/leb-reader-study/ (r
 `?r=2`). Answers go to the tables `rdr_readers` and `rdr_forms` of the Supabase project in `config.js`, once
 `supabase/schema.sql` has been run there.
 
+## Part 1 since version 2.1
+
+Two things were changed so that the timed part looks like data extraction in a real review.
+
+- **The form.** Sixteen fields in four groups, the kinds of items a review's data collection form asks for: the
+  treatments (drug and dose, comparator); the trial and its participants (number randomized in all and in each arm,
+  type 2 diabetes, mean body-mass index, blinding); body weight (time, how expressed, direction, size, spread, number
+  analysed, statistical test, how many lost 5% or more); safety (stopped for adverse events, serious adverse events).
+  The evidence base reads abstracts and holds only some of these.
+- **The evidence base is a first pass, not the only source.** A trial of the evidence base has two steps. Step 1: the
+  reader fills the form from the record sheet alone and ticks "Not on the record sheet" for the rest. Step 2: the page
+  links to the paper; the reader checks what came from the sheet, corrects it, and fills the rest. The clock runs
+  through both. The form as it stood after step 1 is stored with the time of that step, so the study gives two
+  comparisons: the record sheet alone against the paper (the controlled one), and the whole assisted extraction
+  against the paper (the realistic one). It also shows how many values the paper made the reader change.
+
+The record sheet now shows everything the evidence base holds for the trial: the main report, its arms and
+participants, the results on body weight, the results on adverse events and stopping treatment, and all other
+results (folded).
+
 ## What a reader sees
 
 1. Welcome: the three parts, a name and an email. The page gives a code of 10 characters to come back with.
@@ -26,7 +47,7 @@ Online since 2026-11-23 at https://danielliangajj.github.io/leb-reader-study/ (r
    the paper). Then one trial at a time. Pressing Start starts the clock. The source is on the left (a link to the
    paper, or the record sheet) and the form on the right. Any field can be answered "Not given in my source". Pause
    stops the clock and hides the trial. Submit stops the clock; a submitted form cannot be reopened. After the last
-   block: eight questions (which source was easier to read, less tiring, gave more confidence; whether the record
+   block: nine questions (which source was easier to read, less tiring, gave more confidence; whether the record
    sheets felt faster; how often the reader wanted the paper; whether they would start a review from the records;
    two free-text questions).
 4. Part 2. Instructions with an example, then one abstract at a time: the abstract on the left, with the sentences
@@ -45,7 +66,7 @@ Without `?r=` the page only lets a reader resume with a code.
 For the study team, to try the page: add `&test=1` to a link (`?r=1&test=1` or `?r=2&test=1`). The page is the one a
 reader sees, with four differences. Nothing is sent to the database. What is typed is kept in the browser under
 keys of its own (`rdrtest:`), apart from a real session. Each block and each trial of Part 1 has a Skip button, so
-the later screens (the evidence base's record sheets, the eight questions) can be reached without filling 28 forms.
+the later screens (the evidence base's record sheets, the nine questions) can be reached without filling 28 forms.
 Parts 2 and 3 are open without Part 1, and any abstract or item can be opened. The welcome screen has a button to
 erase the test and start over. A reader's link never carries the parameter.
 
@@ -57,7 +78,7 @@ everything else (the database accepts these three names); the column `item_id` t
 | `sheet` | `item_id` | What it is |
 |---|---|---|
 | `practice`, `scored` | the trial's id | One extraction form of Part 1 (below) |
-| `survey` | `S1` | The eight questions at the end of Part 1: `easier`, `tiring`, `sure` (paper, sheet or same), `speed`, `want_paper`, `use`, and the free texts `missing` and `other` |
+| `survey` | `S1` | The nine questions at the end of Part 1: `easier`, `tiring`, `sure` (paper, sheet or same), `speed`, `changed`, `use`, `before` (reviews extracted before), and the free texts `missing` and `other` |
 | `survey` | `K01` to `K50` | Part 2, one abstract: `answer.rows` maps each row (`T`, `F1`, ..., `M`) to `{a, c}` with `a` = agree, disagree or unsure and `c` the comment |
 | `survey` | `H01` to `H40` | Part 3, one item: `answer.choice` (the answer's label), `answer.comment`, `answer.opened_paper`, `answer.set` |
 
@@ -67,8 +88,10 @@ turns an export of `rdr_forms` into the reviewers' answers on the key and the se
 
 ### A trial of Part 1
 
-`answer.fields` (the eight fields, each with its "not given" tick), `answer.confidence` (1 to 5), `answer.note`,
-`answer.condition` (A = paper, B = evidence base), `answer.timing` and `answer.opened`.
+`answer.fields` (the sixteen fields, each with its "not given" tick), `answer.confidence` (1 to 5), `answer.note`,
+`answer.condition` (A = paper alone, B = evidence base first, then the paper), `answer.timing` and `answer.opened`.
+For condition B, `answer.steps` is 2 and `answer.sheet_step` holds `fields` (the form as it stood at the end of
+step 1, from the record sheet alone) and `active_ms` (the time of step 1).
 
 | Timing field | Meaning |
 |---|---|
@@ -108,11 +131,12 @@ screen, and the order of reader 2.
 
 Version 2.0 was tried on 2026-11-24 in Chrome on this computer, in test mode and with an empty `config.js`: the home
 screen, the lock on Parts 2 and 3 and its release, an abstract of Part 2 (the checks, a saved row, the next
-abstract), a set of Part 3 (the example, the checks, a saved item, the list), and the eight questions.
+abstract), a set of Part 3 (the example, the checks, a saved item, the list), and the eight questions. Version 2.1 was tried the same evening: the sixteen fields from the paper, a trial of the
+evidence base through both steps, what is stored for it, and a reload in the middle of step 2.
 
 ## Not done yet
 
 - The scoring script of Part 1. Nothing of the reference is on the page.
-- The comments of the two readers and Dr. Weng on the three open points of the design (full text or abstract, may a
-  reader in the evidence-base part open the paper, which fields). The page follows the protocol's proposals: full
-  text, no, the eight fields.
+- The reference answers of the eight new fields of Part 1.
+- Dr. Weng's and the two readers' comments on the design. Version 2.1 follows Daniel's word of 2026-11-24: the full
+  text, a form close to a real review's, and the evidence base as a first pass that is checked against the paper.

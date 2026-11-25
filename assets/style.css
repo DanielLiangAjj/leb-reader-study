@@ -271,3 +271,15 @@ kbd { font-family: var(--mono); font-size: 13px; line-height: 1; padding: 3px 6p
 .chip.now { border-color: var(--blue); color: var(--blue); background: var(--blue-soft); }
 .chip:disabled { opacity: 0.45; cursor: not-allowed; }
 .survey .q.missing .q-title { color: var(--red); }
+
+/* ---- Part 1, version 2.1: groups of fields, the two steps of a trial of the evidence base ---- */
+.form-group { margin: 18px 0 2px; padding: 6px 10px; background: #f1f3f6; border-radius: 8px; font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.form-group + .q { border-top: 0; }
+.step-note { margin: 8px 0 4px; padding: 10px 12px; border-left: 4px solid var(--green); background: #e8f5ec; border-radius: 0 8px 8px 0; }
+.origin { margin: 0 0 4px; font-size: 14px; font-weight: 650; }
+.origin.from-sheet { color: var(--green); }
+.origin.from-paper { color: var(--amber); }
+.rec-group { margin: 12px 0; }
+.rec-group > summary { cursor: pointer; font-size: 17px; font-weight: 650; padding: 4px 0; }
+.sheet-line { margin: 0 0 8px; }
+.q .row label.mini input { width: 8em; }
