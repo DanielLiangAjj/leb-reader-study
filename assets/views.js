@@ -109,7 +109,7 @@ const now = () => Date.now();
 export function initUI(studyData, keyData, secondData) {
   study = studyData;
   const context = {
-    session: () => session, saveRecord, renderTopbar, renderBanners, setWide, showHome,
+    session: () => session, saveRecord, renderTopbar, renderBanners, setWide, showHome, isStudent,
     mount: (node) => $('main').replaceChildren(node), version: APP_VERSION, test: TEST,
   };
   keyPart.init(context, keyData);
@@ -132,6 +132,8 @@ const sequence = () => study.readers[session.reader];
 /** Readers listed in study.part1_only do the timed extraction only: Parts 2 and 3 are not shown to them. */
 const onlyPart1 = (reader = session && session.reader) => (study.part1_only || []).includes(String(reader));
 const homeLabel = () => (onlyPart1() ? 'Back to the start page' : 'Back to the three parts');
+/** Readers listed in study.students are not addressed as clinicians. */
+const isStudent = (reader = session && session.reader) => (study.students || []).includes(String(reader));
 const totalTrials = () => sequence().reduce((n, p) => n + p.items.length, 0);
 const doneTrials = () => sequence().reduce((n, p) => n + p.items.filter((id) => session.answers.has(`${p.sheet}/${id}`)).length, 0);
 const partLabel = (part) => (part.part === 'practice' ? 'Practice' : `Block ${part.no} of 4`);
@@ -301,7 +303,8 @@ export function showWelcome() {
   const row = (no, name, what, time) => h('tr', {}, h('td', {}, h('strong', {}, `Part ${no}. `), name), h('td', {}, what), h('td', {}, time));
   $('main').replaceChildren(h('section', { class: 'welcome' },
     h('h1', {}, 'A study of an evidence base of clinical trials'),
-    h('p', { class: 'lede' }, 'We built an evidence base automatically from the abstracts of randomized trials: for each trial it holds the groups that were compared, the outcomes, and what the abstract says about each comparison.' + (solo ? ' We ask you to help us test it. There is one task: a timed extraction.' : ' We ask you, as a clinician, to help us test it. There are three parts.')),
+    h('p', { class: 'lede' }, 'We built an evidence base automatically from the abstracts of randomized trials: for each trial it holds the groups that were compared, the outcomes, and what the abstract says about each comparison.' + (solo ? ' We ask you to help us test it. There is one task: a timed extraction.'
+      : (isStudent(who) ? ' We ask you to help us test it. There are three parts.' : ' We ask you, as a clinician, to help us test it. There are three parts.'))),
     h('table', { class: 'seq parts' },
       h('thead', {}, h('tr', {}, h('th', {}, 'Part'), h('th', {}, 'What you do'), h('th', {}, 'Rough time'))),
       h('tbody', {},

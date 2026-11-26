@@ -60,8 +60,9 @@ results (folded).
 
 The reader number is in the link: `?r=1` works paper, evidence base, paper, evidence base; `?r=2` the opposite.
 A third reader was added on 2026-11-25, before any reader started: `?r=3` works in the order of reader 1 (the rule: an
-odd number takes the order of reader 1, an even number that of reader 2) and is shown Part 1 only. Which readers are
-shown Part 1 only is the list `part1_only` in `data/study.json`. Nothing changes for readers 1 and 2.
+odd number takes the order of reader 1, an even number that of reader 2) and does all three parts. Two lists in
+`data/study.json` set what differs between readers: `part1_only` (readers who are shown Part 1 alone; empty) and
+`students` (readers the page does not address as clinicians; reader 3). Nothing changes for readers 1 and 2.
 Without `?r=` the page only lets a reader resume with a code.
 
 ## Test mode
@@ -109,7 +110,7 @@ step 1, from the record sheet alone) and `active_ms` (the time of step 1).
 | File | What it is |
 |---|---|
 | `index.html`, `assets/` | The page. `views.js` holds the welcome and home screens and Part 1, `key.js` Part 2, `second.js` Part 3, `sync.js` the save queue, `storage.js` the browser storage, `api.js` the calls to the database |
-| `data/study.json` | The order of work of each reader, the readers who are shown Part 1 only and, for the 28 trials, the main report and the record sheet. Written by `python3 scripts/reader_study.py site ~/Dropbox/leb-reader-study` in the evidence-base repository. It holds no reference answer |
+| `data/study.json` | The order of work of each reader, the two lists `part1_only` and `students` and, for the 28 trials, the main report and the record sheet. Written by `python3 scripts/reader_study.py site ~/Dropbox/leb-reader-study` in the evidence-base repository. It holds no reference answer |
 | `data/key.json` | Part 2: the 50 abstracts and the rows of the answer key. Written by `python3 scripts/review_site.py build ~/Dropbox/leb-reader-study` in the evidence-base repository |
 | `data/second.json` | Part 3: the four sets, ten items each, and one worked example a set. Written by the same command. It does not hold our first reading of the 40 items; that stays in the evidence-base repository |
 | `config.js` | Address and public key of the database. Empty: the page keeps the answers in the browser only |
