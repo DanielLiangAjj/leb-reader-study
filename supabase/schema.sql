@@ -10,7 +10,7 @@
 
 create table if not exists public.rdr_readers (
   code         text primary key,
-  reader       smallint not null check (reader in (1, 2)),
+  reader       smallint not null check (reader in (1, 2, 3)),
   name         text not null,
   email        text not null,
   user_agent   text,
@@ -41,7 +41,7 @@ revoke all on table public.rdr_forms from anon, authenticated;
 revoke all on sequence public.rdr_forms_id_seq from anon, authenticated;
 
 -- rdr_register_reader: create the reader, or update name, email and last_seen for a known code.
--- The reader number (1 or 2) is set once and never changed by a later call.
+-- The reader number (1, 2 or 3) is set once and never changed by a later call.
 create or replace function public.rdr_register_reader(
   p_code text,
   p_reader integer,
@@ -57,7 +57,7 @@ begin
   if p_code is null or p_code !~ '^[0-9A-HJKMNP-TV-Z]{10}$' then
     raise exception 'invalid code';
   end if;
-  if p_reader is null or p_reader not in (1, 2) then
+  if p_reader is null or p_reader not in (1, 2, 3) then
     raise exception 'invalid reader';
   end if;
   if p_name is null or char_length(btrim(p_name)) not between 2 and 80 then

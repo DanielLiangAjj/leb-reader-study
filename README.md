@@ -15,7 +15,7 @@ must not change how a reader works while timed. No abstract of Part 2 and no ite
 Part 1.
 
 Online since 2026-11-23 at https://danielliangajj.github.io/leb-reader-study/ (reader 1: add `?r=1`; reader 2: add
-`?r=2`). Answers go to the tables `rdr_readers` and `rdr_forms` of the Supabase project in `config.js`, once
+`?r=2`; reader 3, added on 2026-11-25: add `?r=3`). Answers go to the tables `rdr_readers` and `rdr_forms` of the Supabase project in `config.js`, once
 `supabase/schema.sql` has been run there.
 
 ## Part 1 since version 2.1
@@ -59,6 +59,9 @@ results (folded).
    changed. No clock.
 
 The reader number is in the link: `?r=1` works paper, evidence base, paper, evidence base; `?r=2` the opposite.
+A third reader was added on 2026-11-25, before any reader started: `?r=3` works in the order of reader 1 (the rule: an
+odd number takes the order of reader 1, an even number that of reader 2) and is shown Part 1 only. Which readers are
+shown Part 1 only is the list `part1_only` in `data/study.json`. Nothing changes for readers 1 and 2.
 Without `?r=` the page only lets a reader resume with a code.
 
 ## Test mode
@@ -106,11 +109,12 @@ step 1, from the record sheet alone) and `active_ms` (the time of step 1).
 | File | What it is |
 |---|---|
 | `index.html`, `assets/` | The page. `views.js` holds the welcome and home screens and Part 1, `key.js` Part 2, `second.js` Part 3, `sync.js` the save queue, `storage.js` the browser storage, `api.js` the calls to the database |
-| `data/study.json` | The order of work of the two readers and, for the 28 trials, the main report and the record sheet. Written by `python3 scripts/reader_study.py site ~/Dropbox/leb-reader-study` in the evidence-base repository. It holds no reference answer |
+| `data/study.json` | The order of work of each reader, the readers who are shown Part 1 only and, for the 28 trials, the main report and the record sheet. Written by `python3 scripts/reader_study.py site ~/Dropbox/leb-reader-study` in the evidence-base repository. It holds no reference answer |
 | `data/key.json` | Part 2: the 50 abstracts and the rows of the answer key. Written by `python3 scripts/review_site.py build ~/Dropbox/leb-reader-study` in the evidence-base repository |
 | `data/second.json` | Part 3: the four sets, ten items each, and one worked example a set. Written by the same command. It does not hold our first reading of the 40 items; that stays in the evidence-base repository |
 | `config.js` | Address and public key of the database. Empty: the page keeps the answers in the browser only |
 | `supabase/schema.sql` | Two tables (`rdr_readers`, `rdr_forms`) and four functions, all with the prefix `rdr_`, so the file can be run in the project of the rating sites |
+| `supabase/add_reader_3.sql` | For a database made before 2026-11-25: allows reader number 3. It removes no row and changes no stored answer |
 
 ## How it was put online
 
@@ -120,6 +124,8 @@ step 1, from the record sheet alone) and `active_ms` (the time of step 1).
    abstracts and the names of the trials, nothing private; the page asks search engines not to index it.
 4. Both links are tried with a made-up name, and those rows are removed before the readers start.
 5. Reader 1 gets the link ending in `?r=1` and reader 2 the link ending in `?r=2`.
+6. For the third reader, `supabase/add_reader_3.sql` is run once in the SQL editor; that reader gets the link ending in
+   `?r=3`.
 
 ## To try it on this computer
 

@@ -129,6 +129,9 @@ export function showFatal(message) {
 // ---- the order of work ----------------------------------------------------------------------
 
 const sequence = () => study.readers[session.reader];
+/** Readers listed in study.part1_only do the timed extraction only: Parts 2 and 3 are not shown to them. */
+const onlyPart1 = (reader = session && session.reader) => (study.part1_only || []).includes(String(reader));
+const homeLabel = () => (onlyPart1() ? 'Back to the start page' : 'Back to the three parts');
 const totalTrials = () => sequence().reduce((n, p) => n + p.items.length, 0);
 const doneTrials = () => sequence().reduce((n, p) => n + p.items.filter((id) => session.answers.has(`${p.sheet}/${id}`)).length, 0);
 const partLabel = (part) => (part.part === 'practice' ? 'Practice' : `Block ${part.no} of 4`);
@@ -215,7 +218,7 @@ function renderTopbar({ part = null, label = '', count = '', clock = false, home
       h('div', { class: 'tb-left' },
         h('span', { class: 'brand' }, 'Evidence base study'),
         TEST ? h('span', { class: 'tb-sheet' }, 'TEST MODE') : null,
-        home ? h('button', { type: 'button', class: 'btn btn-small', onclick: () => showHome() }, 'All three parts') : null,
+        home ? h('button', { type: 'button', class: 'btn btn-small', onclick: () => showHome() }, onlyPart1() ? 'Start page' : 'All three parts') : null,
         label ? h('span', { class: 'tb-sheet' }, label) : null,
         part ? h('span', { class: 'tb-sheet' }, `Part 1: ${partLabel(part).toLowerCase()}`) : null,
         part ? h('span', { class: `cond-tag${COND[part.condition].cls}` }, COND[part.condition].name) : null,
@@ -280,7 +283,7 @@ function sequenceTable(seq, { marks = false } = {}) {
 
 function readerFromLink() {
   const r = new URLSearchParams(window.location.search).get('r');
-  return r === '1' || r === '2' ? r : null;
+  return r && study && Object.prototype.hasOwnProperty.call(study.readers, r) ? r : null;
 }
 
 export function showWelcome() {
@@ -291,35 +294,37 @@ export function showWelcome() {
   renderBanners();
   const current = store.getCurrent();
   const reader = readerFromLink();
-  const seq = study.readers[(current && current.reader) || reader || '1'];
+  const who = (current && current.reader) || reader || '1';
+  const solo = onlyPart1(who);
+  const seq = study.readers[who] || study.readers['1'];
   const total = seq.reduce((n, p) => n + p.items.length * MINUTES[p.condition], 0);
   const row = (no, name, what, time) => h('tr', {}, h('td', {}, h('strong', {}, `Part ${no}. `), name), h('td', {}, what), h('td', {}, time));
   $('main').replaceChildren(h('section', { class: 'welcome' },
     h('h1', {}, 'A study of an evidence base of clinical trials'),
-    h('p', { class: 'lede' }, 'We built an evidence base automatically from the abstracts of randomized trials: for each trial it holds the groups that were compared, the outcomes, and what the abstract says about each comparison. We ask you, as a clinician, to help us test it. There are three parts.'),
+    h('p', { class: 'lede' }, 'We built an evidence base automatically from the abstracts of randomized trials: for each trial it holds the groups that were compared, the outcomes, and what the abstract says about each comparison.' + (solo ? ' We ask you to help us test it. There is one task: a timed extraction.' : ' We ask you, as a clinician, to help us test it. There are three parts.')),
     h('table', { class: 'seq parts' },
       h('thead', {}, h('tr', {}, h('th', {}, 'Part'), h('th', {}, 'What you do'), h('th', {}, 'Rough time'))),
       h('tbody', {},
         row(1, 'Timed extraction', `You fill an extraction form of sixteen fields for ${seq.reduce((n, p) => n + p.items.length, 0)} trials: for half of them from the paper alone, for the other half from the evidence base first and then checked against the paper. The page times each trial.`, minutesText(total)),
-        row(2, 'Check of an answer key', `For ${keyPart.total() || 50} abstracts you say whether you agree with each result our answer key lists.`, 'about 3 h for all; a little over 1 h for the first 20'),
-        row(3, 'Second reading', `For ${secondPart.total() || 40} items you read a few short texts and choose which of three or four answers fits.`, 'about 1 h'))),
-    h('p', {}, 'Part 1 comes first. Parts 2 and 3 show where the evidence base was right and where it was wrong, and that must not change how you work while you are timed. After Part 1 you can do Parts 2 and 3 in either order.'),
-    h('p', {}, 'Every part has its own instructions with an example, shown when you open it. You can stop at any point and come back later, on this device or another, with the code the page gives you. Nothing has to be done in one day.'),
+        solo ? null : row(2, 'Check of an answer key', `For ${keyPart.total() || 50} abstracts you say whether you agree with each result our answer key lists.`, 'about 3 h for all; a little over 1 h for the first 20'),
+        solo ? null : row(3, 'Second reading', `For ${secondPart.total() || 40} items you read a few short texts and choose which of three or four answers fits.`, 'about 1 h'))),
+    solo ? null : h('p', {}, 'Part 1 comes first. Parts 2 and 3 show where the evidence base was right and where it was wrong, and that must not change how you work while you are timed. After Part 1 you can do Parts 2 and 3 in either order.'),
+    h('p', {}, (solo ? 'The instructions, with an example, are shown when you start.' : 'Every part has its own instructions with an example, shown when you open it.') + ' You can stop at any point and come back later, on this device or another, with the code the page gives you. Nothing has to be done in one day.'),
     h('p', { class: 'consent' }, 'Your name and email are stored with your answers so we can credit and contact you; nothing else about you is collected.'),
     TEST ? testPanel(reader) : null,
     current && current.code ? continuePanel(current)
-      : [reader ? startPanel(reader) : h('div', { class: 'warn-box' }, 'To start, please open the link you were sent: it ends in ?r=1 or ?r=2. If you have already started, resume with your code below.'), resumePanel()]));
+      : [reader ? startPanel(reader) : h('div', { class: 'warn-box' }, 'To start, please open the link you were sent: it ends in ?r= and your reader number. If you have already started, resume with your code below.'), resumePanel()]));
 }
 
 /** Test mode only: what the mode does, the other reader's order, and a way to start over. */
 function testPanel(reader) {
-  const other = reader === '2' ? '1' : '2';
+  const others = Object.keys(study.readers).filter((k) => k !== reader);
   return h('div', { class: 'warn-box' },
     h('p', {}, h('strong', {}, 'Test mode. '), 'This is the page as a reader sees it, with four differences: nothing is sent to the database, ',
-      'each block and each trial of Part 1 has a Skip button, Parts 2 and 3 are open without finishing Part 1 and any of their items can be opened, ',
+      'each block and each trial of Part 1 has a Skip button, Parts 2 and 3 (where a reader has them) are open without finishing Part 1 and any of their items can be opened, ',
       'and the name and email you type stay in this browser. Times and answers of a test are not part of the study.'),
     h('div', { class: 'actions' },
-      h('a', { class: 'btn btn-small', href: `?r=${other}&test=1` }, `Open the test as reader ${other}`),
+      others.map((other) => h('a', { class: 'btn btn-small', href: `?r=${other}&test=1` }, `Open the test as reader ${other}`)),
       h('button', { type: 'button', class: 'btn btn-small', onclick: () => { store.clearTestData(); window.location.reload(); } }, 'Erase my test and start over')));
 }
 
@@ -986,7 +991,7 @@ function showPart1Intro() {
   const seq = sequence();
   const total = seq.reduce((n, p) => n + p.items.length * MINUTES[p.condition], 0);
   $('main').replaceChildren(h('section', { class: 'intro' },
-    h('p', { class: 'eyebrow' }, 'Part 1 of 3'),
+    h('p', { class: 'eyebrow' }, onlyPart1() ? 'Instructions' : 'Part 1 of 3'),
     h('h1', {}, 'Timed extraction'),
     h('p', { class: 'lede' }, 'Does the evidence base save a reviewer time, and does it change how right the extracted data are? You fill the same extraction form for a set of trials in two ways of working: from the paper alone, and from the evidence base first with the paper as a check.'),
     h('div', { class: 'panel' },
@@ -1015,7 +1020,7 @@ function showPart1Intro() {
     codeLine(),
     h('div', { class: 'actions' },
       h('button', { type: 'button', class: 'btn btn-primary', onclick: go }, doneTrials() ? 'Continue' : 'Go to the practice trials'),
-      h('button', { type: 'button', class: 'btn', onclick: () => showHome() }, 'Back to the three parts'))));
+      h('button', { type: 'button', class: 'btn', onclick: () => showHome() }, homeLabel()))));
   window.scrollTo(0, 0);
 }
 
@@ -1048,18 +1053,20 @@ function showHome(flash = '') {
   const kAll = keyPart.total();
   const sDone = secondPart.done();
   const sAll = secondPart.total();
-  const allDone = part1Done && kDone === kAll && sDone === sAll;
+  const solo = onlyPart1();
+  const allDone = part1Done && (solo || (kDone === kAll && sDone === sAll));
   const local = !api.configured();
   const btn = (label, onclick, primary) => h('button', { type: 'button', class: `btn${primary ? ' btn-primary' : ''}`, onclick }, label);
   const seq = sequence();
   const minutes = seq.reduce((n, p) => n + p.items.length * MINUTES[p.condition], 0);
-  const next = part1Done ? (kDone < kAll ? 2 : (sDone < sAll ? 3 : 0)) : 1;   // the part the page suggests now
+  const next = part1Done ? (solo ? 0 : (kDone < kAll ? 2 : (sDone < sAll ? 3 : 0))) : 1;   // the part the page suggests now
 
   $('main').replaceChildren(h('section', { class: 'home' },
     flash ? h('p', { class: 'note-done' }, flash) : null,
     h('h1', {}, allDone ? 'Thank you' : `Welcome, ${session.name}`),
-    h('p', { class: 'lede' }, allDone ? 'You have finished all three parts.'
-      : 'Three parts. Part 1 comes first; Parts 2 and 3 can then be done in either order. Stop whenever you like and come back with your code.'),
+    h('p', { class: 'lede' }, allDone ? (solo ? 'You have finished. Thank you for your time.' : 'You have finished all three parts.')
+      : (solo ? 'One timed task, in four blocks after a short practice. Stop whenever you like and come back with your code.'
+        : 'Three parts. Part 1 comes first; Parts 2 and 3 can then be done in either order. Stop whenever you like and come back with your code.')),
     partCard({
       no: 1, title: 'Timed extraction', tone: part1Done ? 'done' : 'now',
       state: part1Done ? 'Done' : (step.survey ? 'All trials done, nine questions left' : (trials ? `${trials} of ${trialsAll} trials done` : 'Not started')),
@@ -1069,7 +1076,7 @@ function showHome(flash = '') {
         btn(step.survey ? 'Answer the nine questions' : (trials ? 'Continue Part 1' : 'Start Part 1'), () => (trials || step.survey ? go() : showPart1Intro()), next === 1),
         trials && !step.survey ? btn('Read the instructions of Part 1 again', showPart1Intro, false) : null],
     }),
-    partCard({
+    solo ? null : partCard({
       no: 2, title: 'Check of an answer key', tone: !open23 ? 'locked' : (kAll && kDone === kAll ? 'done' : (next === 2 ? 'now' : '')),
       state: !keyPart.available() ? 'Could not be loaded' : (kDone === kAll ? 'Done' : (kDone ? `${kDone} of ${kAll} abstracts done` : 'Not started')),
       what: `For ${kAll || 50} abstracts of trial reports, you say whether you agree with each result our answer key lists: Yes, No or Cannot decide.`,
@@ -1078,7 +1085,7 @@ function showHome(flash = '') {
       actions: [h('button', { type: 'button', class: `btn${next === 2 ? ' btn-primary' : ''}`, disabled: !open23 || !keyPart.available(), onclick: keyPart.open },
         kDone === kAll && kAll ? 'Open Part 2 again' : (kDone ? 'Continue Part 2' : 'Start Part 2'))],
     }),
-    partCard({
+    solo ? null : partCard({
       no: 3, title: 'Second reading of 40 items', tone: !open23 ? 'locked' : (sAll && sDone === sAll ? 'done' : (next === 3 ? 'now' : '')),
       state: !secondPart.available() ? 'Could not be loaded' : (sDone === sAll ? 'Done' : (sDone ? `${sDone} of ${sAll} items done` : 'Not started')),
       what: `For ${sAll || 40} items, in four sets of ten, you read a few short texts and choose which of three or four answers fits.`,

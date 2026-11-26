@@ -153,8 +153,87 @@
      "T24"
     ]
    }
+  ],
+  "3": [
+   {
+    "part": "practice",
+    "sheet": "practice",
+    "condition": "A",
+    "items": [
+     "P01",
+     "P03"
+    ]
+   },
+   {
+    "part": "practice",
+    "sheet": "practice",
+    "condition": "B",
+    "items": [
+     "P02",
+     "P04"
+    ]
+   },
+   {
+    "part": "block",
+    "no": 1,
+    "sheet": "scored",
+    "condition": "A",
+    "items": [
+     "T01",
+     "T02",
+     "T03",
+     "T04",
+     "T05",
+     "T06"
+    ]
+   },
+   {
+    "part": "block",
+    "no": 2,
+    "sheet": "scored",
+    "condition": "B",
+    "items": [
+     "T07",
+     "T08",
+     "T09",
+     "T10",
+     "T11",
+     "T12"
+    ]
+   },
+   {
+    "part": "block",
+    "no": 3,
+    "sheet": "scored",
+    "condition": "A",
+    "items": [
+     "T13",
+     "T14",
+     "T15",
+     "T16",
+     "T17",
+     "T18"
+    ]
+   },
+   {
+    "part": "block",
+    "no": 4,
+    "sheet": "scored",
+    "condition": "B",
+    "items": [
+     "T19",
+     "T20",
+     "T21",
+     "T22",
+     "T23",
+     "T24"
+    ]
+   }
   ]
  },
+ "part1_only": [
+  "3"
+ ],
  "trials": {
   "T01": {
    "id": "T01",
